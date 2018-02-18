@@ -1,7 +1,30 @@
-<div>
-    <input type="text" ng-model="workOrderNumber" placeholder="Enter Work Order" />
-    <input type="button" ng-click="searchWorkOrder()" value="Get WorkOrder" /><br><br>
+<div class="login-container">
+        <div class="login-wrapper">
+            <h1><strong>BOCO</strong> Work Order Systems</h1>
+            <div class="login-form">
+                <form ng-submit="searchWorkOrder()">
+                    <ul>
+                      <li class="d-flex">
+                            <input type="text" class="form-control" ng-model="workOrderNumber" placeholder="Enter Work Order" required>
 
-    <input type="button" value="Create Workorder" ng-click="createWorkOrder()" />
-    
-</div>
+                            <div class="go-btn">
+                                <button class="btn btn-default btn-blue2" type="submit" >
+                                    GO
+                                </button>    
+                            </div>
+                      </li>
+                          <li>
+                              <div class="or">
+                                OR
+                              </div>
+                          </li>
+                        <li>
+                            <button class="btn btn-default btn-blue2" ng-click="createWorkOrder()">
+                               CREATE NEW ORDER
+                            </button>
+                        </li>
+                    </ul>
+                </form>
+            </div>
+        </div>
+    </div>

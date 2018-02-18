@@ -31,14 +31,15 @@
 
         router.post("/createWorkOrder", function(req, res) {
 
-            var returnData =  {
-                "work_order_num": "1001",
-                "customer_po_num": "1234567",
-                "work_order_by": "Shashank",
-                "creationStatus": true
-           }
+            var requestData = {
+                "work_order_num": req.body.work_order_num,
+                "customer_po_num": req.body.customer_po_num,
+                "work_order_by": req.body.work_order_by,
+                "date_of_order": req.body.date_of_order,
+                "date_work_started": req.body.date_work_started
+            }
 
-            res.send(returnData);
+            res.send(requestData);
         })
 
         app.use('/api', router);
