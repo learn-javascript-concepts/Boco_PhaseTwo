@@ -4,7 +4,7 @@ define([], function(){
 
         authenticateUser.redirectToLoginIfUnauthenticated();
 
-        $scope.workOrderNumber = "";
+        $scope.workOrderNumber = "1555";
         $scope.poNumber = "";
         $scope.workOrderBy = "";
         $scope.dateOfOrder = "";

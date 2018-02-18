@@ -1,3 +1,13 @@
 .form-control {
     text-transform: none !important;
 }
+
+input[type=date] {
+    padding-left: 50px !important;
+    padding-top: 13px !important;
+    padding-bottom: 13px !important;
+}
+
+.form-control:disabled {
+    color: black;
+}
