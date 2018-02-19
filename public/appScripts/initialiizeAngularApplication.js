@@ -3,6 +3,8 @@ require.config({
     paths: {
         "angular": "lib/angular/angular",
         "angular-route": "lib/angular-route/angular-route",
+        "jquery": "lib/jquery/dist/jquery",
+        "angular-screenshot": "lib/angular-screenshot/build/angular-screenshot",
         "appModule": "appScripts/appModule",
         "appModuleRouting": "appScripts/appModuleRouting",
         "loginController": "appScripts/controllers/loginController",
@@ -15,6 +17,9 @@ require.config({
         "descriptionController": "appScripts/controllers/descriptionController"
     },
     shim: {
+        "angular-screenshot": { 
+            deps: ["angular"]
+        },
         "angular-cookies": {
             deps: ["angular"]
         },
@@ -22,7 +27,7 @@ require.config({
             deps: ["angular"]
         },
         "appModule": {
-            deps: ["angular", "angular-route", "angular-cookies"]
+            deps: ["angular", "angular-route", "angular-cookies", "angular-screenshot", "jquery"]
         }
     }
 });

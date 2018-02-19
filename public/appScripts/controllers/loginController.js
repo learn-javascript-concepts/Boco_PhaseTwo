@@ -2,10 +2,17 @@ define([], function(){
 
     var loginController = function($scope, $location, $http, $cookies, authenticateUser, appConstants){
 
+        $scope.screenshotTargetOptions = {
+            filename: "screenshotTarget.png",
+            downloadText: "Click here to download",
+            cancelText: "Click here to cancel download!!!"
+        }
+
         authenticateUser.redirectToLandingPageIfAuthenticated();
 
         $scope.userName = "";
         $scope.userPassword = "";
+        $scope.isOpen = false;
 
          $scope.logoutUser = function() {
             authenticateUser.clearAuthenticationToken();

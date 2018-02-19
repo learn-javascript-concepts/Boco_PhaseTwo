@@ -17,7 +17,7 @@ define(["appModuleRouting",
 
     var appModule = {
         init : function() {
-            var appModule = angular.module("appModule", ["ngRoute", "ngCookies"]);
+            var appModule = angular.module("appModule", ["ngRoute", "ngCookies", "angular-screenshot"]);
 
             appModule.controller("loginController", loginController);
 
