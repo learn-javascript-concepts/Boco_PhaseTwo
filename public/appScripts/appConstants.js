@@ -5,7 +5,8 @@ define([], function() {
     var appConstants = {
         authenticateUserUrl: serverUrl + "authenticateuser",
         getWorkOrder: serverUrl + "getworkorder/",
-        createWorkOrder: serverUrl + "createworkorder"
+        createWorkOrder: serverUrl + "createworkorder",
+        getRandomWorkOrder: serverUrl + "getrandomworkorder"
     }
 
     return appConstants;

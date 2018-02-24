@@ -6,7 +6,7 @@ define([], function() {
 
             var appModule = angular.module("appModule");
 
-            appModule.config(function($routeProvider, $locationProvider){
+            appModule.config(function($routeProvider, $locationProvider, $httpProvider){
 
                 $locationProvider.html5Mode(true);
 

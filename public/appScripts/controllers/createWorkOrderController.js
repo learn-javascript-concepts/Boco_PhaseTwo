@@ -1,14 +1,26 @@
 define([], function(){
 
-    var createWorkOrderController = function($scope, $http, authenticateUser, appConstants, workOrderCache, $location) {
+    var createWorkOrderController = function($scope, $http, $cookies, authenticateUser, appConstants, workOrderCache, $location) {
 
         authenticateUser.redirectToLoginIfUnauthenticated();
 
-        $scope.workOrderNumber = "1555";
+        $scope.workOrderNumber = "";
         $scope.poNumber = "";
         $scope.workOrderBy = "";
         $scope.dateOfOrder = "";
         $scope.dateWorkStarted = "";
+
+        var configObject = {
+            headers: {
+                "authToken": $cookies.get('authToken')
+            }
+        };
+
+        $scope.getRandomWorkOrder = function() {
+            $http.get(appConstants.getRandomWorkOrder, configObject).then(function(response) {
+                $scope.workOrderNumber = response.data.randomWorkOrder;
+            })
+        }
 
         $scope.createWorkOrder = function() {
 
@@ -18,14 +30,16 @@ define([], function(){
                 "work_order_by": $scope.workOrderBy,
                 "date_of_order": $scope.dateOfOrder,
                 "date_work_started": $scope.dateWorkStarted
-            }
+            };
 
-            $http.post(appConstants.createWorkOrder, requestData).then(function(response) {
+            $http.post(appConstants.createWorkOrder, requestData, configObject).then(function(response) {
                 workOrderCache.saveWorkOrderDetails(response.data);
                 var responseData = response.data;
                 $location.path("description");
             })
         }
+
+        $scope.getRandomWorkOrder();
 
     }
     return createWorkOrderController;

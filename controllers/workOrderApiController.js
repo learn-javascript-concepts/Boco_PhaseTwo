@@ -29,6 +29,12 @@
 
         });
 
+        router.get('/getrandomworkorder', function(req, res) {
+            res.send({
+                randomWorkOrder: 1003
+            });
+        });
+
         router.post("/createWorkOrder", function(req, res) {
 
             var requestData = {

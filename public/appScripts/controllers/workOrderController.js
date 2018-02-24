@@ -1,14 +1,20 @@
 define([], function() {
 
-    function workOrderController($scope, authenticateUser, $location, appConstants, $http, $location, workOrderCache) {
+    function workOrderController($scope, authenticateUser, $location, appConstants, $http, $location, $cookies, workOrderCache) {
 
         authenticateUser.redirectToLoginIfUnauthenticated();
 
         $scope.workOrderNumber = "";
 
         $scope.searchWorkOrder = function() {
+
+            var configObject = {
+                headers: {
+                    "authToken": $cookies.get('authToken')
+                }
+            };
             
-            $http.get(appConstants.getWorkOrder + $scope.workOrderNumber).then(function(response) {
+            $http.get(appConstants.getWorkOrder + $scope.workOrderNumber, configObject).then(function(response) {
                 var workOrderData = response.data;
                 if(workOrderData) {
                     workOrderCache.saveWorkOrderDetails(workOrderData);
