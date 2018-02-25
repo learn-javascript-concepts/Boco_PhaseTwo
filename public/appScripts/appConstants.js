@@ -6,7 +6,8 @@ define([], function() {
         authenticateUserUrl: serverUrl + "authenticateuser",
         getWorkOrder: serverUrl + "getworkorder/",
         createWorkOrder: serverUrl + "createworkorder",
-        getRandomWorkOrder: serverUrl + "getrandomworkorder"
+        getRandomWorkOrder: serverUrl + "getrandomworkorder",
+        getDetailedWorkorder: serverUrl + "getdetailedworkorder/"
     }
 
     return appConstants;

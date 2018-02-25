@@ -2,7 +2,7 @@
     text-transform: none !important;
 }
 
-input[type=date] {
+input.create-work-order[type=date] {
     padding-left: 50px !important;
     padding-top: 13px !important;
     padding-bottom: 13px !important;
@@ -10,4 +10,16 @@ input[type=date] {
 
 .form-control:disabled {
     color: black;
+}
+
+.content-wrapper {
+    background-color: white !important;
+}
+
+input.description-date[type=date] {
+    font-size: x-small;
+}
+
+.work-info .work-no {
+    font-size: 20px !important;
 }

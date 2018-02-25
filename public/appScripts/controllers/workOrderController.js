@@ -14,7 +14,7 @@ define([], function() {
                 }
             };
             
-            $http.get(appConstants.getWorkOrder + $scope.workOrderNumber, configObject).then(function(response) {
+            $http.get(appConstants.getDetailedWorkorder + $scope.workOrderNumber, configObject).then(function(response) {
                 var workOrderData = response.data;
                 if(workOrderData) {
                     workOrderCache.saveWorkOrderDetails(workOrderData);
@@ -27,7 +27,7 @@ define([], function() {
         }
 
         $scope.createWorkOrder = function() {
-            $location.path("createworkorder")
+            $location.path("createworkorder");
         }
 
     }
