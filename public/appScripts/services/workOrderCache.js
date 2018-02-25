@@ -1,6 +1,6 @@
 define([], function() {
 
-    var workOrderCache = function() {
+    var workOrderCache = function($sessionStorage) {
 
         var cachedWorkOrder = null;
 
@@ -13,7 +13,13 @@ define([], function() {
         };
 
         this.getWorkOrderDetail = function() {
-            return cachedWorkOrder;
+            if(cachedWorkOrder) {
+                return cachedWorkOrder;
+            } else {
+                cachedWorkOrder = $sessionStorage.cachedWorkOrder;
+                return cachedWorkOrder;
+            }
+            
         }
     }
         

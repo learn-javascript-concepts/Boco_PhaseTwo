@@ -41,11 +41,17 @@
                 "work_order_num": req.body.work_order_num,
                 "customer_po_num": req.body.customer_po_num,
                 "work_order_by": req.body.work_order_by,
-                "date_of_order": req.body.date_of_order,
+                "created": req.body.date_of_order,
                 "date_work_started": req.body.date_work_started
             }
 
             res.send(requestData);
+        })
+
+        router.post("/saveDescription", function(req, res) {
+            res.send({
+                success: true
+            });
         })
 
         app.use('/api', router);

@@ -2,7 +2,7 @@
     <div class="login-wrapper">
         <h1><strong>BOCO</strong> Work Order Systems</h1>
         <div class="login-form">
-            <form>
+            <form ng-submit="createWorkOrder()">
                 <ul>
                     <li>
                         <input type="text" disabled class="form-control" ng-model="workOrderNumber" placeholder="W.O. NO." required>
@@ -20,9 +20,7 @@
                         <input type="date" class="form-control create-work-order" placeholder="Date Work Started" ng-model="dateWorkStarted" required>
                     </li>
                     <li>
-                        <button class="btn btn-default btn-blue2" ng-submit="createWorkOrder()">
-                            Submit
-                        </button>
+                        <input type="submit" class="btn btn-default btn-blue2" />
                     </li>
                 </ul>
             </form>

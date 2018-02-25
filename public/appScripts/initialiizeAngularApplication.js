@@ -19,6 +19,8 @@ require.config({
         "bootstrapBundle": "assets/bootstrap/js/bootstrap.bundle",
         "datePicker": "assets/plugins/date-picker/bootstrap-datepicker.min",
         "appScript": "assets/js/script",
+        "ngStorage": "lib/ngstorage/ngStorage",
+        "angular-google-map": "lib/angular-google-map/src/angular-google-map"
 
     },
     shim: {
@@ -35,7 +37,7 @@ require.config({
             deps: ["jquery"]
         },
         "appModule": {
-            deps: ["angular", "angular-route", "angular-cookies", "angular-screenshot", "jquery", "fontAwesome", "bootstrapBundle", "datePicker", "appScript"]
+            deps: ["angular", "angular-route", "angular-cookies", "angular-screenshot", "jquery", "fontAwesome", "bootstrapBundle", "datePicker", "appScript", "ngStorage"]
         }
     }
 });

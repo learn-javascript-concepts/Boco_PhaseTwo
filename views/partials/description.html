@@ -9,7 +9,7 @@
                 </div>
                 <div class="col-md-6 col-sm-6 col-xs-4 clearfix">
                     <div class="login-link">
-                        <a href="#">Logout</a>
+                        <a href="#" ng-click="logoutUser()">Logout</a>
                     </div>
                 </div>
             </div>
@@ -67,26 +67,26 @@
                 <div class="title-col">
                     Project Description
                 </div>
-                <div class="project-des-form">
+                <form class="project-des-form" ng-submit="saveDescriptionButton()">
                     <ul>
                         <li>
-                            <textarea cols="4" rows="4" class="form-control textarea-minheight1" placeholder="Add Project Description" ng-model="description"></textarea>
+                            <textarea required cols="4" rows="4" class="form-control textarea-minheight1" placeholder="Add Project Description" ng-model="description" ng-disabled="isInNonEditModeOfDescription"></textarea>
                         </li>
                         <li>
-                            <textarea cols="4" rows="4" class="form-control textarea-minheight2" placeholder="Any Other Requirements" ng-model="other_requirements"></textarea>
+                            <textarea required cols="4" rows="4" class="form-control textarea-minheight2" placeholder="Any Other Requirements" ng-model="other_requirements" ng-disabled="isInNonEditModeOfDescription"></textarea>
                         </li>
                         <li>
                             <div class="row custom-btn">
-                                <div class="col-md-6">
-                                    <button type="submit" class="btn btn-lightgray">EDIT</button>
+                                <div class="col-md-6" ng-show="isInNonEditModeOfDescription == true">
+                                    <input type="button" class="btn btn-lightgray" ng-click="editDescriptionButton()" value="Edit" />
                                 </div>
-                                <div class="col-md-6">
-                                    <button type="submit" class="btn btn-gray">SAVE</button>
+                                <div class="col-md-6" ng-show="isInNonEditModeOfDescription == false">
+                                    <input type="submit" class="btn btn-gray" value="Save" />
                                 </div>
                             </div>
                         </li>
                     </ul>
-                </div>
+                </form>
             </div>
             <!-- /project description -->
             <!-- customer -->
@@ -104,64 +104,67 @@
                         </button>
                     </div>
                 </div>
-                <div class="company-info">
-                    <div class="company-title">
-                        <span>ABC Company Name</span>
-                        <div class="edit-link">Edit</div>
+                <div ng-if="customer_details">
+                    <div class="company-info">
+                        <div class="company-title">
+                            <span ng-bind="customer_details.name"></span>
+                            <div class="edit-link">Edit</div>
+                        </div>
                     </div>
-                </div>
-                <div class="address-container">
-                    <div class="address-col">
-                        <h3>ADDRESS</h3>
-                        <ul>
-                            <li>
-                                <div class="col-content">
-                                    <div class="col-icon">
-                                        <i class="fas fa-map-marker-alt"></i>
+                    <form class="address-container" ng-submit="saveCustomerButton()">
+                        <div class="address-col">
+                            <h3>ADDRESS</h3>
+                            <ul>
+                                <li>
+                                    <div class="col-content">
+                                        <div class="col-icon">
+                                            <i class="fas fa-map-marker-alt"></i>
+                                        </div>
+                                        <div class="colContent-indent">
+                                            <input type="text" ng-model="customer_details.address" class="form-control" ng-disabled="isInEditCustomerMode == false" required>
+                                        </div>
                                     </div>
-                                    <div class="colContent-indent">
-                                        <input type="text" value="23 Crescent Road Mount Pleasant, 3452" class="form-control">
+                                </li>
+                                <li>
+                                    <div class="col-content">
+                                        <div class="col-icon">
+                                            <i class="fas fa-envelope"></i>
+                                        </div>
+                                        <div class="colContent-indent">
+                                            <input type="text" ng-model="customer_details.email" class="form-control" ng-disabled="isInEditCustomerMode == false" required>
+                                        </div>
                                     </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="col-content">
-                                    <div class="col-icon">
-                                        <i class="fas fa-envelope"></i>
+                                </li>
+                                <li>
+                                    <div class="col-content">
+                                        <div class="col-icon">
+                                            <i class="fas fa-phone-square"></i>
+                                        </div>
+                                        <div class="colContent-indent">
+                                            <input type="text" ng-model="customer_details.contact_number" class="form-control" ng-disabled="isInEditCustomerMode == false" required>
+                                        </div>
                                     </div>
-                                    <div class="colContent-indent">
-                                        <input type="text" value="contact_name@company.com" class="form-control">
+                                </li>
+                                <li>
+                                    <div class="col-content">
+                                        <div class="col-icon">
+                                            <i class="fas fa-user"></i>
+                                        </div>
+                                        <div class="colContent-indent">
+                                            <input type="text" ng-model="customer_details.poc" class="form-control" ng-disabled="isInEditCustomerMode == false" required>
+                                        </div>
                                     </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="col-content">
-                                    <div class="col-icon">
-                                        <i class="fas fa-phone-square"></i>
-                                    </div>
-                                    <div class="colContent-indent">
-                                        <input type="text" value="00293 038 3948" class="form-control">
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="col-content">
-                                    <div class="col-icon">
-                                        <i class="fas fa-user"></i>
-                                    </div>
-                                    <div class="colContent-indent">
-                                        <input type="text" value="Jim Moore, John M. K." class="form-control">
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="custom-btn padt-25">
-                                <button class="btn btn-lightgray">EDIT</button>
-                                <button class="btn btn-gray">SAVE</button>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="map-container" id="googleMap">
-                    </div>
+                                </li>
+                                <li class="custom-btn padt-25">
+                                    <input type="button" class="btn btn-lightgray" ng-click="editCustomerButton()" ng-show="isInEditCustomerMode == false" value="Edit" />
+                                    <input type="submit" class="btn btn-gray" ng-show="isInEditCustomerMode == true" value="Save" />
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="map-container" id="googleMap">
+                            
+                        </div>
+                    </form>
                 </div>
             </div>
             <!-- /customer -->
@@ -180,64 +183,66 @@
                         </button>
                     </div>
                 </div>
-                <div class="company-info">
-                    <div class="company-title">
-                        <span>ABC Company Name</span>
-                        <div class="edit-link">Edit</div>
-                    </div>
-                </div>
-                <div class="address-container">
-                    <div class="address-col">
-                        <h3>ADDRESS</h3>
-                        <ul>
-                            <li>
-                                <div class="col-content">
-                                    <div class="col-icon">
-                                        <i class="fas fa-map-marker-alt"></i>
+                <div ng-if="sub_contractor_details">
+                        <div class="company-info">
+                            <div class="company-title">
+                                <span ng-bind="sub_contractor_details.name"></span>
+                                <div class="edit-link">Edit</div>
+                            </div>
+                        </div>
+                    <form ng-submit="saveSubContractorButton()" class="address-container">
+                        <div class="address-col">
+                            <h3>ADDRESS</h3>
+                            <ul>
+                                <li>
+                                    <div class="col-content">
+                                        <div class="col-icon">
+                                            <i class="fas fa-map-marker-alt"></i>
+                                        </div>
+                                        <div class="colContent-indent">
+                                            <input type="text" ng-model="sub_contractor_details.address" class="form-control" ng-disabled="isSubContractorInEditMode == false" required>
+                                        </div>
                                     </div>
-                                    <div class="colContent-indent">
-                                        <input type="text" value="23 Crescent Road Mount Pleasant, 3452" class="form-control">
+                                </li>
+                                <li>
+                                    <div class="col-content">
+                                        <div class="col-icon">
+                                            <i class="fas fa-envelope"></i>
+                                        </div>
+                                        <div class="colContent-indent">
+                                            <input type="text" ng-model="sub_contractor_details.email" class="form-control" ng-disabled="isSubContractorInEditMode == false" required>
+                                        </div>
                                     </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="col-content">
-                                    <div class="col-icon">
-                                        <i class="fas fa-envelope"></i>
+                                </li>
+                                <li>
+                                    <div class="col-content">
+                                        <div class="col-icon">
+                                            <i class="fas fa-phone-square"></i>
+                                        </div>
+                                        <div class="colContent-indent">
+                                            <input type="text" ng-model="sub_contractor_details.contact_number" class="form-control" ng-disabled="isSubContractorInEditMode == false" required>
+                                        </div>
                                     </div>
-                                    <div class="colContent-indent">
-                                        <input type="text" value="contact_name@company.com" class="form-control">
+                                </li>
+                                <li>
+                                    <div class="col-content">
+                                        <div class="col-icon">
+                                            <i class="fas fa-user"></i>
+                                        </div>
+                                        <div class="colContent-indent">
+                                            <input type="text" ng-model="sub_contractor_details.poc" class="form-control" ng-disabled="isSubContractorInEditMode == false" required>
+                                        </div>
                                     </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="col-content">
-                                    <div class="col-icon">
-                                        <i class="fas fa-phone-square"></i>
-                                    </div>
-                                    <div class="colContent-indent">
-                                        <input type="text" value="00293 038 3948" class="form-control">
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="col-content">
-                                    <div class="col-icon">
-                                        <i class="fas fa-user"></i>
-                                    </div>
-                                    <div class="colContent-indent">
-                                        <input type="text" value="Jim Moore, John M. K." class="form-control">
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="custom-btn padt-25">
-                                <button class="btn btn-lightgray">EDIT</button>
-                                <button class="btn btn-gray">SAVE</button>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="map-container" id="googleMap2">
-                    </div>
+                                </li>
+                                <li class="custom-btn padt-25">
+                                    <input type="button" class="btn btn-lightgray" ng-click="editSubContractorButton()" ng-if="isSubContractorInEditMode == false" value="Edit" />
+                                    <input type="submit" class="btn btn-gray" ng-if="isSubContractorInEditMode == true" value="Save" />
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="map-container" id="googleMap2">
+                        </div>
+                    </form>
                 </div>
             </div>
             <!-- /sub contractor -->

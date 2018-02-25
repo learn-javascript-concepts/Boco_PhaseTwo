@@ -7,7 +7,8 @@ define([], function() {
         getWorkOrder: serverUrl + "getworkorder/",
         createWorkOrder: serverUrl + "createworkorder",
         getRandomWorkOrder: serverUrl + "getrandomworkorder",
-        getDetailedWorkorder: serverUrl + "getdetailedworkorder/"
+        getDetailedWorkorder: serverUrl + "getdetailedworkorder/",
+        saveDescription: serverUrl + "/saveDescription"
     }
 
     return appConstants;
