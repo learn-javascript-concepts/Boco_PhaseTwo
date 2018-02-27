@@ -10,6 +10,7 @@ define([], function() {
         
         this.saveWorkOrderDetails = function(workOrderData) {
             cachedWorkOrder = workOrderData
+            $sessionStorage.cachedWorkOrder = cachedWorkOrder;
         };
 
         this.getWorkOrderDetail = function() {

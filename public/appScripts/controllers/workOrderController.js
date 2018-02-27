@@ -7,14 +7,8 @@ define([], function() {
         $scope.workOrderNumber = "";
 
         $scope.searchWorkOrder = function() {
-
-            var configObject = {
-                headers: {
-                    "authToken": $cookies.get('authToken')
-                }
-            };
             
-            $http.get(appConstants.getDetailedWorkorder + $scope.workOrderNumber, configObject).then(function(response) {
+            $http.get(appConstants.getDetailedWorkorder + $scope.workOrderNumber, authenticateUser.getHeaderObject()).then(function(response) {
                 var workOrderData = response.data;
                 $sessionStorage.cachedWorkOrder = response.data;
                 if(workOrderData) {

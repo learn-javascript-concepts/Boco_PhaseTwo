@@ -99,19 +99,19 @@
                         </div>
                     </div>
                     <div class="add-customer">
-                        <button class="btn btn-gray">
-                        ADD NEW CUSTOMER
+                        <button class="btn btn-gray" ng-click="addCustomer()">
+                        Add New Customer
                         </button>
                     </div>
                 </div>
-                <div ng-if="customer_details">
+                <form ng-if="customer_details" ng-submit="saveCustomerButton()">
                     <div class="company-info">
                         <div class="company-title">
-                            <span ng-bind="customer_details.name"></span>
-                            <div class="edit-link">Edit</div>
+                            <span ng-bind="customer_details.name" ng-if="isInEditCustomerMode == false"></span>
+                            <input ng-if="isInEditCustomerMode == true" type="text" placeholder="Add Customer Name" ng-model="customer_details.name" class="form-control" required></span>
                         </div>
                     </div>
-                    <form class="address-container" ng-submit="saveCustomerButton()">
+                    <div class="address-container">
                         <div class="address-col">
                             <h3>ADDRESS</h3>
                             <ul>
@@ -121,7 +121,7 @@
                                             <i class="fas fa-map-marker-alt"></i>
                                         </div>
                                         <div class="colContent-indent">
-                                            <input type="text" ng-model="customer_details.address" class="form-control" ng-disabled="isInEditCustomerMode == false" required>
+                                            <input type="text" ng-model="customer_details.address" class="form-control" ng-disabled="isInEditCustomerMode == false" required placeholder="Add Customer Address">
                                         </div>
                                     </div>
                                 </li>
@@ -131,7 +131,7 @@
                                             <i class="fas fa-envelope"></i>
                                         </div>
                                         <div class="colContent-indent">
-                                            <input type="text" ng-model="customer_details.email" class="form-control" ng-disabled="isInEditCustomerMode == false" required>
+                                            <input type="text" ng-model="customer_details.email" class="form-control" ng-disabled="isInEditCustomerMode == false" required placeholder="Add Customer Email Id">
                                         </div>
                                     </div>
                                 </li>
@@ -141,7 +141,7 @@
                                             <i class="fas fa-phone-square"></i>
                                         </div>
                                         <div class="colContent-indent">
-                                            <input type="text" ng-model="customer_details.contact_number" class="form-control" ng-disabled="isInEditCustomerMode == false" required>
+                                            <input type="text" ng-model="customer_details.contact_number" class="form-control" ng-disabled="isInEditCustomerMode == false" required placeholder="Add Customer Contact Details">
                                         </div>
                                     </div>
                                 </li>
@@ -151,7 +151,7 @@
                                             <i class="fas fa-user"></i>
                                         </div>
                                         <div class="colContent-indent">
-                                            <input type="text" ng-model="customer_details.poc" class="form-control" ng-disabled="isInEditCustomerMode == false" required>
+                                            <input type="text" ng-model="customer_details.poc" class="form-control" ng-disabled="isInEditCustomerMode == false" required placeholder="Add Customer Point Of Contact">
                                         </div>
                                     </div>
                                 </li>
@@ -164,8 +164,8 @@
                         <div class="map-container" id="googleMap">
                             
                         </div>
-                    </form>
-                </div>
+                    </div>
+                </form>
             </div>
             <!-- /customer -->
             <!-- sub contractor -->               
@@ -179,18 +179,18 @@
                     </div>
                     <div class="add-customer">
                         <button class="btn btn-gray">
-                        ADD NEW CUSTOMER
+                        Add New Sub Contractor
                         </button>
                     </div>
                 </div>
-                <div ng-if="sub_contractor_details">
+                <form ng-if="sub_contractor_details" ng-submit="saveSubContractorButton()">
                         <div class="company-info">
                             <div class="company-title">
-                                <span ng-bind="sub_contractor_details.name"></span>
-                                <div class="edit-link">Edit</div>
+                                <span ng-bind="sub_contractor_details.name" ng-if="isSubContractorInEditMode == false"></span>
+                                <input type="text" ng-if="isSubContractorInEditMode == true" class="form-control" ng-model="sub_contractor_details.name" placeholder="Enter name of SubContractor" required>
                             </div>
                         </div>
-                    <form ng-submit="saveSubContractorButton()" class="address-container">
+                    <div class="address-container">
                         <div class="address-col">
                             <h3>ADDRESS</h3>
                             <ul>
@@ -242,8 +242,8 @@
                         </div>
                         <div class="map-container" id="googleMap2">
                         </div>
-                    </form>
-                </div>
+                    </div>
+                </form>
             </div>
             <!-- /sub contractor -->
             <!-- Supplier -->

@@ -27,19 +27,13 @@ define([], function() {
         $scope.saveDescriptionButton = function() {
             $scope.isInNonEditModeOfDescription = true;
 
-            var configObject = {
-                headers: {
-                    "authToken": $cookies.get('authToken')
-                }
-            };
-
             var descriptionData = {
                 work_order_num: $scope.work_order_num,
                 description: $scope.description,
                 other_requirements: $scope.other_requirements
             }
 
-            $http.post(appConstants.saveDescription, descriptionData, configObject).then(function(response) {
+            $http.post(appConstants.saveDescription, descriptionData, authenticateUser.getHeaderObject()).then(function(response) {
                 if(response.data.success == true) {
                     alert("Data Saved");
                 }
@@ -61,10 +55,32 @@ define([], function() {
 
         $scope.saveCustomerButton = function() {
             $scope.isInEditCustomerMode = false;
+
+            var customerDetails = {
+                name: $scope.customer_details.name,
+                address: $scope.customer_details.address,
+                email: $scope.customer_details.email,
+                contact_number: $scope.customer_details.contact_number,
+                poc: $scope.customer_details.poc
+            };
+
+            if(cachedData.customer_details.id) {
+                $http.post(appConstants.updateCustomerDetails, customerDetails, authenticateUser.getHeaderObject()).then(function(response) {
+                    var data = response.data;
+                    alert(data.success);
+                })
+            } else {
+                $http.post(appConstants.addNewCustomer, customerDetails, authenticateUser.getHeaderObject()).then(function(response) {
+                    var data = response.data;
+                    alert(data.success);
+                })
+            }
         };
 
         $scope.addCustomer = function() {
-
+            $scope.customer_details = {};
+            $scope.isInEditCustomerMode = true;
+            cachedData.customer_details = {};
         }
 
 

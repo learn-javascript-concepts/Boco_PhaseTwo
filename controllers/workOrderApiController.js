@@ -54,6 +54,20 @@
             });
         })
 
+        router.post("/updateCustomerDetails", function(req, res) {
+            res.send({
+                success: "Customer Details Updated"
+            })
+        })
+
+        router.post("/addNewCustomer", function(req, res) {
+            res.send({
+                success: "New Customer Added"
+            })
+        })
+
+        
+
         app.use('/api', router);
 
         return app;

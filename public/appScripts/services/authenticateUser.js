@@ -36,6 +36,16 @@ define([], function() {
             $cookies.put("authToken", "");
         }
 
+        this.getHeaderObject = function() {
+            var configObject = {
+                headers: {
+                    "authToken": $cookies.get('authToken')
+                }
+            };
+
+            return configObject;
+        }
+
     }
 
     return authenticateUser;

@@ -10,14 +10,8 @@ define([], function(){
         $scope.dateOfOrder = "";
         $scope.dateWorkStarted = "";
 
-        var configObject = {
-            headers: {
-                "authToken": $cookies.get('authToken')
-            }
-        };
-
         $scope.getRandomWorkOrder = function() {
-            $http.get(appConstants.getRandomWorkOrder, configObject).then(function(response) {
+            $http.get(appConstants.getRandomWorkOrder, authenticateUser.getHeaderObject()).then(function(response) {
                 $scope.workOrderNumber = response.data.randomWorkOrder;
             })
         }
@@ -32,7 +26,7 @@ define([], function(){
                 "date_work_started": $scope.dateWorkStarted
             };
 
-            $http.post(appConstants.createWorkOrder, requestData, configObject).then(function(response) {
+            $http.post(appConstants.createWorkOrder, requestData, authenticateUser.getHeaderObject()).then(function(response) {
                 workOrderCache.saveWorkOrderDetails(response.data);
                 var responseData = response.data;
                 $location.path("description");
