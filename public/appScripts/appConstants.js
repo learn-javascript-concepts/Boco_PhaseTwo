@@ -1,6 +1,6 @@
 define([], function() {
 
-    var serverUrl = "http://localhost:5000/api/"
+    var serverUrl = "http://localhost:3000/api/"
 
     var appConstants = {
         authenticateUserUrl: serverUrl + "authenticateuser",
