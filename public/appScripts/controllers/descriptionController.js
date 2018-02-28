@@ -29,13 +29,13 @@ define([], function() {
 
             var descriptionData = {
                 work_order_num: $scope.work_order_num,
-                description: $scope.description,
+                has_additional_comments: $scope.description,
                 other_requirements: $scope.other_requirements
             }
 
-            $http.post(appConstants.saveDescription, descriptionData, authenticateUser.getHeaderObject()).then(function(response) {
-                if(response.data.success == true) {
-                    alert("Work Order Updated");
+            $http.put(appConstants.saveDescription + cachedData.id, descriptionData, authenticateUser.getHeaderObject()).then(function(response) {
+                if(response.data.status == "CREATED") {
+                    workOrderCache.saveWorkOrderDetails(response.data);
                 }
             })
         };
@@ -58,7 +58,6 @@ define([], function() {
 
             var customerDetails = {
                 company_name: $scope.customer_details.company_name,
-                name: $scope.customer_details.name,
                 address: $scope.customer_details.address,
                 email: $scope.customer_details.email,
                 contact_number: $scope.customer_details.contact_number,
@@ -109,7 +108,7 @@ define([], function() {
 
 
 
-        $scope.getAllCustomers();
+        //$scope.getAllCustomers();
 
         $scope.searchCustomerName = "";
 

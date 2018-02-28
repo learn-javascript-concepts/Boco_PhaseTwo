@@ -39,7 +39,6 @@ define([], function(){
         }
 
         $scope.getRandomWorkOrder();
-
     }
     return createWorkOrderController;
 });

@@ -6,9 +6,8 @@ define([], function() {
 
         $scope.workOrderNumber = "";
 
-        $scope.searchWorkOrder = function() {
-            
-            $http.get(appConstants.getWorkOrder + $scope.workOrderNumber + "/", authenticateUser.getHeaderObject()).then(function(response) {
+        $scope.searchWorkOrder = function() {      
+            $http.get(appConstants.getWorkOrder + "work_order_num=" + $scope.workOrderNumber, authenticateUser.getHeaderObject()).then(function(response) {
                 var workOrderData = response.data;
                 $sessionStorage.cachedWorkOrder = response.data;
                 if(workOrderData) {
@@ -18,7 +17,6 @@ define([], function() {
                     alert("No Data exists for selected Work Order Number")
                 }
             });
-
         }
 
         $scope.createWorkOrder = function() {

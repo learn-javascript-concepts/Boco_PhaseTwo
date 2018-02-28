@@ -5,13 +5,13 @@ define([], function() {
 
     var appConstants = {
         authenticateUserUrl: serverUrl + "api-token-auth/",
-        getWorkOrder: serverUrl + "workorders/",
+        getWorkOrder: serverUrl + "workorders/?",
         createWorkOrder: serverUrl + "workorders/",
         getRandomWorkOrder: serverUrl + "workorders/getNextNumber/",
         getDetailedWorkorder: serverUrl + "getdetailedworkorder/",
-        saveDescription: serverUrl + "saveDescription",
+        saveDescription: serverUrl + "workorders/",
         updateCustomerDetails: serverUrl + "updateCustomerDetails",
-        addNewCustomer: serverUrl + "addNewCustomer",
+        addNewCustomer: serverUrl + "customers/",
         getAllWorkOrders: serverUrl + "getallworkorders",
         getSelectedCustomer: serverUrl + "customer/"
     }
