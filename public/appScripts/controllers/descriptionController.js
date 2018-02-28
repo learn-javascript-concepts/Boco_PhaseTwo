@@ -94,6 +94,18 @@ define([], function() {
             cachedData.customer_details = {};
         }
 
+        $scope.allCustomers = [];
+
+        $scope.getAllCustomers = function() {
+            $http.get(appConstants.getAllCustomers, authenticateUser.getHeaderObject()).then(function(response) {
+                var allNames = [];
+                $scope.allCustomers = response.data;
+                for(let i=0; i<$scope.allCustomers; i++) {
+                    allNames.push($scope.allCustomers[i].company_name);
+                }
+            })
+        }
+
 
 
 

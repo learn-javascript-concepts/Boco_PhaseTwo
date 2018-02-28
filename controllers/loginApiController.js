@@ -9,7 +9,7 @@
         app.use(bodyParser.urlencoded({ extended: true }));
         app.use(bodyParser.json());
 
-        router.post('/authenticateuser', function(req, res) {
+        router.post('/api-token-auth', function(req, res) {
 
             var returnData = {
                 isAuthenticated: true,
