@@ -100,7 +100,10 @@ define([], function() {
             $scope.isSubContractorInEditMode = false;
         }
 
-        $scope.addSubContractor = function() {
+        $scope.addNewSubContractor = function() {
+            $scope.sub_contractor_details = {};
+            $scope.isSubContractorInEditMode = true;
+            cachedData.sub_contractor_details = {};
 
         }
     }

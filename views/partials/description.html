@@ -178,7 +178,7 @@
                         </div>
                     </div>
                     <div class="add-customer">
-                        <button class="btn btn-gray">
+                        <button class="btn btn-gray" ng-click="addNewSubContractor()">
                         Add New Sub Contractor
                         </button>
                     </div>
@@ -200,7 +200,7 @@
                                             <i class="fas fa-map-marker-alt"></i>
                                         </div>
                                         <div class="colContent-indent">
-                                            <input type="text" ng-model="sub_contractor_details.address" class="form-control" ng-disabled="isSubContractorInEditMode == false" required>
+                                            <input type="text" ng-model="sub_contractor_details.address" class="form-control" ng-disabled="isSubContractorInEditMode == false" placeholder="Add Sub-Contractor Address" required>
                                         </div>
                                     </div>
                                 </li>
@@ -210,7 +210,7 @@
                                             <i class="fas fa-envelope"></i>
                                         </div>
                                         <div class="colContent-indent">
-                                            <input type="text" ng-model="sub_contractor_details.email" class="form-control" ng-disabled="isSubContractorInEditMode == false" required>
+                                            <input type="text" ng-model="sub_contractor_details.email" class="form-control" ng-disabled="isSubContractorInEditMode == false" placeholder="Add Sub-Contractor Email Id" required>
                                         </div>
                                     </div>
                                 </li>
@@ -220,7 +220,7 @@
                                             <i class="fas fa-phone-square"></i>
                                         </div>
                                         <div class="colContent-indent">
-                                            <input type="text" ng-model="sub_contractor_details.contact_number" class="form-control" ng-disabled="isSubContractorInEditMode == false" required>
+                                            <input type="text" ng-model="sub_contractor_details.contact_number" class="form-control" ng-disabled="isSubContractorInEditMode == false" placeholder="Add Sub-Contractor Contact Details" required>
                                         </div>
                                     </div>
                                 </li>
@@ -230,7 +230,7 @@
                                             <i class="fas fa-user"></i>
                                         </div>
                                         <div class="colContent-indent">
-                                            <input type="text" ng-model="sub_contractor_details.poc" class="form-control" ng-disabled="isSubContractorInEditMode == false" required>
+                                            <input type="text" ng-model="sub_contractor_details.poc" class="form-control" ng-disabled="isSubContractorInEditMode == false" placeholder="Add Sub-Contractor Point Of Contact" required>
                                         </div>
                                     </div>
                                 </li>
