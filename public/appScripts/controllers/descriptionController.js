@@ -41,9 +41,6 @@ define([], function() {
             });
         };
 
-
-
-
         // Customer Screen
 
         $scope.customer_details = cachedData.customer_details;
@@ -68,18 +65,16 @@ define([], function() {
             if(cachedData.customer_details.id) {
                 $http.put(appConstants.updateCustomerDetails + $scope.customer_details.id + "/", customerDetails, authenticateUser.getHeaderObject()).then(function(response) {
                     if(response.data.id) {
-                        workOrderCache.saveWorkOrderDetails.customer_details = response.data;
+                        workOrderCache.updateCustomerDetails(response.data);
                         alert("Customer Updated Successfully")
                     } else {
                         alert("Error Updating Customer Details")
                     }
-                    
-                    alert(data.success);
                 })
             } else {
                 $http.post(appConstants.addNewCustomer, customerDetails, authenticateUser.getHeaderObject()).then(function(response) {
                     if(response.data.id) {
-                        workOrderCache.saveWorkOrderDetails.customer_details = response.data;
+                        workOrderCache.updateCustomerDetails(response.data);
 
                         var addCustomerToWorkOrder = {
                             customer: response.data.id
@@ -123,12 +118,12 @@ define([], function() {
         $scope.searchCustomerName = "";
 
         $scope.searchCustomer = function() {
-            $http.get(appConstants.getSelectedCustomer + "1", authenticateUser.getHeaderObject()).then(function(response) {
-                $scope.customer_details = response.data.customerDetails;
-                cachedData.customer_details = response.data.customerDetails;
-                workOrderCache.updateCustomerDetails(cachedData.customer_details);
+            $http.get(appConstants.getSelectedCustomer + "company_name=" + $scope.searchCustomerName, authenticateUser.getHeaderObject()).then(function(response) {
+                $scope.customer_details = response.data[0];
+                workOrderCache.updateCustomerDetails(response.data[0]);
+                $scope.isInEditCustomerMode = true;
             })
-        }
+        };
 
 
 

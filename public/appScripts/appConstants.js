@@ -13,7 +13,7 @@ define([], function() {
         updateCustomerDetails: serverUrl + "customers/",
         addNewCustomer: serverUrl + "customers/",
         getAllWorkOrders: serverUrl + "getallworkorders",
-        getSelectedCustomer: serverUrl + "customer/",
+        getSelectedCustomer: serverUrl + "customers/?",
         getAllCustomers: serverUrl + "customers/"
     }
 

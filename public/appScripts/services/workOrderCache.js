@@ -15,6 +15,7 @@ define([], function() {
 
         this.updateCustomerDetails = function(customerDetails) {
             if($sessionStorage.cachedWorkOrder) {
+                cachedWorkOrder.customer_details = customerDetails;
                 $sessionStorage.cachedWorkOrder.customer_details = customerDetails;
             }
         }
