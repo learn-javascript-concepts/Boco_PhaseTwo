@@ -23,11 +23,18 @@ define([], function(){
             $cookies.put("token", "");
 
             var authenticationData = {
-                username: $scope.userName,
-                password: $scope.userPassword
+                "username": $scope.userName,
+                "password": $scope.userPassword
             }
 
-            $http.post(appConstants.authenticateUserUrl, authenticationData).then(function(response) {
+            $http.post("appConstants.authenticateUserUrl", authenticationData, {
+                "Accept": "application/json",
+                "Content-Type": 'application/json',
+                "Cache-Control": "no-cache",
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'GET, POST, DELETE',
+                'Access-Control-Allow-Headers': 'Content-Type',
+            }).then(function(response) {
                 
                 if(response.status == 200 && response.data.isAuthenticated == true) {
                     authenticateUser.setAuthenticationToken(response.data.token);
