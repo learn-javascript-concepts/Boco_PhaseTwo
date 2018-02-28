@@ -42,7 +42,9 @@
                 "customer_po_num": req.body.customer_po_num,
                 "work_order_by": req.body.work_order_by,
                 "created": req.body.date_of_order,
-                "date_work_started": req.body.date_work_started
+                "date_work_started": req.body.date_work_started,
+                "date_of_order": req.body.date_of_order,
+                "status": "Created"
             }
 
             res.send(requestData);
@@ -56,12 +58,14 @@
 
         router.post("/updateCustomerDetails", function(req, res) {
             res.send({
+                id:3424,
                 success: "Customer Details Updated"
             })
         })
 
         router.post("/addNewCustomer", function(req, res) {
             res.send({
+                id: 763241,
                 success: "New Customer Added"
             })
         })

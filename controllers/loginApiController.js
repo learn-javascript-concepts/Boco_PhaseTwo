@@ -14,9 +14,9 @@
             var returnData = {
                 isAuthenticated: true,
                 userName: req.body.userName,
-                authToken: "Data"
+                token: "Data"
             }
-            if(req.body.userName != "Mayank") {
+            if(req.body.username != "Mayank") {
                 returnData.isAuthenticated = false;
             }
             res.send(returnData);

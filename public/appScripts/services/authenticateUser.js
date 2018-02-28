@@ -3,43 +3,43 @@ define([], function() {
     function authenticateUser($cookies, $location) {
 
         this.isUserAuthenticated = function() {
-            var authToken = $cookies.get('authToken');
+            var token = $cookies.get('token');
 
-            if(authToken) {
+            if(token) {
                 return true;
             } else return false;
         }
 
         this.redirectToLoginIfUnauthenticated = function() {
-            var authToken = $cookies.get('authToken');
-            if(!authToken) {
+            var token = $cookies.get('token');
+            if(!token) {
                 $location.path("/");
             }
         }
 
         this.redirectToLandingPageIfAuthenticated = function() {
-            var authToken = $cookies.get("authToken");
-            if(authToken) {
+            var token = $cookies.get("token");
+            if(token) {
                 $location.path("workorder");
             }
         }
 
         this.getAuthenticationToken = function() {
-            return $cookies.get('authToken');
+            return $cookies.get('token');
         }
 
         this.setAuthenticationToken = function(value) {
-            $cookies.put("authToken", value);
+            $cookies.put("token", "jwt " + value);
         }
 
         this.clearAuthenticationToken = function(value) {
-            $cookies.put("authToken", "");
+            $cookies.put("token", "");
         }
 
         this.getHeaderObject = function() {
             var configObject = {
                 headers: {
-                    "authToken": $cookies.get('authToken')
+                    "token": $cookies.get('token')
                 }
             };
 

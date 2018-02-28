@@ -8,7 +8,7 @@ define([], function() {
         $scope.customer_po_num = cachedData.customer_po_num;
         $scope.work_order_by = cachedData.work_order_by;
         $scope.date_work_started = new Date(cachedData.date_work_started);
-        $scope.created = new Date(cachedData.created);
+        $scope.date_of_order = new Date(cachedData.date_of_order);
         $scope.description = cachedData.description;
         $scope.other_requirements = cachedData.other_requirements;
         $scope.isInNonEditModeOfDescription = true;
@@ -35,7 +35,7 @@ define([], function() {
 
             $http.post(appConstants.saveDescription, descriptionData, authenticateUser.getHeaderObject()).then(function(response) {
                 if(response.data.success == true) {
-                    alert("Data Saved");
+                    alert("Work Order Updated");
                 }
             })
         };
@@ -57,6 +57,7 @@ define([], function() {
             $scope.isInEditCustomerMode = false;
 
             var customerDetails = {
+                company_name: $scope.customer_details.company_name,
                 name: $scope.customer_details.name,
                 address: $scope.customer_details.address,
                 email: $scope.customer_details.email,
@@ -66,13 +67,23 @@ define([], function() {
 
             if(cachedData.customer_details.id) {
                 $http.post(appConstants.updateCustomerDetails, customerDetails, authenticateUser.getHeaderObject()).then(function(response) {
-                    var data = response.data;
+                    if(response.data.id) {
+                        workOrderCache.saveWorkOrderDetails.customer_details = response.data;
+                        alert("Customer Updated Successfully")
+                    } else {
+                        alert("Error Updating Customer Details")
+                    }
+                    
                     alert(data.success);
                 })
             } else {
                 $http.post(appConstants.addNewCustomer, customerDetails, authenticateUser.getHeaderObject()).then(function(response) {
-                    var data = response.data;
-                    alert(data.success);
+                    if(response.data.id) {
+                        workOrderCache.saveWorkOrderDetails.customer_details = response.data;
+                        alert("Customer Added Successfully")
+                    } else {
+                        alert("Error Adding New Customer")
+                    }
                 })
             }
         };
@@ -98,7 +109,38 @@ define([], function() {
 
         $scope.saveSubContractorButton = function() {
             $scope.isSubContractorInEditMode = false;
-        }
+
+            var subContractorDetails = {
+                sub_contractor_name: $scope.sub_contractor_details.sub_contractor_name,
+                address: $scope.sub_contractor_details.address,
+                email: $scope.sub_contractor_details.email,
+                contact_number: $scope.sub_contractor_details.contact_number,
+                poc: $scope.sub_contractor_details.poc
+            };
+
+            if(cachedData.sub_contractor_details.id) {
+                $http.post(appConstants.updateCustomerDetails, customerDetails, authenticateUser.getHeaderObject()).then(function(response) {
+                    if(response.data.id) {
+                        workOrderCache.saveWorkOrderDetails.sub_contractor_details = response.data;
+                        alert("Sub Contractor Updated Successfully");
+                    } else {
+                        alert("Error Updating Customer Details");
+                    }
+                    
+                    alert(data.success);
+                })
+            } else {
+                $http.post(appConstants.addNewCustomer, customerDetails, authenticateUser.getHeaderObject()).then(function(response) {
+                    if(response.data.id) {
+                        workOrderCache.saveWorkOrderDetails.sub_contractor_details = response.data;
+                        alert("Sub Contractor Added Successfully");
+                    } else {
+                        alert("Error Adding New Customer")
+                        
+                    }
+                })
+            }
+        };
 
         $scope.addNewSubContractor = function() {
             $scope.sub_contractor_details = {};

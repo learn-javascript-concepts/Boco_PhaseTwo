@@ -9,7 +9,8 @@
             "work_order_by": "Shashank",
             "status": "CREATED",
             "created": "2018-02-11T03:07:47.691015Z",
-            "date_work_started": "2018-02-11T03:07:47.691015Z"
+            "date_work_started": "2018-02-11T03:07:47.691015Z",
+            "date_of_order": "2018-02-11T03:07:47.691015Z"
         }
 
         var detailedWorkOrders = [{
@@ -19,6 +20,7 @@
             "work_order_by": "Shashank",
             "created": "2018-02-11T03:07:47.691015Z",
             "date_work_started": "2018-02-11T03:07:47.691015Z",
+            "date_of_order": "2018-02-11T03:07:47.691015Z",
             "description": "Testing update serializer",
             "other_requirements": "1234",
             "customer": "de5b6961-0d80-4ad9-97af-86762349c5bf",
@@ -28,7 +30,7 @@
             "status": "STARTED",
             "created": "2018-02-11T09:00:04.912358Z",
             "customer_details": {
-                "name": "Mayank Gupta",
+                "company_name": "Mayank Gupta",
                 "id": "de5b6961-0d80-4ad9-97af-86762349c5bf",
                 "email": "1003@1003.com",
                 "contact_number": 1234567909,
@@ -39,7 +41,7 @@
                 "created": "2018-02-11T17:56:33.106465Z"
             },
             "sub_contractor_details": {
-                "name": "Mayank Gupta",
+                "sub_contractor_name": "Mayank Gupta",
                 "id": "de5b6961-0d80-4ad9-97af-86762349c5bf",
                 "email": "1003@1003.com",
                 "contact_number": 1234567909,
@@ -65,7 +67,7 @@
             "status": "STARTED",
             "created": "2018-02-11T09:00:04.912358Z",
             "customer_details": {
-                "name": "Mayank Gupta",
+                "company_name": "Mayank Gupta",
                 "id": "de5b6961-0d80-4ad9-97af-86762349c5bf",
                 "email": "1003@1003.com",
                 "contact_number": 1234567909,
@@ -76,7 +78,7 @@
                 "created": "2018-02-11T17:56:33.106465Z"
             },
             "supplier_details": {
-                "name": "Mayank Gupta",
+                "sub_contractor_name": "Mayank Gupta",
                 "id": "de5b6961-0d80-4ad9-97af-86762349c5bf",
                 "email": "1003@1003.com",
                 "contact_number": 1234567909,

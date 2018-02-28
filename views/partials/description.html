@@ -30,7 +30,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <label style="font-size: 13px;">Date of Order:</label>
-                                <input type="date" class="form-control description-date" placeholder="Date Work Started" ng-model="created" disabled>
+                                <input type="date" class="form-control description-date" placeholder="Date Work Started" ng-model="date_of_order" disabled>
                             </div>
                             <div class="col-md-6">
                                 <label style="font-size: 13px;">Date Work Started:</label>
@@ -107,8 +107,8 @@
                 <form ng-if="customer_details" ng-submit="saveCustomerButton()">
                     <div class="company-info">
                         <div class="company-title">
-                            <span ng-bind="customer_details.name" ng-if="isInEditCustomerMode == false"></span>
-                            <input ng-if="isInEditCustomerMode == true" type="text" placeholder="Add Customer Name" ng-model="customer_details.name" class="form-control" required></span>
+                            <span ng-bind="customer_details.company_name" ng-if="isInEditCustomerMode == false"></span>
+                            <input ng-if="isInEditCustomerMode == true" type="text" placeholder="Add Customer Name" ng-model="customer_details.company_name" class="form-control" required></span>
                         </div>
                     </div>
                     <div class="address-container">
@@ -173,7 +173,7 @@
                 <div class="searchCustomer-form custom-btn padlr-50">
                     <div class="searchCustomer-indent">
                         <div class="max-width450">
-                            <input type="text" class="form-control" placeholder="Search Customer">
+                            <input type="text" class="form-control" placeholder="Search Sub Contractor">
                             <button class="btn btn-gray">SEARCH</button>
                         </div>
                     </div>
@@ -186,8 +186,8 @@
                 <form ng-if="sub_contractor_details" ng-submit="saveSubContractorButton()">
                         <div class="company-info">
                             <div class="company-title">
-                                <span ng-bind="sub_contractor_details.name" ng-if="isSubContractorInEditMode == false"></span>
-                                <input type="text" ng-if="isSubContractorInEditMode == true" class="form-control" ng-model="sub_contractor_details.name" placeholder="Enter name of SubContractor" required>
+                                <span ng-bind="sub_contractor_details.sub_contractor_name" ng-if="isSubContractorInEditMode == false"></span>
+                                <input type="text" ng-if="isSubContractorInEditMode == true" class="form-control" ng-model="sub_contractor_details.sub_contractor_name" placeholder="Enter name of SubContractor" required>
                             </div>
                         </div>
                     <div class="address-container">

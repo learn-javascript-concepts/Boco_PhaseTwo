@@ -20,17 +20,17 @@ define([], function(){
 
         $scope.authenticateUserLogin = function() {
 
-            $cookies.put("authToken", "");
+            $cookies.put("token", "");
 
             var authenticationData = {
-                userName: $scope.userName,
-                userPassword: $scope.userPassword
+                username: $scope.userName,
+                password: $scope.userPassword
             }
 
             $http.post(appConstants.authenticateUserUrl, authenticationData).then(function(response) {
                 
                 if(response.status == 200 && response.data.isAuthenticated == true) {
-                    authenticateUser.setAuthenticationToken(response.data.authToken);
+                    authenticateUser.setAuthenticationToken(response.data.token);
                     $location.path("workorder");
                 } else {
                     alert("Enter Correct Credentials");

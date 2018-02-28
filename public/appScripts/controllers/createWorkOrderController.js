@@ -29,7 +29,12 @@ define([], function(){
             $http.post(appConstants.createWorkOrder, requestData, authenticateUser.getHeaderObject()).then(function(response) {
                 workOrderCache.saveWorkOrderDetails(response.data);
                 var responseData = response.data;
-                $location.path("description");
+                if(response.data.status == "Created") {
+                    $location.path("description");
+                } else {
+                    alert("Error Creating Work Order")
+                }
+                
             })
         }
 
