@@ -6,8 +6,8 @@ define([], function() {
     var appConstants = {
         authenticateUserUrl: serverUrl + "api-token-auth/",
         getWorkOrder: serverUrl + "workorders/",
-        createWorkOrder: serverUrl + "createworkorder",
-        getRandomWorkOrder: serverUrl + "getrandomworkorder",
+        createWorkOrder: serverUrl + "workorders/",
+        getRandomWorkOrder: serverUrl + "workorders/getNextNumber/",
         getDetailedWorkorder: serverUrl + "getdetailedworkorder/",
         saveDescription: serverUrl + "saveDescription",
         updateCustomerDetails: serverUrl + "updateCustomerDetails",

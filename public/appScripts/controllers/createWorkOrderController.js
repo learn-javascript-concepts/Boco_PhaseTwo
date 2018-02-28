@@ -12,7 +12,7 @@ define([], function(){
 
         $scope.getRandomWorkOrder = function() {
             $http.get(appConstants.getRandomWorkOrder, authenticateUser.getHeaderObject()).then(function(response) {
-                $scope.workOrderNumber = response.data.randomWorkOrder;
+                $scope.workOrderNumber = response.data.work_order_number;
             })
         }
 
@@ -29,7 +29,7 @@ define([], function(){
             $http.post(appConstants.createWorkOrder, requestData, authenticateUser.getHeaderObject()).then(function(response) {
                 workOrderCache.saveWorkOrderDetails(response.data);
                 var responseData = response.data;
-                if(response.data.status == "Created") {
+                if(response.data.status == "CREATED") {
                     $location.path("description");
                 } else {
                     alert("Error Creating Work Order")

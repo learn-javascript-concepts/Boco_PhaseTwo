@@ -41,8 +41,7 @@ define([], function() {
                 headers: {
                     "Authorization": $cookies.get('token'),
                     "Accept": "application/json",
-                    "Content-Type": "application/json",
-                    "Cache-Control": "no-cache"
+                    "Content-Type": "application/json"
                 }
             };
 
