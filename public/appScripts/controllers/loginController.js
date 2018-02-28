@@ -27,7 +27,7 @@ define([], function(){
                 "password": $scope.userPassword
             }
 
-            $http.post("appConstants.authenticateUserUrl", authenticationData, {
+            $http.post(appConstants.authenticateUserUrl, authenticationData, {
                 "Accept": "application/json",
                 "Content-Type": 'application/json',
                 "Cache-Control": "no-cache",
