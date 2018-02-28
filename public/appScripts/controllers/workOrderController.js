@@ -2,6 +2,8 @@ define([], function() {
 
     function workOrderController($scope, authenticateUser, $sessionStorage, $location, appConstants, $http, $location, $cookies, workOrderCache) {
 
+        authenticateUser.redirectToLoginIfUnauthenticated();
+
         $scope.workOrderNumber = "";
 
         $scope.searchWorkOrder = function() {      

@@ -6,9 +6,7 @@ define([], function(){
             filename: "screenshotTarget.png",
             downloadText: "Click here to download",
             cancelText: "Click here to cancel download!!!"
-        }
-
-        authenticateUser.redirectToLandingPageIfAuthenticated();
+        };
 
         $scope.userName = "";
         $scope.userPassword = "";
