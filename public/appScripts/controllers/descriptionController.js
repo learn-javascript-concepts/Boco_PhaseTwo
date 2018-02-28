@@ -1,6 +1,7 @@
 define([], function() {
     var descriptionController = function($scope, workOrderCache, $http, $cookies, $location, appConstants, authenticateUser, $sessionStorage) {
 
+        var isCustomerIdModified = false;
         authenticateUser.redirectToLoginIfUnauthenticated();
 
         var cachedData = workOrderCache.getWorkOrderDetail();
@@ -51,7 +52,7 @@ define([], function() {
             $scope.isInEditCustomerMode = true;
         };
 
-        $scope.saveCustomerButton = function() {
+        $scope.saveCustomerButton = function(isCustomerChanged = 0 ) {
             $scope.isInEditCustomerMode = false;
 
             var customerDetails = {
@@ -66,10 +67,27 @@ define([], function() {
                 $http.put(appConstants.updateCustomerDetails + $scope.customer_details.id + "/", customerDetails, authenticateUser.getHeaderObject()).then(function(response) {
                     if(response.data.id) {
                         workOrderCache.updateCustomerDetails(response.data);
-                        alert("Customer Updated Successfully")
+
+                        if(isCustomerIdModified) {
+
+                            var addCustomerToWorkOrder = {
+                                customer: response.data.id
+                            }
+                            
+                            $http.put(appConstants.saveDescription + cachedData.id, addCustomerToWorkOrder, authenticateUser.getHeaderObject()).then(function(response) {
+                                if(response.status == 200) {
+                                    workOrderCache.saveWorkOrderDetails(response.data);
+                                    alert("Customer Added Successfully")
+                                }
+                            });
+                        } else {
+                            alert("Customer Updated Successfully");
+                        }
                     } else {
                         alert("Error Updating Customer Details")
                     }
+
+                    isCustomerIdModified = false;
                 })
             } else {
                 $http.post(appConstants.addNewCustomer, customerDetails, authenticateUser.getHeaderObject()).then(function(response) {
@@ -86,11 +104,10 @@ define([], function() {
                                 alert("Customer Added Successfully")
                             }
                         });
-
-                        
                     } else {
                         alert("Error Adding New Customer")
                     }
+                    isCustomerIdModified = false;
                 })
             }
         };
@@ -122,6 +139,7 @@ define([], function() {
                 $scope.customer_details = response.data[0];
                 workOrderCache.updateCustomerDetails(response.data[0]);
                 $scope.isInEditCustomerMode = true;
+                isCustomerIdModified = true;
             })
         };
 
