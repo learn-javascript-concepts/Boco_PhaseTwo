@@ -118,8 +118,6 @@ define([], function() {
             })
         }
 
-
-
         $scope.getAllCustomers();
 
         $scope.searchCustomerName = "";
