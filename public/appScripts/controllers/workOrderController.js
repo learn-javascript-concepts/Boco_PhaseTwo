@@ -10,8 +10,8 @@ define([], function() {
             $http.get(appConstants.getWorkOrder + "work_order_num=" + $scope.workOrderNumber, authenticateUser.getHeaderObject()).then(function(response) {
                 var workOrderData = response.data;
                 $sessionStorage.cachedWorkOrder = response.data;
-                if(workOrderData) {
-                    workOrderCache.saveWorkOrderDetails(workOrderData);
+                if(workOrderData.length > 0) {
+                    workOrderCache.saveWorkOrderDetails(workOrderData[0]);
                     $location.path("description");                    
                 } else {
                     alert("No Data exists for selected Work Order Number")

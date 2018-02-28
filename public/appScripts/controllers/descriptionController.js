@@ -4,6 +4,7 @@ define([], function() {
         authenticateUser.redirectToLoginIfUnauthenticated();
 
         var cachedData = workOrderCache.getWorkOrderDetail();
+
         $scope.work_order_num = cachedData.work_order_num;
         $scope.customer_po_num = cachedData.customer_po_num;
         $scope.work_order_by = cachedData.work_order_by;
@@ -29,7 +30,7 @@ define([], function() {
 
             var descriptionData = {
                 work_order_num: $scope.work_order_num,
-                has_additional_comments: $scope.description,
+                description: $scope.description,
                 other_requirements: $scope.other_requirements
             }
 
@@ -37,7 +38,7 @@ define([], function() {
                 if(response.data.status == "CREATED") {
                     workOrderCache.saveWorkOrderDetails(response.data);
                 }
-            })
+            });
         };
 
 
@@ -65,7 +66,7 @@ define([], function() {
             };
 
             if(cachedData.customer_details.id) {
-                $http.post(appConstants.updateCustomerDetails, customerDetails, authenticateUser.getHeaderObject()).then(function(response) {
+                $http.put(appConstants.updateCustomerDetails + $scope.customer_details.id + "/", customerDetails, authenticateUser.getHeaderObject()).then(function(response) {
                     if(response.data.id) {
                         workOrderCache.saveWorkOrderDetails.customer_details = response.data;
                         alert("Customer Updated Successfully")
@@ -79,7 +80,19 @@ define([], function() {
                 $http.post(appConstants.addNewCustomer, customerDetails, authenticateUser.getHeaderObject()).then(function(response) {
                     if(response.data.id) {
                         workOrderCache.saveWorkOrderDetails.customer_details = response.data;
-                        alert("Customer Added Successfully")
+
+                        var addCustomerToWorkOrder = {
+                            customer: response.data.id
+                        }
+
+                        $http.put(appConstants.saveDescription + cachedData.id, addCustomerToWorkOrder, authenticateUser.getHeaderObject()).then(function(response) {
+                            if(response.status == 200) {
+                                workOrderCache.saveWorkOrderDetails(response.data);
+                                alert("Customer Added Successfully")
+                            }
+                        });
+
+                        
                     } else {
                         alert("Error Adding New Customer")
                     }
@@ -98,17 +111,16 @@ define([], function() {
         $scope.allCustomerName = [];
 
         $scope.getAllCustomers = function() {
-            $http.get(appConstants.getAllWorkOrders, authenticateUser.getHeaderObject()).then(function(response) {
-                $scope.workOrderList = response.data.allWorkOrderDetails;
-                for(let i=0; i < $scope.workOrderList.length; i++) {
-                    $scope.allCustomerName.push($scope.workOrderList[i].customer_details.company_name);
+            $http.get(appConstants.getAllCustomers, authenticateUser.getHeaderObject()).then(function(response) {
+                for(let i=0; i < response.data.length; i++) {
+                    $scope.allCustomerName.push(response.data[i].company_name);
                 }
             })
         }
 
 
 
-        //$scope.getAllCustomers();
+        $scope.getAllCustomers();
 
         $scope.searchCustomerName = "";
 

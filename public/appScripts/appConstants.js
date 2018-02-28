@@ -10,10 +10,11 @@ define([], function() {
         getRandomWorkOrder: serverUrl + "workorders/getNextNumber/",
         getDetailedWorkorder: serverUrl + "getdetailedworkorder/",
         saveDescription: serverUrl + "workorders/",
-        updateCustomerDetails: serverUrl + "updateCustomerDetails",
+        updateCustomerDetails: serverUrl + "customers/",
         addNewCustomer: serverUrl + "customers/",
         getAllWorkOrders: serverUrl + "getallworkorders",
-        getSelectedCustomer: serverUrl + "customer/"
+        getSelectedCustomer: serverUrl + "customer/",
+        getAllCustomers: serverUrl + "customers/"
     }
 
     return appConstants;
