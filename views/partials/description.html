@@ -94,14 +94,12 @@
                 <div class="searchCustomer-form custom-btn padlr-50">
                     <div class="searchCustomer-indent">
                         <div class="max-width450">
-                            <input type="text" class="form-control" placeholder="Search Customer"  list="dataList">
+                            <input type="text" class="form-control" placeholder="Search Customer" list="dataList" ng-model="searchCustomerName">
                             <datalist id="dataList">
-                                <option>1001</option>
-                                <option>1002</option>
-                                <option>1003</option>
+                                <option ng-repeat="customerName in allCustomerName">{{customerName}}</option>
                               </datalist>
                             
-                            <button class="btn btn-gray">SEARCH</button>
+                            <button class="btn btn-gray" ng-click="searchCustomer()">Search</button>
                         </div>
                     </div>
                     <div class="add-customer">

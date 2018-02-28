@@ -13,6 +13,12 @@ define([], function() {
             $sessionStorage.cachedWorkOrder = cachedWorkOrder;
         };
 
+        this.updateCustomerDetails = function(customerDetails) {
+            if($sessionStorage.cachedWorkOrder) {
+                $sessionStorage.cachedWorkOrder.customer_details = customerDetails;
+            }
+        }
+
         this.getWorkOrderDetail = function() {
             if(cachedWorkOrder) {
                 return cachedWorkOrder;

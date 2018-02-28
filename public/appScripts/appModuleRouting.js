@@ -6,9 +6,20 @@ define([], function() {
 
             var appModule = angular.module("appModule");
 
-            appModule.config(function($routeProvider, $locationProvider, $httpProvider){
+            appModule.config(function($routeProvider, $locationProvider, $httpProvider, $sceDelegateProvider){
 
                 $locationProvider.html5Mode(true);
+
+                $httpProvider.defaults.headers.common = {};
+                $httpProvider.defaults.headers.post = {};
+                $httpProvider.defaults.headers.put = {};
+                $httpProvider.defaults.headers.patch = {};
+                $httpProvider.defaults.headers.get = {};
+
+                $httpProvider.defaults.useXDomain = true;
+                delete $httpProvider.defaults.headers.common['X-Requested-With'];
+
+                $sceDelegateProvider.resourceUrlWhitelist(['self', /^http?:\/\/(cdn\.)?ec2-13-58-74-246.us-east-2.compute.amazonaws.com:5000/]);
 
                 $routeProvider.when("/", {
                     templateUrl: "./partials/login.html",

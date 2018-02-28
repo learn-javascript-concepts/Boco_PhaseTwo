@@ -94,15 +94,30 @@ define([], function() {
             cachedData.customer_details = {};
         }
 
-        $scope.allCustomers = [];
+        $scope.workOrderList = [];
+
+        $scope.allCustomerName = [];
 
         $scope.getAllCustomers = function() {
-            $http.get(appConstants.getAllCustomers, authenticateUser.getHeaderObject()).then(function(response) {
-                var allNames = [];
-                $scope.allCustomers = response.data;
-                for(let i=0; i<$scope.allCustomers; i++) {
-                    allNames.push($scope.allCustomers[i].company_name);
+            $http.get(appConstants.getAllWorkOrders, authenticateUser.getHeaderObject()).then(function(response) {
+                $scope.workOrderList = response.data.allWorkOrderDetails;
+                for(let i=0; i < $scope.workOrderList.length; i++) {
+                    $scope.allCustomerName.push($scope.workOrderList[i].customer_details.company_name);
                 }
+            })
+        }
+
+
+
+        $scope.getAllCustomers();
+
+        $scope.searchCustomerName = "";
+
+        $scope.searchCustomer = function() {
+            $http.get(appConstants.getSelectedCustomer + "1", authenticateUser.getHeaderObject()).then(function(response) {
+                $scope.customer_details = response.data.customerDetails;
+                cachedData.customer_details = response.data.customerDetails;
+                workOrderCache.updateCustomerDetails(cachedData.customer_details);
             })
         }
 

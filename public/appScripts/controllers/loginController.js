@@ -28,15 +28,15 @@ define([], function(){
             }
 
             $http.post(appConstants.authenticateUserUrl, authenticationData, {
-                "Accept": "application/json",
-                "Content-Type": 'application/json',
-                "Cache-Control": "no-cache",
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Methods': 'GET, POST, DELETE',
-                'Access-Control-Allow-Headers': 'Content-Type',
+                headers: {
+                    "Authorization": $cookies.get('token'),
+                    "Accept": "application/json",
+                    "Content-Type": "application/json",
+                    "Cache-Control": "no-cache"
+                }
             }).then(function(response) {
                 
-                if(response.status == 200 && response.data.isAuthenticated == true) {
+                if(response.status == 200 && response.data.token.length > 0) {
                     authenticateUser.setAuthenticationToken(response.data.token);
                     $location.path("workorder");
                 } else {

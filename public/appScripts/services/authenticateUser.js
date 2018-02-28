@@ -39,7 +39,7 @@ define([], function() {
         this.getHeaderObject = function() {
             var configObject = {
                 headers: {
-                    "token": $cookies.get('token'),
+                    "Authorization": $cookies.get('token'),
                     "Accept": "application/json",
                     "Content-Type": "application/json",
                     "Cache-Control": "no-cache"

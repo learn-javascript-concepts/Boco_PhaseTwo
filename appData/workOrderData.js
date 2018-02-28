@@ -124,8 +124,20 @@
             return allWorkOrder.find( workOrder => workOrder.work_order_num == workOrderNumber );
         }
 
-        var getAllWorkOrders = function() {
-            return allWorkOrder;
+        var getSelectedCustomerDetails = {
+            "company_name": "Updated Customer",
+            "id": "de5b6961-0d80-4ad9-97af-86762349c5bf",
+            "email": "1003@1003.com",
+            "contact_number": 1234567909,
+            "poc": "Shashank",
+            "address": "Mountain View, CA",
+            "address_latitude": "37.38605170",
+            "address_longitude": "-122.08385110",
+            "created": "2018-02-11T17:56:33.106465Z"
+        };
+
+        var getAllWorkOrdersFunction = function() {
+            return detailedWorkOrders;
         };
 
         var getDetailedWorkOrder = function(workOrderNumber) {
@@ -133,9 +145,9 @@
         };
 
         return {
-
+            getSelectedCustomerDetails: getSelectedCustomerDetails,
+            getAllWorkOrdersList: detailedWorkOrders,
             getWorkOrderByNumber: getWorkOrderByNumber,
-            getAllWorkOrders: getAllWorkOrders,
             getDetailedWorkOrder: getDetailedWorkOrder
 
         }
