@@ -135,7 +135,7 @@ define([], function() {
         $scope.searchCustomerName = "";
 
         $scope.searchCustomer = function() {
-            if($scope.allCustomerName.indexOf($searchCustomerName) > -1) {
+            if($scope.allCustomerName.indexOf($scope.searchCustomerName) > -1) {
                 $http.get(appConstants.getSelectedCustomer + "company_name=" + $scope.searchCustomerName, authenticateUser.getHeaderObject()).then(function(response) {
                     $scope.customer_details = response.data[0];
                     workOrderCache.updateCustomerDetails(response.data[0]);
