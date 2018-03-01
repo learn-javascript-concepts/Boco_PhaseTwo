@@ -135,12 +135,17 @@ define([], function() {
         $scope.searchCustomerName = "";
 
         $scope.searchCustomer = function() {
-            $http.get(appConstants.getSelectedCustomer + "company_name=" + $scope.searchCustomerName, authenticateUser.getHeaderObject()).then(function(response) {
-                $scope.customer_details = response.data[0];
-                workOrderCache.updateCustomerDetails(response.data[0]);
-                $scope.isInEditCustomerMode = true;
-                isCustomerIdModified = true;
-            })
+            if($scope.allCustomerName.indexOf($searchCustomerName) > -1) {
+                $http.get(appConstants.getSelectedCustomer + "company_name=" + $scope.searchCustomerName, authenticateUser.getHeaderObject()).then(function(response) {
+                    $scope.customer_details = response.data[0];
+                    workOrderCache.updateCustomerDetails(response.data[0]);
+                    $scope.isInEditCustomerMode = true;
+                    isCustomerIdModified = true;
+                })
+            } else {
+                alert("No Customer with Specified Name Found")
+            }
+            
         };
 
 
