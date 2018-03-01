@@ -20,7 +20,8 @@ require.config({
         "datePicker": "assets/plugins/date-picker/bootstrap-datepicker.min",
         "appScript": "assets/js/script",
         "ngStorage": "lib/ngstorage/ngStorage",
-        "angular-google-map": "lib/angular-google-map/src/angular-google-map"
+        "angular-google-map": "lib/angular-google-map/src/angular-google-map",
+        "mapDirective": "appScripts/directives/mapDirective"
 
     },
     shim: {
