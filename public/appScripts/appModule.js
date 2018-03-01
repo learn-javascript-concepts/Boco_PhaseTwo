@@ -15,6 +15,7 @@ define(["appModuleRouting",
             createWorkOrderController, 
             appConstants,
             workOrderCache,
+            descriptionController,
             mapDirective) {
 
     var appModule = {
