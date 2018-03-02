@@ -145,7 +145,11 @@
                                             <i class="fas fa-phone-square"></i>
                                         </div>
                                         <div class="colContent-indent">
-                                            <input type="tel" pattern="^\d{4}-\d{3}-\d{4}$" ng-model="customer_details.contact_number" class="form-control telInput" ng-disabled="isInEditCustomerMode == false" required placeholder="Contact Number">
+                                            <input type="tel" ng-model="customer_details.contact_number"
+                                                   class="form-control telInput" 
+                                                   ng-disabled="isInEditCustomerMode == false" required 
+                                                   placeholder="Contact Number"
+                                                   ng-change="formatTelephoneNumber()">
                                         </div>
                                     </div>
                                 </li>
@@ -1107,13 +1111,4 @@
     </div>
     <script src="/assets/js/script.js"></script>
 
-    <script>
-    
-    $(document).on('focusout', '.telInput', function(){
-        var telData = $(".telInput").val().toString().replace(/-|x/g, '');
-        var formattedTel = telData.substring(0, 3) + "-" + telData.substring(3, 6) + "-" + telData.substring(6, 10);
-        $(".telInput").val(formattedTel);
-    });
-    
-    </script>
 </div>

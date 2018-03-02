@@ -1,5 +1,5 @@
 define([], function() {
-    var descriptionController = function($scope, workOrderCache, $http, $cookies, $location, appConstants, authenticateUser, $sessionStorage) {
+    var descriptionController = function($scope, workOrderCache, $timeout, $http, $cookies, $location, appConstants, authenticateUser, $sessionStorage) {
 
         var isCustomerIdModified = false;
         authenticateUser.redirectToLoginIfUnauthenticated();
@@ -46,11 +46,27 @@ define([], function() {
 
         $scope.customer_details = cachedData.customer_details;
 
+        $scope.formatTelephoneNumber = function() {
+
+            if ($scope.customer_details.contact_number && $scope.customer_details.contact_number.toString().length > 9) {
+                var telData = $scope.customer_details.contact_number.toString().replace(/-|x/g, '');
+                var formattedTel = telData.substring(0, 3) + "-" + telData.substring(3, 6) + "-" + telData.substring(6, 10);
+                $scope.customer_details.contact_number = formattedTel;
+            }
+            
+        }
+
+        $scope.formatTelephoneNumber();
+
+        
+
         $scope.isInEditCustomerMode = false;
 
         $scope.editCustomerButton = function() {
             $scope.isInEditCustomerMode = true;
         };
+
+        
 
         $scope.saveCustomerButton = function(isCustomerChanged = 0 ) {
             $scope.isInEditCustomerMode = false;
@@ -59,7 +75,7 @@ define([], function() {
                 company_name: $scope.customer_details.company_name,
                 address: $scope.customer_details.address,
                 email: $scope.customer_details.email,
-                contact_number: $scope.customer_details.contact_number,
+                contact_number: $scope.customer_details.contact_number.replace(/-|x/g, ''),
                 poc: $scope.customer_details.poc
             };
 
