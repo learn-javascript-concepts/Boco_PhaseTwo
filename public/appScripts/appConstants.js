@@ -14,7 +14,9 @@ define([], function() {
         addNewCustomer: serverUrl + "customers/",
         getAllWorkOrders: serverUrl + "getallworkorders",
         getSelectedCustomer: serverUrl + "customers/?",
-        getAllCustomers: serverUrl + "customers/"
+        getAllCustomers: serverUrl + "customers/",
+
+        getWorkOrderList: serverUrl + "workorders/list/"
     }
 
     return appConstants;

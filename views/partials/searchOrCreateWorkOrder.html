@@ -5,7 +5,10 @@
                 <form ng-submit="searchWorkOrder()">
                     <ul>
                       <li class="d-flex">
-                            <input type="text" class="form-control" ng-model="workOrderNumber" placeholder="Enter Work Order" required>
+                            <input type="text" list="dataList" class="form-control" ng-model="workOrderNumber" placeholder="Enter Work Order" required>
+                            <datalist id="dataList">
+                                <option ng-repeat="workOrder in workOrderList">{{workOrder.work_order_num}}</option>
+                            </datalist>
 
                             <div class="go-btn">
                                 <button class="btn btn-default btn-blue2" type="submit" >

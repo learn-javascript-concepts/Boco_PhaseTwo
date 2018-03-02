@@ -6,6 +6,16 @@ define([], function() {
 
         $scope.workOrderNumber = "";
 
+        $scope.workOrderList = [];
+
+        $scope.getWorkOrderList = function(){
+            $http.get(appConstants.getWorkOrderList, authenticateUser.getHeaderObject()).then(function(response) {
+                $scope.workOrderList = response.data;
+            });
+        }
+
+        $scope.getWorkOrderList();
+
         $scope.searchWorkOrder = function() {      
             $http.get(appConstants.getWorkOrder + "work_order_num=" + $scope.workOrderNumber, authenticateUser.getHeaderObject()).then(function(response) {
                 var workOrderData = response.data;
