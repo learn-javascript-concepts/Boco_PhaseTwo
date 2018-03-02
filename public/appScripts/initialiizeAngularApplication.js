@@ -20,8 +20,7 @@ require.config({
         "datePicker": "assets/plugins/date-picker/bootstrap-datepicker.min",
         "appScript": "assets/js/script",
         "ngStorage": "lib/ngstorage/ngStorage",
-        "angular-google-map": "lib/angular-google-map/src/angular-google-map",
-        "mapDirective": "appScripts/directives/mapDirective"
+        "ngMaps": "lib/ngmap/build/scripts/ng-map"
 
     },
     shim: {
@@ -37,6 +36,9 @@ require.config({
         "appScript" : {
             deps: ["jquery"]
         },
+        "ngMaps": {
+            deps: ["angular"]
+        },
         "appModule": {
             deps: ["angular", "angular-route", "angular-cookies", "angular-screenshot", "jquery", "fontAwesome", "bootstrapBundle", "datePicker", "appScript", "ngStorage"]
         }
@@ -44,5 +46,8 @@ require.config({
 });
 
 require(["appModule"], function(appModule) {
-    appModule.init();
+    require(["ngMaps"], function() {
+        appModule.init();
+    })
+    
 });

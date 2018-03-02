@@ -169,8 +169,16 @@
                                 </li>
                             </ul>
                         </div>
+
+                        <div map-lazy-load="https://maps.google.com/maps/api/js" map-lazy-load-params="{{googleMapsUrl}}">
+                            <ng-map center="41,-87" zoom="3"></ng-map>
+                        </div>
                         <div class="map-container" id="googleMap">
-                            <div my-map=""></div>
+                            <div map-lazy-load="https://maps.google.com/maps/api/js">
+                                <ng-map id="map" zoom="11" center="{{markerPosition}}">
+                                    <marker position="{{markerPosition}}"></marker>
+                                </ng-map>
+                            </div>
                         </div>
                     </div>
                 </form>

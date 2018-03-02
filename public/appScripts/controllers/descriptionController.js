@@ -6,11 +6,14 @@ define([], function() {
 
         var cachedData = workOrderCache.getWorkOrderDetail();
 
+        $scope.googleMapsUrl = "AIzaSyAog2mjYSr6LJ2nMkQ2mOO7H4mrzizFqmY";
+
+
         $scope.work_order_num = cachedData.work_order_num;
         $scope.customer_po_num = cachedData.customer_po_num;
         $scope.work_order_by = cachedData.work_order_by;
-        $scope.date_work_started = new Date(cachedData.date_work_started);
-        $scope.date_of_order = new Date(cachedData.date_of_order);
+        $scope.date_work_started = new Date(cachedData.date_work_started).toLocaleDateString("en-US");
+        $scope.date_of_order = new Date(cachedData.date_of_order).toLocaleDateString("en-US");
         $scope.description = cachedData.description;
         $scope.other_requirements = cachedData.other_requirements;
         $scope.isInNonEditModeOfDescription = true;
@@ -46,6 +49,14 @@ define([], function() {
 
         $scope.customer_details = cachedData.customer_details;
 
+        $scope.updateGoogleMaps = function() {
+            if($scope.customer_details) {
+                $scope.markerPosition = [cachedData.customer_details.address_latitude, cachedData.customer_details.address_longitude];
+            }
+        }
+
+        $scope.updateGoogleMaps();
+
         $scope.formatTelephoneNumber = function() {
 
             if ($scope.customer_details.contact_number && $scope.customer_details.contact_number.toString().length > 9) {
@@ -58,8 +69,6 @@ define([], function() {
 
         $scope.formatTelephoneNumber();
 
-        
-
         $scope.isInEditCustomerMode = false;
 
         $scope.editCustomerButton = function() {
@@ -69,6 +78,8 @@ define([], function() {
         
 
         $scope.saveCustomerButton = function(isCustomerChanged = 0 ) {
+
+            $scope.markerPosition = [49.74, -104.18];
             $scope.isInEditCustomerMode = false;
 
             var customerDetails = {
@@ -82,7 +93,9 @@ define([], function() {
             if(cachedData.customer_details.id) {
                 $http.put(appConstants.updateCustomerDetails + $scope.customer_details.id + "/", customerDetails, authenticateUser.getHeaderObject()).then(function(response) {
                     if(response.data.id) {
+                        nj0$scope.updateGoogleMaps();
                         workOrderCache.updateCustomerDetails(response.data);
+                        $scope.getAllCustomers();
 
                         if(isCustomerIdModified) {
 
@@ -108,7 +121,9 @@ define([], function() {
             } else {
                 $http.post(appConstants.addNewCustomer, customerDetails, authenticateUser.getHeaderObject()).then(function(response) {
                     if(response.data.id) {
+                        $scope.updateGoogleMaps();
                         workOrderCache.updateCustomerDetails(response.data);
+                        $scope.getAllCustomers();
 
                         var addCustomerToWorkOrder = {
                             customer: response.data.id
@@ -139,6 +154,7 @@ define([], function() {
         $scope.allCustomerName = [];
 
         $scope.getAllCustomers = function() {
+            $scope.allCustomerName = [];
             $http.get(appConstants.getAllCustomers, authenticateUser.getHeaderObject()).then(function(response) {
                 for(let i=0; i < response.data.length; i++) {
                     $scope.allCustomerName.push(response.data[i].company_name);

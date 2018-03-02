@@ -5,8 +5,7 @@ define(["appModuleRouting",
         "createWorkOrderController", 
         "appConstants",
         "workOrderCache",
-        "descriptionController",
-        "mapDirective"
+        "descriptionController"
     ], function(
             appModuleRouting, 
             loginController, 
@@ -15,12 +14,11 @@ define(["appModuleRouting",
             createWorkOrderController, 
             appConstants,
             workOrderCache,
-            descriptionController,
-            mapDirective) {
+            descriptionController) {
 
     var appModule = {
         init : function() {
-            var appModule = angular.module("appModule", ["ngRoute", "ngCookies", "angular-screenshot", "ngStorage"]);
+            var appModule = angular.module("appModule", ["ngRoute", "ngCookies", "angular-screenshot", "ngStorage", "ngMap"]);
 
             appModule.controller("loginController", loginController);
 
@@ -33,8 +31,6 @@ define(["appModuleRouting",
             appModule.service("authenticateUser", authenticateUser);
 
             appModule.service("workOrderCache", workOrderCache);
-
-            appModule.directive('myMap', mapDirective);
 
             appModule.constant("appConstants", appConstants);
 
