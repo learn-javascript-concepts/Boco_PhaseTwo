@@ -112,7 +112,7 @@
                     <div class="company-info">
                         <div class="company-title">
                             <span ng-bind="customer_details.company_name" ng-if="isInEditCustomerMode == false"></span>
-                            <input ng-if="isInEditCustomerMode == true" type="text" placeholder="Add Customer Name" ng-model="customer_details.company_name" class="form-control" required></span>
+                            <input ng-if="isInEditCustomerMode == true" type="text" placeholder="Name" ng-model="customer_details.company_name" class="form-control" required></span>
                         </div>
                     </div>
                     <div class="address-container">
@@ -125,7 +125,7 @@
                                             <i class="fas fa-map-marker-alt"></i>
                                         </div>
                                         <div class="colContent-indent">
-                                            <input type="text" ng-model="customer_details.address" class="form-control" ng-disabled="isInEditCustomerMode == false" required placeholder="Add Customer Address">
+                                            <input type="text" ng-model="customer_details.address" class="form-control" ng-disabled="isInEditCustomerMode == false" required placeholder="Address">
                                         </div>
                                     </div>
                                 </li>
@@ -135,7 +135,7 @@
                                             <i class="fas fa-envelope"></i>
                                         </div>
                                         <div class="colContent-indent">
-                                            <input type="email" ng-model="customer_details.email" class="form-control" ng-disabled="isInEditCustomerMode == false" required placeholder="Add Customer Email Id">
+                                            <input type="email" ng-model="customer_details.email" class="form-control" ng-disabled="isInEditCustomerMode == false" required placeholder="Email Id">
                                         </div>
                                     </div>
                                 </li>
@@ -145,7 +145,7 @@
                                             <i class="fas fa-phone-square"></i>
                                         </div>
                                         <div class="colContent-indent">
-                                            <input type="tel" ng-model="customer_details.contact_number" class="form-control" ng-disabled="isInEditCustomerMode == false" required placeholder="Add Customer Contact Details">
+                                            <input type="tel" ng-model="customer_details.contact_number" class="form-control" ng-disabled="isInEditCustomerMode == false" required placeholder="Contact Number">
                                         </div>
                                     </div>
                                 </li>
@@ -155,7 +155,7 @@
                                             <i class="fas fa-user"></i>
                                         </div>
                                         <div class="colContent-indent">
-                                            <input type="text" ng-model="customer_details.poc" class="form-control" ng-disabled="isInEditCustomerMode == false" required placeholder="Add Customer Point Of Contact">
+                                            <input type="text" ng-model="customer_details.poc" class="form-control" ng-disabled="isInEditCustomerMode == false" required placeholder="Point Of Contact">
                                         </div>
                                     </div>
                                 </li>
@@ -191,7 +191,7 @@
                         <div class="company-info">
                             <div class="company-title">
                                 <span ng-bind="sub_contractor_details.sub_contractor_name" ng-if="isSubContractorInEditMode == false"></span>
-                                <input type="text" ng-if="isSubContractorInEditMode == true" class="form-control" ng-model="sub_contractor_details.sub_contractor_name" placeholder="Enter name of SubContractor" required>
+                                <input type="text" ng-if="isSubContractorInEditMode == true" class="form-control" ng-model="sub_contractor_details.sub_contractor_name" placeholder="Name" required>
                             </div>
                         </div>
                     <div class="address-container">
@@ -204,7 +204,7 @@
                                             <i class="fas fa-map-marker-alt"></i>
                                         </div>
                                         <div class="colContent-indent">
-                                            <input type="text" ng-model="sub_contractor_details.address" class="form-control" ng-disabled="isSubContractorInEditMode == false" placeholder="Add Sub-Contractor Address" required>
+                                            <input type="text" ng-model="sub_contractor_details.address" class="form-control" ng-disabled="isSubContractorInEditMode == false" placeholder="Address" required>
                                         </div>
                                     </div>
                                 </li>
@@ -214,7 +214,7 @@
                                             <i class="fas fa-envelope"></i>
                                         </div>
                                         <div class="colContent-indent">
-                                            <input type="email" ng-model="sub_contractor_details.email" class="form-control" ng-disabled="isSubContractorInEditMode == false" placeholder="Add Sub-Contractor Email Id" required>
+                                            <input type="email" ng-model="sub_contractor_details.email" class="form-control" ng-disabled="isSubContractorInEditMode == false" placeholder="Email Id" required>
                                         </div>
                                     </div>
                                 </li>
@@ -224,7 +224,7 @@
                                             <i class="fas fa-phone-square"></i>
                                         </div>
                                         <div class="colContent-indent">
-                                            <input type="number" ng-model="sub_contractor_details.contact_number" class="form-control" ng-disabled="isSubContractorInEditMode == false" placeholder="Add Sub-Contractor Contact Details" required>
+                                            <input type="number" ng-model="sub_contractor_details.contact_number" class="form-control" ng-disabled="isSubContractorInEditMode == false" placeholder="Contact Number" required>
                                         </div>
                                     </div>
                                 </li>
@@ -234,7 +234,7 @@
                                             <i class="fas fa-user"></i>
                                         </div>
                                         <div class="colContent-indent">
-                                            <input type="text" ng-model="sub_contractor_details.poc" class="form-control" ng-disabled="isSubContractorInEditMode == false" placeholder="Add Sub-Contractor Point Of Contact" required>
+                                            <input type="text" ng-model="sub_contractor_details.poc" class="form-control" ng-disabled="isSubContractorInEditMode == false" placeholder="Point Of Contact" required>
                                         </div>
                                     </div>
                                 </li>
