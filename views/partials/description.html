@@ -29,12 +29,12 @@
                     <div class="col-md-6">
                         <div class="row">
                             <div class="col-md-6">
-                                <label style="font-size: 13px;">Date of Order:</label>
-                                <input type="date" class="form-control description-date" placeholder="Date Work Started" ng-model="date_of_order" disabled>
+                                <b style="font-size: 13px;">Date of Order:</b>
+                                <input type="text" style="font-size: 13px;" class="form-control description-date" placeholder="Date Work Started" ng-model="date_of_order" disabled>
                             </div>
                             <div class="col-md-6">
-                                <label style="font-size: 13px;">Date Work Started:</label>
-                                <input type="date" class="form-control description-date" ng-model="date_work_started" disabled>
+                                <b style="font-size: 13px;">Date Work Started:</b>
+                                <input type="text" style="font-size: 13px;" class="form-control description-date" ng-model="date_work_started" disabled>
                             </div>
                         </div>
                     </div>
@@ -135,7 +135,7 @@
                                             <i class="fas fa-envelope"></i>
                                         </div>
                                         <div class="colContent-indent">
-                                            <input type="text" ng-model="customer_details.email" class="form-control" ng-disabled="isInEditCustomerMode == false" required placeholder="Add Customer Email Id">
+                                            <input type="email" ng-model="customer_details.email" class="form-control" ng-disabled="isInEditCustomerMode == false" required placeholder="Add Customer Email Id">
                                         </div>
                                     </div>
                                 </li>
@@ -145,7 +145,7 @@
                                             <i class="fas fa-phone-square"></i>
                                         </div>
                                         <div class="colContent-indent">
-                                            <input type="text" ng-model="customer_details.contact_number" class="form-control" ng-disabled="isInEditCustomerMode == false" required placeholder="Add Customer Contact Details">
+                                            <input type="tel" ng-model="customer_details.contact_number" class="form-control" ng-disabled="isInEditCustomerMode == false" required placeholder="Add Customer Contact Details">
                                         </div>
                                     </div>
                                 </li>
@@ -166,7 +166,7 @@
                             </ul>
                         </div>
                         <div class="map-container" id="googleMap">
-                            
+                            <div my-map=""></div>
                         </div>
                     </div>
                 </form>
@@ -178,7 +178,7 @@
                     <div class="searchCustomer-indent">
                         <div class="max-width450">
                             <input type="text" class="form-control" placeholder="Search Sub Contractor">
-                            <button class="btn btn-gray">SEARCH</button>
+                            <button class="btn btn-gray">Search</button>
                         </div>
                     </div>
                     <div class="add-customer">
@@ -214,7 +214,7 @@
                                             <i class="fas fa-envelope"></i>
                                         </div>
                                         <div class="colContent-indent">
-                                            <input type="text" ng-model="sub_contractor_details.email" class="form-control" ng-disabled="isSubContractorInEditMode == false" placeholder="Add Sub-Contractor Email Id" required>
+                                            <input type="email" ng-model="sub_contractor_details.email" class="form-control" ng-disabled="isSubContractorInEditMode == false" placeholder="Add Sub-Contractor Email Id" required>
                                         </div>
                                     </div>
                                 </li>
@@ -224,7 +224,7 @@
                                             <i class="fas fa-phone-square"></i>
                                         </div>
                                         <div class="colContent-indent">
-                                            <input type="text" ng-model="sub_contractor_details.contact_number" class="form-control" ng-disabled="isSubContractorInEditMode == false" placeholder="Add Sub-Contractor Contact Details" required>
+                                            <input type="number" ng-model="sub_contractor_details.contact_number" class="form-control" ng-disabled="isSubContractorInEditMode == false" placeholder="Add Sub-Contractor Contact Details" required>
                                         </div>
                                     </div>
                                 </li>

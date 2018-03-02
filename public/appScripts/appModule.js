@@ -5,7 +5,9 @@ define(["appModuleRouting",
         "createWorkOrderController", 
         "appConstants",
         "workOrderCache",
-        "descriptionController"], function(
+        "descriptionController",
+        "mapDirective"
+    ], function(
             appModuleRouting, 
             loginController, 
             authenticateUser, 
@@ -13,7 +15,8 @@ define(["appModuleRouting",
             createWorkOrderController, 
             appConstants,
             workOrderCache,
-            descriptionController) {
+            descriptionController,
+            mapDirective) {
 
     var appModule = {
         init : function() {
@@ -30,6 +33,8 @@ define(["appModuleRouting",
             appModule.service("authenticateUser", authenticateUser);
 
             appModule.service("workOrderCache", workOrderCache);
+
+            appModule.directive('myMap', mapDirective);
 
             appModule.constant("appConstants", appConstants);
 

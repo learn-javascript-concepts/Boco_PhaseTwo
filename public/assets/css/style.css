@@ -308,12 +308,12 @@ body {
 }
 
 .textarea-minheight1 {
-    height: 146px;
+    height: 84px;
     resize: none;
 }
 
 .textarea-minheight2 {
-    height: 84px;
+    height: 146px;
     resize: none;
 }
 
