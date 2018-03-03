@@ -176,11 +176,19 @@ define([], function() {
         $scope.allCustomerName = [];
         $scope.allCustomers = [];
 
-        $scope.searchCustomerNameFromListIndex = function(id) {
+        $scope.searchCustomerNameFromListIndex = function(id, searchByName = false) {
             for(let i=0; i < $scope.allCustomers.length; i++) {
-                if($scope.allCustomers[i].id == id){
-                    return i;
+                if(searchByName) {
+                    if($scope.allCustomers[i].company_name == id){
+                        return i;
+                    }
+
+                } else {
+                    if($scope.allCustomers[i].id == id){
+                        return i;
+                    }
                 }
+                
             }
             return -1;
         }
@@ -202,18 +210,27 @@ define([], function() {
 
         $scope.searchCustomer = function(showAlert = 0) {
             if($scope.allCustomerName.indexOf($scope.searchCustomerName) > -1) {
-                $http.get(appConstants.getSelectedCustomer + "company_name=" + $scope.searchCustomerName, authenticateUser.getHeaderObject()).then(function(response) {
-                    $scope.customer_details = response.data[0];
-                    cachedData.customer_details = response.data[0];
-                    workOrderCache.updateCustomerDetails(response.data[0]);
-                    $scope.isInEditCustomerMode = true;
-                    isCustomerIdModified = true;
-                    $scope.searchCustomerName = "";
-                }) 
+
+                $scope.customer_details = $scope.allCustomers[$scope.searchCustomerNameFromListIndex($scope.searchCustomerName, true)];
+                cachedData.customer_details = $scope.customer_details;
+                workOrderCache.updateCustomerDetails($scope.customer_details)
+                $scope.isInEditCustomerMode = true;
+                isCustomerIdModified = true;
+                $scope.searchCustomerName = "";
             } else {
-                if(showAlert == 1 ) {
-                    alert("No Such Customer Exists")
-                }
+                $http.get(appConstants.getSelectedCustomer + "company_name=" + $scope.searchCustomerName, authenticateUser.getHeaderObject()).then(function(response) {
+                    if(response.data[0]) {
+                        $scope.customer_details = response.data[0];
+                        cachedData.customer_details = response.data[0];
+                        workOrderCache.updateCustomerDetails(response.data[0]);
+                        $scope.isInEditCustomerMode = true;
+                        isCustomerIdModified = true;
+                        $scope.searchCustomerName = "";
+                        $scope.getAllCustomers();
+                    } else {
+                        alert("No Such Customer Exists");
+                    }
+                })
             }
         };
 

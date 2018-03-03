@@ -94,7 +94,7 @@
                 <div class="searchCustomer-form custom-btn padlr-50">
                     <div class="searchCustomer-indent">
                         <div class="max-width450">
-                            <input type="text" class="form-control" ng-change="searchCustomer()" placeholder="Search Customer" list="dataList" ng-model="searchCustomerName">
+                            <input type="text" class="form-control" ng-model-options="{ debounce: 500 }" ng-change="searchCustomer()" placeholder="Search Customer" list="dataList" ng-model="searchCustomerName">
                             <datalist id="dataList">
                                 <option ng-repeat="customer in allCustomers">{{customer.company_name}}</option>
                             </datalist>
