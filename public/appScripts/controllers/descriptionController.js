@@ -1,7 +1,7 @@
 define([], function() {
     var descriptionController = function($scope, workOrderCache, $timeout, $http, $cookies, $location, appConstants, authenticateUser, $sessionStorage) {
-        $scope.markerPosition = [40.730610, -73.935242];
-        $scope.markerSubContractorPosition = [40.730610, -73.935242];
+        $scope.markerPosition = [38.46583480, -91.02618380];
+        $scope.markerSubContractorPosition = [38.46583480, -91.02618380];
         var isCustomerIdModified = false;
         var isSubContractorModified = false;
         authenticateUser.redirectToLoginIfUnauthenticated();
