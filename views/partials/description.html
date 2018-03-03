@@ -108,7 +108,7 @@
                         </button>
                     </div>
                 </div>
-                <form ng-if="customer_details" ng-submit="saveCustomerButton()">
+                <form ng-submit="saveCustomerButton()">
                     <div class="company-info">
                         <div class="company-title">
                             <span ng-bind="customer_details.company_name" ng-if="isInEditCustomerMode == false"></span>
@@ -202,7 +202,7 @@
                             </button>
                         </div>
                     </div>
-                    <form ng-if="sub_contractor_details" ng-submit="saveSubContractorButton()">
+                    <form ng-submit="saveSubContractorButton()">
                             <div class="company-info">
                                 <div class="company-title">
                                     <span ng-bind="sub_contractor_details.sub_contractor_name" ng-if="isSubContractorInEditMode == false"></span>

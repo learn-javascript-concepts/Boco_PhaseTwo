@@ -1,6 +1,7 @@
 define([], function() {
     var descriptionController = function($scope, workOrderCache, $timeout, $http, $cookies, $location, appConstants, authenticateUser, $sessionStorage) {
-
+        $scope.markerPosition = [40.730610, -73.935242];
+        $scope.markerSubContractorPosition = [40.730610, -73.935242];
         var isCustomerIdModified = false;
         var isSubContractorModified = false;
         authenticateUser.redirectToLoginIfUnauthenticated();
@@ -91,9 +92,20 @@ define([], function() {
                 poc: $scope.customer_details.poc
             };
 
+            if(cachedData.customer_details == null) {
+                cachedData.customer_details = {
+                    company_name: "",
+                    address: "",
+                    email: "",
+                    contact_number: "",
+                    poc: ""
+
+                }
+            }
+
             if(cachedData.customer_details.id) {
                 $http.put(appConstants.updateCustomerDetails + $scope.customer_details.id + "/", customerDetails, authenticateUser.getHeaderObject()).then(function(response) {
-                    $scope.isInEditCustomerMode = false;
+                    
                     if(response.data.id) {
                         workOrderCache.updateCustomerDetails(response.data);
                         $scope.customer_details = response.data;
@@ -110,6 +122,7 @@ define([], function() {
                             $http.put(appConstants.saveDescription + cachedData.id + "/", addCustomerToWorkOrder, authenticateUser.getHeaderObject()).then(function(response) {
                                 if(response.status == 200) {
                                     workOrderCache.saveWorkOrderDetails(response.data);
+                                    $scope.isInEditCustomerMode = false;
                                     alert("Customer Added Successfully")
                                 }
                             });
@@ -126,7 +139,6 @@ define([], function() {
                 })
             } else {
                 $http.post(appConstants.addNewCustomer, customerDetails, authenticateUser.getHeaderObject()).then(function(response) {
-                    $scope.isInEditCustomerMode = false;
                     if(response.data.id) {
                         $scope.allCustomers.push(response.data);
                         $scope.customer_details = response.data;
@@ -141,6 +153,7 @@ define([], function() {
                         $http.put(appConstants.saveDescription + cachedData.id + "/", addCustomerToWorkOrder, authenticateUser.getHeaderObject()).then(function(response) {
                             if(response.status == 200) {
                                 workOrderCache.saveWorkOrderDetails(response.data);
+                                $scope.isInEditCustomerMode = false;
                                 alert("Customer Added Successfully")
                             }
                         });
@@ -195,11 +208,11 @@ define([], function() {
                     workOrderCache.updateCustomerDetails(response.data[0]);
                     $scope.isInEditCustomerMode = true;
                     isCustomerIdModified = true;
+                    $scope.searchCustomerName = "";
                 })
             } else {
                 alert("No Customer with Specified Name Found")
             }
-            $scope.searchCustomerName = "";
         };
 
 
@@ -232,11 +245,12 @@ define([], function() {
                     workOrderCache.updateSubContractorDetails(response.data[0]);
                     $scope.isSubContractorInEditMode = true;
                     isSubContractorModified = true;
+                    $scope.searchSubContractorName = "";
                 })
             } else {
                 alert("No Customer with Specified Name Found")
             }
-            $scope.searchSubContractorName = "";
+            
         };
 
         $scope.editSubContractorButton = function() {
@@ -274,6 +288,16 @@ define([], function() {
                 contact_number: $scope.sub_contractor_details.contact_number.toString().replace(/-|x/g, ''),
                 poc: $scope.sub_contractor_details.poc
             };
+
+            if(cachedData.sub_contractor_details == null) {
+                cachedData.sub_contractor_details = {
+                    company_name: "",
+                    address: "",
+                    email: "",
+                    contact_number: "",
+                    poc: ""
+                }
+            }
 
             if(cachedData.sub_contractor_details.id) {
                 $http.put(appConstants.updateSubContractorDetails + cachedData.sub_contractor_details.id + "/", subContractorDetails, authenticateUser.getHeaderObject()).then(function(response) {
