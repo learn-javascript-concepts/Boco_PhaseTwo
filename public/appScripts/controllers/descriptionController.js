@@ -45,7 +45,7 @@ define([], function() {
                     workOrderCache.saveWorkOrderDetails(response.data);
                     alert("Workorder Description Updated Successfully")
                 } else {
-                    alert("Error Updating Customer Description")
+                    alert("Error Updating Workorder Description")
                 }
             });
         };
