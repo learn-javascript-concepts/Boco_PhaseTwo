@@ -96,7 +96,7 @@
                         <div class="max-width450">
                             <input type="text" class="form-control" placeholder="Search Customer" list="dataList" ng-model="searchCustomerName">
                             <datalist id="dataList">
-                                <option ng-repeat="customerName in allCustomerName">{{customerName}}</option>
+                                <option ng-repeat="customer in allCustomers">{{customer.company_name}}</option>
                             </datalist>
                             
                             <button class="btn btn-gray" ng-click="searchCustomer()">Search</button>
@@ -190,7 +190,7 @@
                             <div class="max-width450">
                                 <input type="text" class="form-control" placeholder="Search Sub Contractor" list="subcontractordataList" ng-model="searchSubContractorName">
                                 <datalist id="subcontractordataList">
-                                    <option ng-repeat="subContractorName in allSubContractorName">{{subContractorName}}</option>
+                                    <option ng-repeat="subContractor in allSubContractor">{{subContractor.sub_contractor_name}}</option>
                                 </datalist>
                                 
                                 <button class="btn btn-gray" ng-click="searchSubContractor()">Search</button>

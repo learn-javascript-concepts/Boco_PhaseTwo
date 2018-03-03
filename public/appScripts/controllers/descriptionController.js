@@ -97,7 +97,7 @@ define([], function() {
                     if(response.data.id) {
                         workOrderCache.updateCustomerDetails(response.data);
                         $scope.customer_details = response.data;
-                        $scope.getAllCustomers();
+                        $scope.allCustomers[$scope.searchCustomerNameFromListIndex(response.data.id)] = response.data;
                         $scope.updateGoogleMaps();
 
                         if(isCustomerIdModified) {
@@ -127,9 +127,9 @@ define([], function() {
                 $http.post(appConstants.addNewCustomer, customerDetails, authenticateUser.getHeaderObject()).then(function(response) {
                     $scope.isInEditCustomerMode = false;
                     if(response.data.id) {
+                        $scope.allCustomers.push(response.data);
                         $scope.customer_details = response.data;
                         workOrderCache.updateCustomerDetails(response.data);
-                        $scope.getAllCustomers();
                         $scope.updateGoogleMaps();
 
                         var addCustomerToWorkOrder = {
@@ -159,14 +159,29 @@ define([], function() {
         }
 
         $scope.allCustomerName = [];
+        $scope.allCustomers = [];
+
+        $scope.searchCustomerNameFromListIndex = function(id) {
+            for(let i=0; i < $scope.allCustomers.length; i++) {
+                if($scope.allCustomers[i].id == id){
+                    return i;
+                }
+            }
+            return -1;
+        }
 
         $scope.getAllCustomers = function() {
             $scope.allCustomerName = [];
             $http.get(appConstants.getAllCustomers, authenticateUser.getHeaderObject()).then(function(response) {
+                $scope.allCustomers = response.data;
                 for(let i=0; i < response.data.length; i++) {
                     $scope.allCustomerName.push(response.data[i].company_name);
                 }
             })
+        }
+
+        $scope.updateCustomerList = function() {
+
         }
 
         $scope.getAllCustomers();
@@ -184,7 +199,7 @@ define([], function() {
             } else {
                 alert("No Customer with Specified Name Found")
             }
-            $scope.searchCustomerName = "";s
+            $scope.searchCustomerName = "";
         };
 
 
@@ -228,10 +243,21 @@ define([], function() {
         }
 
         $scope.allSubContractorName = [];
+        $scope.allSubContractor = [];
+
+        $scope.searchSubContractorNameFromListIndex = function(id) {
+            for(let i=0; i < $scope.allSubContractor.length; i++) {
+                if($scope.allSubContractor[i].id == id){
+                    return i;
+                }
+            }
+            return -1;
+        }
 
         $scope.getAllSubContractors = function() {
             $scope.allSubContractorName = [];
             $http.get(appConstants.getAllSubContractors, authenticateUser.getHeaderObject()).then(function(response) {
+                $scope.allSubContractor = response.data;
                 for(let i=0; i < response.data.length; i++) {
                     $scope.allSubContractorName.push(response.data[i].sub_contractor_name);
                 }
@@ -252,7 +278,7 @@ define([], function() {
                     $scope.isSubContractorInEditMode = false;
                     if(response.data.id) {
                         workOrderCache.updateSubContractorDetails(response.data);
-                        $scope.getAllSubContractors();
+                        $scope.allSubContractor[$scope.searchSubContractorNameFromListIndex(response.data.id)] = response.data;
                         $scope.sub_contractor_details = response.data;
                         $scope.updateGoogleMapsForContractor();
 
@@ -283,9 +309,9 @@ define([], function() {
                 $http.post(appConstants.addNewSubContractor, subContractorDetails, authenticateUser.getHeaderObject()).then(function(response) {
                     $scope.isSubContractorInEditMode = false;
                     if(response.data.id) {
+                        $scope.allSubContractor.push(response.data);
                         $scope.sub_contractor_details = response.data;
                         workOrderCache.updateSubContractorDetails(response.data);
-                        $scope.getAllSubContractors();
                         $scope.updateGoogleMapsForContractor();
                         var addSubContractorToWorkOrder = {
                             sub_contractor: response.data.id

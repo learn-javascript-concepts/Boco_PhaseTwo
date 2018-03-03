@@ -20,6 +20,7 @@ define([], function() {
                             if(rejection.status === 401) {
                                 location.reload();
                             }
+                            alert("Error Processing Request")
                             return $q.reject(rejection);
                         }
                     };
