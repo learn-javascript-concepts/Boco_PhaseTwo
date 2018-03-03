@@ -210,30 +210,34 @@ define([], function() {
         $scope.searchCustomerName = "";
 
         $scope.searchCustomer = function(showAlert = 0) {
-            if($scope.allCustomerName.indexOf($scope.searchCustomerName) > -1) {
+            if($scope.searchCustomerName != "") {
+                if($scope.allCustomerName.indexOf($scope.searchCustomerName) > -1) {
 
-                $scope.customer_details = $scope.allCustomers[$scope.searchCustomerNameFromListIndex($scope.searchCustomerName, true)];
-                cachedData.customer_details = $scope.customer_details;
-                workOrderCache.updateCustomerDetails($scope.customer_details)
-                $scope.isInEditCustomerMode = true;
-                isCustomerIdModified = true;
-                $scope.searchCustomerName = "";
-                $scope.markerPosition = [$scope.customer_details.address_latitude, $scope.customer_details.address_longitude];
+                    $scope.customer_details = $scope.allCustomers[$scope.searchCustomerNameFromListIndex($scope.searchCustomerName, true)];
+                    cachedData.customer_details = $scope.customer_details;
+                    workOrderCache.updateCustomerDetails($scope.customer_details)
+                    $scope.isInEditCustomerMode = true;
+                    isCustomerIdModified = true;
+                    $scope.searchCustomerName = "";
+                    $scope.markerPosition = [$scope.customer_details.address_latitude, $scope.customer_details.address_longitude];
+                } else {
+                    $http.get(appConstants.getSelectedCustomer + "company_name=" + $scope.searchCustomerName, authenticateUser.getHeaderObject()).then(function(response) {
+                        if(response.data[0]) {
+                            $scope.customer_details = response.data[0];
+                            cachedData.customer_details = response.data[0];
+                            workOrderCache.updateCustomerDetails(response.data[0]);
+                            $scope.isInEditCustomerMode = true;
+                            isCustomerIdModified = true;
+                            $scope.searchCustomerName = "";
+                            $scope.getAllCustomers();
+                            $scope.markerPosition = [$scope.customer_details.address_latitude, $scope.customer_details.address_longitude];
+                        } else {
+                            alert("No Such Customer Exists");
+                        }
+                    })
+                }
             } else {
-                $http.get(appConstants.getSelectedCustomer + "company_name=" + $scope.searchCustomerName, authenticateUser.getHeaderObject()).then(function(response) {
-                    if(response.data[0]) {
-                        $scope.customer_details = response.data[0];
-                        cachedData.customer_details = response.data[0];
-                        workOrderCache.updateCustomerDetails(response.data[0]);
-                        $scope.isInEditCustomerMode = true;
-                        isCustomerIdModified = true;
-                        $scope.searchCustomerName = "";
-                        $scope.getAllCustomers();
-                        $scope.markerPosition = [$scope.customer_details.address_latitude, $scope.customer_details.address_longitude];
-                    } else {
-                        alert("No Such Customer Exists");
-                    }
-                })
+                alert("Enter Company Name to Search")
             }
         };
 
@@ -260,28 +264,32 @@ define([], function() {
         }
 
         $scope.searchSubContractor = function(showAlert = 0) {
-            if($scope.allSubContractorName.indexOf($scope.searchSubContractorName) > -1) {
-                $scope.sub_contractor_details = $scope.allSubContractor[$scope.searchSubContractorNameFromListIndex($scope.searchSubContractorName, true)];
-                cachedData.sub_contractor_details = $scope.sub_contractor_details;
-                workOrderCache.updateSubContractorDetails($scope.sub_contractor_details)
-                $scope.isSubContractorInEditMode = true;
-                isSubContractorModified = true;
-                $scope.searchSubContractorName = "";
-                $scope.markerSubContractorPosition = [$scope.sub_contractor_details.address_latitude, $scope.sub_contractor_details.address_longitude];
+            if($scope.searchSubContractorName != "") {
+                if($scope.allSubContractorName.indexOf($scope.searchSubContractorName) > -1) {
+                    $scope.sub_contractor_details = $scope.allSubContractor[$scope.searchSubContractorNameFromListIndex($scope.searchSubContractorName, true)];
+                    cachedData.sub_contractor_details = $scope.sub_contractor_details;
+                    workOrderCache.updateSubContractorDetails($scope.sub_contractor_details)
+                    $scope.isSubContractorInEditMode = true;
+                    isSubContractorModified = true;
+                    $scope.searchSubContractorName = "";
+                    $scope.markerSubContractorPosition = [$scope.sub_contractor_details.address_latitude, $scope.sub_contractor_details.address_longitude];
+                } else {
+                    $http.get(appConstants.getSelectedSubContractor + "sub_contractor_name=" + $scope.searchSubContractorName, authenticateUser.getHeaderObject()).then(function(response) {
+                        if(response.data[0]) {
+                            $scope.sub_contractor_details = response.data[0];
+                            cachedData.sub_contractor_details = response.data[0];
+                            workOrderCache.updateSubContractorDetails(response.data[0]);
+                            $scope.isSubContractorInEditMode = true;
+                            isSubContractorModified = true;
+                            $scope.searchSubContractorName = "";
+                            $scope.markerSubContractorPosition = [$scope.sub_contractor_details.address_latitude, $scope.sub_contractor_details.address_longitude];
+                        } else {
+                            alert("No Such Sub Contractor Exists");
+                        }
+                    })
+                }
             } else {
-                $http.get(appConstants.getSelectedSubContractor + "sub_contractor_name=" + $scope.searchSubContractorName, authenticateUser.getHeaderObject()).then(function(response) {
-                    if(response.data[0]) {
-                        $scope.sub_contractor_details = response.data[0];
-                        cachedData.sub_contractor_details = response.data[0];
-                        workOrderCache.updateSubContractorDetails(response.data[0]);
-                        $scope.isSubContractorInEditMode = true;
-                        isSubContractorModified = true;
-                        $scope.searchSubContractorName = "";
-                        $scope.markerSubContractorPosition = [$scope.sub_contractor_details.address_latitude, $scope.sub_contractor_details.address_longitude];
-                    } else {
-                        alert("No Such Sub Contractor Exists");
-                    }
-                })
+                alert("Enter Sub Contractor Name to search");
             }
         };
 
