@@ -42,8 +42,9 @@ define([], function() {
             $http.put(appConstants.saveDescription + cachedData.id + "/", descriptionData, authenticateUser.getHeaderObject()).then(function(response) {
                 if(response.status == 200) {
                     workOrderCache.saveWorkOrderDetails(response.data);
-                } else {
                     alert("Customer Description Updated")
+                } else {
+                    alert("Error Updating Customer Description")
                 }
             });
         };
@@ -94,9 +95,10 @@ define([], function() {
                 $http.put(appConstants.updateCustomerDetails + $scope.customer_details.id + "/", customerDetails, authenticateUser.getHeaderObject()).then(function(response) {
                     $scope.isInEditCustomerMode = false;
                     if(response.data.id) {
-                        $scope.updateGoogleMaps();
                         workOrderCache.updateCustomerDetails(response.data);
+                        $scope.customer_details = response.data;
                         $scope.getAllCustomers();
+                        $scope.updateGoogleMaps();
 
                         if(isCustomerIdModified) {
 
@@ -125,9 +127,10 @@ define([], function() {
                 $http.post(appConstants.addNewCustomer, customerDetails, authenticateUser.getHeaderObject()).then(function(response) {
                     $scope.isInEditCustomerMode = false;
                     if(response.data.id) {
-                        $scope.updateGoogleMaps();
+                        $scope.customer_details = response.data;
                         workOrderCache.updateCustomerDetails(response.data);
                         $scope.getAllCustomers();
+                        $scope.updateGoogleMaps();
 
                         var addCustomerToWorkOrder = {
                             customer: response.data.id
@@ -181,7 +184,7 @@ define([], function() {
             } else {
                 alert("No Customer with Specified Name Found")
             }
-            
+            $scope.searchCustomerName = "";s
         };
 
 
@@ -189,13 +192,12 @@ define([], function() {
 
         // Sub Contractor Screen
 
-        cachedData.sub_contractor_details = cachedData.sub_contrator_details;
 
         $scope.sub_contractor_details = cachedData.sub_contractor_details;
 
         $scope.updateGoogleMapsForContractor = function() {
             if($scope.sub_contractor_details) {
-                $scope.markerPosition = [cachedData.sub_contractor_details.address_latitude, cachedData.sub_contractor_details.address_longitude];
+                $scope.markerSubContractorPosition = [cachedData.sub_contractor_details.address_latitude, cachedData.sub_contractor_details.address_longitude];
             }
         }
 
@@ -207,8 +209,8 @@ define([], function() {
             }
         }
 
-        $scope.searchCustomer = function() {
-            if($scope.getAllSubContractors.indexOf($scope.searchSubContractorName) > -1) {
+        $scope.searchSubContractor = function() {
+            if($scope.allSubContractorName.indexOf($scope.searchSubContractorName) > -1) {
                 $http.get(appConstants.getSelectedSubContractor + "sub_contractor_name=" + $scope.searchSubContractorName, authenticateUser.getHeaderObject()).then(function(response) {
                     $scope.sub_contractor_details = response.data[0];
                     workOrderCache.updateSubContractorDetails(response.data[0]);
@@ -218,7 +220,7 @@ define([], function() {
             } else {
                 alert("No Customer with Specified Name Found")
             }
-            
+            $scope.searchSubContractorName = "";
         };
 
         $scope.editSubContractorButton = function() {
@@ -231,7 +233,7 @@ define([], function() {
             $scope.allSubContractorName = [];
             $http.get(appConstants.getAllSubContractors, authenticateUser.getHeaderObject()).then(function(response) {
                 for(let i=0; i < response.data.length; i++) {
-                    $scope.allSubContractorName.push(response.data[i].company_name);
+                    $scope.allSubContractorName.push(response.data[i].sub_contractor_name);
                 }
             })
         }
@@ -246,7 +248,7 @@ define([], function() {
             };
 
             if(cachedData.sub_contractor_details.id) {
-                $http.put(appConstants.updateSubContractorDetails + $scope.sub_contractor_details.id + "/", subContractorDetails, authenticateUser.getHeaderObject()).then(function(response) {
+                $http.put(appConstants.updateSubContractorDetails + cachedData.sub_contractor_details.id + "/", subContractorDetails, authenticateUser.getHeaderObject()).then(function(response) {
                     $scope.isSubContractorInEditMode = false;
                     if(response.data.id) {
                         $scope.updateGoogleMaps();

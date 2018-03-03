@@ -173,7 +173,7 @@
                             </ul>
                         </div>
                         <div class="map-container" id="googleMap">
-                            <div map-lazy-load="https://maps.google.com/maps/api/js">
+                            <div map-lazy-load="https://maps.google.com/maps/api/js" ng-if="markerPosition">
                                 <ng-map id="map" zoom="11" center="{{markerPosition}}">
                                     <marker position="{{markerPosition}}"></marker>
                                 </ng-map>
@@ -188,7 +188,7 @@
                     <div class="searchCustomer-form custom-btn padlr-50">
                         <div class="searchCustomer-indent">
                             <div class="max-width450">
-                                <input type="text" class="form-control" placeholder="Search Sub Contractor" list="subcontractordataList" ng-model="searchCustomerName">
+                                <input type="text" class="form-control" placeholder="Search Sub Contractor" list="subcontractordataList" ng-model="searchSubContractorName">
                                 <datalist id="subcontractordataList">
                                     <option ng-repeat="subContractorName in allSubContractorName">{{subContractorName}}</option>
                                 </datalist>
@@ -267,9 +267,9 @@
                                 </ul>
                             </div>
                             <div class="map-container" id="googleMap2">
-                                    <div map-lazy-load="https://maps.google.com/maps/api/js">
+                                    <div map-lazy-load="https://maps.google.com/maps/api/js" ng-if="markerSubContractorPosition">
                                         <ng-map id="map" zoom="11" center="{{markerPosition}}">
-                                            <marker position="{{markerPosition}}"></marker>
+                                            <marker position="{{markerSubContractorPosition}}"></marker>
                                         </ng-map>
                                     </div>
                             </div>
