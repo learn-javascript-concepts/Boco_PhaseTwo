@@ -149,7 +149,9 @@
                                                    class="form-control telInput" 
                                                    ng-disabled="isInEditCustomerMode == false" required 
                                                    placeholder="Contact Number"
-                                                   ng-change="formatTelephoneNumber()">
+                                                   ng-change="formatTelephoneNumber()"
+                                                   oninvalid="InvalidMsg(this);"
+                                                   oninput="InvalidMsg(this);">
                                         </div>
                                     </div>
                                 </li>
@@ -1118,5 +1120,16 @@
         </div>
     </div>
     <script src="/assets/js/script.js"></script>
+    <script>
+        window.InvalidMsg = function(textbox) {
+            if (textbox.value.trim().charAt(3) == '-' && textbox.value.trim().charAt(7) == "-" && textbox.value.trim().length == 12) {
+                return true;
+            };
+
+            debugger;
+
+            textbox.setCustomValidity('Incorect Contact Number Format'); 
+        }
+    </script>
 
 </div>

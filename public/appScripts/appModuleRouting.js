@@ -10,6 +10,23 @@ define([], function() {
 
                 $locationProvider.html5Mode(true);
 
+                $httpProvider.interceptors.push(function ($q) {
+                    return {
+                        'response': function (response) {
+                            //Will only be called for HTTP up to 300
+                            console.log(response);
+                            return response;
+                        },
+                        'responseError': function (rejection) {
+                            alert("Error")
+                            if(rejection.status === 401) {
+                                location.reload();
+                            }
+                            return $q.reject(rejection);
+                        }
+                    };
+                });
+
                 $httpProvider.defaults.headers.common = {};
                 $httpProvider.defaults.headers.post = {};
                 $httpProvider.defaults.headers.put = {};

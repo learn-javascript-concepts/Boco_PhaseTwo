@@ -55,6 +55,7 @@ define([], function() {
             }
         }
 
+
         $scope.updateGoogleMaps();
 
         $scope.formatTelephoneNumber = function() {
@@ -78,22 +79,19 @@ define([], function() {
         
 
         $scope.saveCustomerButton = function(isCustomerChanged = 0 ) {
-
-            $scope.markerPosition = [49.74, -104.18];
-            $scope.isInEditCustomerMode = false;
-
             var customerDetails = {
                 company_name: $scope.customer_details.company_name,
                 address: $scope.customer_details.address,
                 email: $scope.customer_details.email,
-                contact_number: $scope.customer_details.contact_number.replace(/-|x/g, ''),
+                contact_number: $scope.customer_details.contact_number.toString().replace(/-|x/g, ''),
                 poc: $scope.customer_details.poc
             };
 
             if(cachedData.customer_details.id) {
                 $http.put(appConstants.updateCustomerDetails + $scope.customer_details.id + "/", customerDetails, authenticateUser.getHeaderObject()).then(function(response) {
+                    $scope.isInEditCustomerMode = false;
                     if(response.data.id) {
-                        nj0$scope.updateGoogleMaps();
+                        $scope.updateGoogleMaps();
                         workOrderCache.updateCustomerDetails(response.data);
                         $scope.getAllCustomers();
 
@@ -117,9 +115,12 @@ define([], function() {
                     }
 
                     isCustomerIdModified = false;
+                }, function() {
+                    alert("Error Saving Data");
                 })
             } else {
                 $http.post(appConstants.addNewCustomer, customerDetails, authenticateUser.getHeaderObject()).then(function(response) {
+                    $scope.isInEditCustomerMode = false;
                     if(response.data.id) {
                         $scope.updateGoogleMaps();
                         workOrderCache.updateCustomerDetails(response.data);
@@ -139,6 +140,8 @@ define([], function() {
                         alert("Error Adding New Customer")
                     }
                     isCustomerIdModified = false;
+                }, function() {
+                    alert("Error Saving Data");
                 })
             }
         };
