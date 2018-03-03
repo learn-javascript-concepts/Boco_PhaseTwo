@@ -13,12 +13,10 @@ define([], function() {
                 $httpProvider.interceptors.push(function ($q) {
                     return {
                         'response': function (response) {
-                            //Will only be called for HTTP up to 300
                             console.log(response);
                             return response;
                         },
                         'responseError': function (rejection) {
-                            alert("Error")
                             if(rejection.status === 401) {
                                 location.reload();
                             }
