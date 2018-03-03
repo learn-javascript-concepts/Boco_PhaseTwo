@@ -20,7 +20,8 @@ require.config({
         "datePicker": "assets/plugins/date-picker/bootstrap-datepicker.min",
         "appScript": "assets/js/script",
         "ngStorage": "lib/ngstorage/ngStorage",
-        "ngMaps": "appScripts/maps/ng-maps"
+        "ngMaps": "appScripts/maps/ng-maps",
+        "logoutController": "appScripts/controllers/logoutController"
 
     },
     shim: {

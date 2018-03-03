@@ -1,10 +1,15 @@
 <div class="login-container">
+
+        <div ng-controller="logoutController" class="login-link" style="position: fixed; top: 40px; right: 70px;">
+            <a href="#" ng-click="logoutUser()">Logout</a>
+        </div>
         <div class="login-wrapper">
             <h1><strong>BOCO</strong> Work Order Systems</h1>
             <div class="login-form">
-                <form ng-submit="searchWorkOrder()">
+                <div>
                     <ul>
-                      <li class="d-flex">
+                      <li>
+                          <form class="d-flex" ng-submit="searchWorkOrder()">
                             <input type="text" list="dataList" class="form-control" ng-model="workOrderNumber" placeholder="Enter Work Order" required>
                             <datalist id="dataList">
                                 <option ng-repeat="workOrder in workOrderList">{{workOrder.work_order_num}}</option>
@@ -15,19 +20,20 @@
                                     GO
                                 </button>    
                             </div>
+                        </form>
                       </li>
-                          <li>
-                              <div class="or">
-                                OR
-                              </div>
-                          </li>
+                    <li>
+                        <div class="or">
+                        OR
+                        </div>
+                    </li>
                         <li>
                             <button class="btn btn-default btn-blue2" ng-click="createWorkOrder()">
                                CREATE NEW ORDER
                             </button>
                         </li>
                     </ul>
-                </form>
+                </div>
             </div>
         </div>
     </div>
