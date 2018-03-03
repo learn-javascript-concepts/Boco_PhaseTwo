@@ -112,6 +112,7 @@ define([], function() {
                         $scope.formatTelephoneNumber();
                         $scope.allCustomers[$scope.searchCustomerNameFromListIndex(response.data.id)] = response.data;
                         $scope.updateGoogleMaps();
+                        $scope.isInEditCustomerMode = false;
 
                         if(isCustomerIdModified) {
 
@@ -122,7 +123,6 @@ define([], function() {
                             $http.put(appConstants.saveDescription + cachedData.id + "/", addCustomerToWorkOrder, authenticateUser.getHeaderObject()).then(function(response) {
                                 if(response.status == 200) {
                                     workOrderCache.saveWorkOrderDetails(response.data);
-                                    $scope.isInEditCustomerMode = false;
                                     alert("Customer Added Successfully")
                                 }
                             });
@@ -145,6 +145,7 @@ define([], function() {
                         $scope.formatTelephoneNumber();
                         workOrderCache.updateCustomerDetails(response.data);
                         $scope.updateGoogleMaps();
+                        $scope.isInEditCustomerMode = false;
 
                         var addCustomerToWorkOrder = {
                             customer: response.data.id
@@ -153,7 +154,7 @@ define([], function() {
                         $http.put(appConstants.saveDescription + cachedData.id + "/", addCustomerToWorkOrder, authenticateUser.getHeaderObject()).then(function(response) {
                             if(response.status == 200) {
                                 workOrderCache.saveWorkOrderDetails(response.data);
-                                $scope.isInEditCustomerMode = false;
+                                
                                 alert("Customer Added Successfully")
                             }
                         });

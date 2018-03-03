@@ -135,7 +135,7 @@
                                             <i class="fas fa-envelope"></i>
                                         </div>
                                         <div class="colContent-indent">
-                                            <input type="email" ng-model="customer_details.email" class="form-control" ng-disabled="isInEditCustomerMode == false" required placeholder="Email Id">
+                                            <input type="text" ng-model="customer_details.email" pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" title="Contact's email (format: xxx@xxx.xxx)" class="form-control" ng-disabled="isInEditCustomerMode == false" required placeholder="Email Id">
                                         </div>
                                     </div>
                                 </li>
@@ -229,7 +229,7 @@
                                                 <i class="fas fa-envelope"></i>
                                             </div>
                                             <div class="colContent-indent">
-                                                <input type="email" ng-model="sub_contractor_details.email" class="form-control" ng-disabled="isSubContractorInEditMode == false" placeholder="Email Id" required>
+                                                <input type="text" pattern="[a-zA-Z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*" title="Contact's email (format: xxx@xxx.xxx)" ng-model="sub_contractor_details.email" class="form-control" ng-disabled="isSubContractorInEditMode == false" placeholder="Email Id" required>
                                             </div>
                                         </div>
                                     </li>
