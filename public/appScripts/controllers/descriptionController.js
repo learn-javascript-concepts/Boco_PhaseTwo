@@ -18,7 +18,13 @@ define([], function() {
         $scope.date_of_order = new Date(cachedData.date_of_order).toLocaleDateString("en-US");
         $scope.description = cachedData.description;
         $scope.other_requirements = cachedData.other_requirements;
-        $scope.isInNonEditModeOfDescription = false;
+
+        if($scope.description != "") {
+            $scope.isInNonEditModeOfDescription = true;
+        } else {
+            $scope.isInNonEditModeOfDescription = false;
+        }
+        
 
         $scope.logoutUser = function() {
             authenticateUser.clearAuthenticationToken();
