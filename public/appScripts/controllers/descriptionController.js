@@ -2,6 +2,7 @@ define([], function() {
     var descriptionController = function($scope, workOrderCache, $timeout, $http, $cookies, $location, appConstants, authenticateUser, $sessionStorage) {
 
         var isCustomerIdModified = false;
+        var isSubContractorModified = false;
         authenticateUser.redirectToLoginIfUnauthenticated();
 
         var cachedData = workOrderCache.getWorkOrderDetail();
@@ -152,8 +153,6 @@ define([], function() {
             cachedData.customer_details = {};
         }
 
-        $scope.workOrderList = [];
-
         $scope.allCustomerName = [];
 
         $scope.getAllCustomers = function() {
@@ -188,45 +187,117 @@ define([], function() {
 
         // Sub Contractor Screen
 
+        cachedData.sub_contractor_details = cachedData.sub_contrator_details;
+
         $scope.sub_contractor_details = cachedData.sub_contractor_details;
 
-        $scope.isSubContractorInEditMode = false;
+        $scope.updateGoogleMapsForContractor = function() {
+            if($scope.sub_contractor_details) {
+                $scope.markerPosition = [cachedData.sub_contractor_details.address_latitude, cachedData.sub_contractor_details.address_longitude];
+            }
+        }
+
+        $scope.formatTelephoneNumberForContractor = function() {
+            if ($scope.sub_contractor_details.contact_number && $scope.sub_contractor_details.contact_number.toString().length > 9) {
+                var telData = $scope.sub_contractor_details.contact_number.toString().replace(/-|x/g, '');
+                var formattedTel = telData.substring(0, 3) + "-" + telData.substring(3, 6) + "-" + telData.substring(6, 10);
+                $scope.sub_contractor_details.contact_number = formattedTel;
+            }
+        }
+
+        $scope.searchCustomer = function() {
+            if($scope.getAllSubContractors.indexOf($scope.searchSubContractorName) > -1) {
+                $http.get(appConstants.getSelectedSubContractor + "sub_contractor_name=" + $scope.searchSubContractorName, authenticateUser.getHeaderObject()).then(function(response) {
+                    $scope.sub_contractor_details = response.data[0];
+                    workOrderCache.updateSubContractorDetails(response.data[0]);
+                    $scope.isSubContractorInEditMode = true;
+                    isSubContractorModified = true;
+                })
+            } else {
+                alert("No Customer with Specified Name Found")
+            }
+            
+        };
 
         $scope.editSubContractorButton = function() {
             $scope.isSubContractorInEditMode = true;
         }
 
-        $scope.saveSubContractorButton = function() {
-            $scope.isSubContractorInEditMode = false;
+        $scope.allSubContractorName = [];
 
+        $scope.getAllSubContractors = function() {
+            $scope.allSubContractorName = [];
+            $http.get(appConstants.getAllSubContractors, authenticateUser.getHeaderObject()).then(function(response) {
+                for(let i=0; i < response.data.length; i++) {
+                    $scope.allSubContractorName.push(response.data[i].company_name);
+                }
+            })
+        }
+
+        $scope.saveSubContractorButton = function() {
             var subContractorDetails = {
                 sub_contractor_name: $scope.sub_contractor_details.sub_contractor_name,
                 address: $scope.sub_contractor_details.address,
                 email: $scope.sub_contractor_details.email,
-                contact_number: $scope.sub_contractor_details.contact_number,
+                contact_number: $scope.sub_contractor_details.contact_number.toString().replace(/-|x/g, ''),
                 poc: $scope.sub_contractor_details.poc
             };
 
             if(cachedData.sub_contractor_details.id) {
-                $http.post(appConstants.updateCustomerDetails, customerDetails, authenticateUser.getHeaderObject()).then(function(response) {
+                $http.put(appConstants.updateSubContractorDetails + $scope.sub_contractor_details.id + "/", subContractorDetails, authenticateUser.getHeaderObject()).then(function(response) {
+                    $scope.isSubContractorInEditMode = false;
                     if(response.data.id) {
-                        workOrderCache.saveWorkOrderDetails.sub_contractor_details = response.data;
-                        alert("Sub Contractor Updated Successfully");
+                        $scope.updateGoogleMaps();
+                        workOrderCache.updateSubContractorDetails(response.data);
+                        $scope.getAllSubContractors();
+
+                        if(isSubContractorModified) {
+
+                            var addSubContractorToWorkOrder = {
+                                sub_contractor: response.data.id
+                            }
+                            
+                            $http.put(appConstants.saveDescription + cachedData.id, addSubContractorToWorkOrder, authenticateUser.getHeaderObject()).then(function(response) {
+                                if(response.status == 200) {
+                                    workOrderCache.saveWorkOrderDetails(response.data);
+                                    alert("Customer Added Successfully")
+                                }
+                            });
+                        } else {
+                            alert("Sub Contractor Updated Successfully");
+                        }
                     } else {
-                        alert("Error Updating Customer Details");
+                        alert("Error Updating Sub Contractor Details")
                     }
-                    
-                    alert(data.success);
+
+                    isSubContractorModified = false;
+                }, function() {
+                    alert("Error Saving Data");
                 })
             } else {
-                $http.post(appConstants.addNewCustomer, customerDetails, authenticateUser.getHeaderObject()).then(function(response) {
+                $http.post(appConstants.addNewSubContractor, subContractorDetails, authenticateUser.getHeaderObject()).then(function(response) {
+                    $scope.isSubContractorInEditMode = false;
                     if(response.data.id) {
-                        workOrderCache.saveWorkOrderDetails.sub_contractor_details = response.data;
-                        alert("Sub Contractor Added Successfully");
+                        $scope.updateGoogleMaps();
+                        workOrderCache.updateSubContractorDetails(response.data);
+                        $scope.getAllSubContractors();
+
+                        var addSubContractorToWorkOrder = {
+                            sub_contractor: response.data.id
+                        }
+
+                        $http.put(appConstants.saveDescription + cachedData.id, addSubContractorToWorkOrder, authenticateUser.getHeaderObject()).then(function(response) {
+                            if(response.status == 200) {
+                                workOrderCache.saveWorkOrderDetails(response.data);
+                                alert("Sub Contractor Added Successfully")
+                            }
+                        });
                     } else {
-                        alert("Error Adding New Customer")
-                        
+                        alert("Error Adding New Sub Contractor")
                     }
+                    isSubContractorModified = false;
+                }, function() {
+                    alert("Error Saving Data");
                 })
             }
         };
@@ -237,6 +308,20 @@ define([], function() {
             cachedData.sub_contractor_details = {};
 
         }
+
+        $scope.initializePage = function() {
+            if($scope.sub_contractor_details) {
+                $scope.updateGoogleMapsForContractor();
+                $scope.formatTelephoneNumberForContractor();
+            }
+            $scope.isSubContractorInEditMode = false;
+            $scope.getAllSubContractors();
+            $scope.searchSubContractorName = "";
+        }
+
+        $scope.initializePage();
+
+
     }
     return descriptionController;
 });

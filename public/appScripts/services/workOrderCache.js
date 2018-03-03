@@ -20,6 +20,13 @@ define([], function() {
             }
         }
 
+        this.updateSubContractorDetails = function(subContractorDetails) {
+            if($sessionStorage.cachedWorkOrder) {
+                cachedWorkOrder.sub_contractor_details = subContractorDetails;
+                $sessionStorage.cachedWorkOrder.sub_contractor_details = subContractorDetails;
+            }
+        }
+
         this.getWorkOrderDetail = function() {
             if(cachedWorkOrder) {
                 return cachedWorkOrder;
