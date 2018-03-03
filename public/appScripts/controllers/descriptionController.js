@@ -43,7 +43,7 @@ define([], function() {
             $http.put(appConstants.saveDescription + cachedData.id + "/", descriptionData, authenticateUser.getHeaderObject()).then(function(response) {
                 if(response.status == 200) {
                     workOrderCache.saveWorkOrderDetails(response.data);
-                    alert("Customer Description Updated")
+                    alert("Workorder Description Updated Successfully")
                 } else {
                     alert("Error Updating Customer Description")
                 }
