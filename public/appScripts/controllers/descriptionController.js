@@ -200,7 +200,7 @@ define([], function() {
 
         $scope.searchCustomerName = "";
 
-        $scope.searchCustomer = function() {
+        $scope.searchCustomer = function(showAlert = 0) {
             if($scope.allCustomerName.indexOf($scope.searchCustomerName) > -1) {
                 $http.get(appConstants.getSelectedCustomer + "company_name=" + $scope.searchCustomerName, authenticateUser.getHeaderObject()).then(function(response) {
                     $scope.customer_details = response.data[0];
@@ -209,9 +209,11 @@ define([], function() {
                     $scope.isInEditCustomerMode = true;
                     isCustomerIdModified = true;
                     $scope.searchCustomerName = "";
-                })
+                }) 
             } else {
-                alert("No Customer with Specified Name Found")
+                if(showAlert == 1 ) {
+                    alert("No Such Customer Exists")
+                }
             }
         };
 
@@ -237,7 +239,7 @@ define([], function() {
             }
         }
 
-        $scope.searchSubContractor = function() {
+        $scope.searchSubContractor = function(showAlert = 0) {
             if($scope.allSubContractorName.indexOf($scope.searchSubContractorName) > -1) {
                 $http.get(appConstants.getSelectedSubContractor + "sub_contractor_name=" + $scope.searchSubContractorName, authenticateUser.getHeaderObject()).then(function(response) {
                     $scope.sub_contractor_details = response.data[0];
@@ -248,7 +250,9 @@ define([], function() {
                     $scope.searchSubContractorName = "";
                 })
             } else {
-                alert("No Customer with Specified Name Found")
+                if(showAlert == 1) {
+                    alert("No Customer with Specified Name Found")
+                }
             }
             
         };
