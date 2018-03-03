@@ -39,9 +39,11 @@ define([], function() {
                 other_requirements: $scope.other_requirements
             }
 
-            $http.put(appConstants.saveDescription + cachedData.id, descriptionData, authenticateUser.getHeaderObject()).then(function(response) {
-                if(response.data.status == "CREATED") {
+            $http.put(appConstants.saveDescription + cachedData.id + "/", descriptionData, authenticateUser.getHeaderObject()).then(function(response) {
+                if(response.status == 200) {
                     workOrderCache.saveWorkOrderDetails(response.data);
+                } else {
+                    alert("Customer Description Updated")
                 }
             });
         };
@@ -102,7 +104,7 @@ define([], function() {
                                 customer: response.data.id
                             }
                             
-                            $http.put(appConstants.saveDescription + cachedData.id, addCustomerToWorkOrder, authenticateUser.getHeaderObject()).then(function(response) {
+                            $http.put(appConstants.saveDescription + cachedData.id + "/", addCustomerToWorkOrder, authenticateUser.getHeaderObject()).then(function(response) {
                                 if(response.status == 200) {
                                     workOrderCache.saveWorkOrderDetails(response.data);
                                     alert("Customer Added Successfully")
@@ -131,7 +133,7 @@ define([], function() {
                             customer: response.data.id
                         }
 
-                        $http.put(appConstants.saveDescription + cachedData.id, addCustomerToWorkOrder, authenticateUser.getHeaderObject()).then(function(response) {
+                        $http.put(appConstants.saveDescription + cachedData.id + "/", addCustomerToWorkOrder, authenticateUser.getHeaderObject()).then(function(response) {
                             if(response.status == 200) {
                                 workOrderCache.saveWorkOrderDetails(response.data);
                                 alert("Customer Added Successfully")
@@ -257,7 +259,7 @@ define([], function() {
                                 sub_contractor: response.data.id
                             }
                             
-                            $http.put(appConstants.saveDescription + cachedData.id, addSubContractorToWorkOrder, authenticateUser.getHeaderObject()).then(function(response) {
+                            $http.put(appConstants.saveDescription + cachedData.id + "/", addSubContractorToWorkOrder, authenticateUser.getHeaderObject()).then(function(response) {
                                 if(response.status == 200) {
                                     workOrderCache.saveWorkOrderDetails(response.data);
                                     alert("Customer Added Successfully")
@@ -286,7 +288,7 @@ define([], function() {
                             sub_contractor: response.data.id
                         }
 
-                        $http.put(appConstants.saveDescription + cachedData.id, addSubContractorToWorkOrder, authenticateUser.getHeaderObject()).then(function(response) {
+                        $http.put(appConstants.saveDescription + cachedData.id + "/", addSubContractorToWorkOrder, authenticateUser.getHeaderObject()).then(function(response) {
                             if(response.status == 200) {
                                 workOrderCache.saveWorkOrderDetails(response.data);
                                 alert("Sub Contractor Added Successfully")
