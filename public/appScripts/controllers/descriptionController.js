@@ -217,6 +217,7 @@ define([], function() {
                 $scope.isInEditCustomerMode = true;
                 isCustomerIdModified = true;
                 $scope.searchCustomerName = "";
+                $scope.markerPosition = [$scope.customer_details.address_latitude, $scope.customer_details.address_longitude];
             } else {
                 $http.get(appConstants.getSelectedCustomer + "company_name=" + $scope.searchCustomerName, authenticateUser.getHeaderObject()).then(function(response) {
                     if(response.data[0]) {
@@ -227,6 +228,7 @@ define([], function() {
                         isCustomerIdModified = true;
                         $scope.searchCustomerName = "";
                         $scope.getAllCustomers();
+                        $scope.markerPosition = [$scope.customer_details.address_latitude, $scope.customer_details.address_longitude];
                     } else {
                         alert("No Such Customer Exists");
                     }
@@ -258,20 +260,28 @@ define([], function() {
 
         $scope.searchSubContractor = function(showAlert = 0) {
             if($scope.allSubContractorName.indexOf($scope.searchSubContractorName) > -1) {
-                $http.get(appConstants.getSelectedSubContractor + "sub_contractor_name=" + $scope.searchSubContractorName, authenticateUser.getHeaderObject()).then(function(response) {
-                    $scope.sub_contractor_details = response.data[0];
-                    cachedData.sub_contractor_details = response.data[0];
-                    workOrderCache.updateSubContractorDetails(response.data[0]);
-                    $scope.isSubContractorInEditMode = true;
-                    isSubContractorModified = true;
-                    $scope.searchSubContractorName = "";
-                })
+                $scope.sub_contractor_details = $scope.allSubContractor[$scope.searchSubContractorNameFromListIndex($scope.searchSubContractorName, true)];
+                cachedData.sub_contractor_details = $scope.sub_contractor_details;
+                workOrderCache.updateSubContractorDetails($scope.sub_contractor_details)
+                $scope.isSubContractorInEditMode = true;
+                isSubContractorModified = true;
+                $scope.searchSubContractorName = "";
+                $scope.markerSubContractorPosition = [$scope.sub_contractor_details.address_latitude, $scope.sub_contractor_details.address_longitude];
             } else {
-                if(showAlert == 1) {
-                    alert("No Customer with Specified Name Found")
-                }
+                $http.get(appConstants.getSelectedSubContractor + "sub_contractor_name=" + $scope.searchSubContractorName, authenticateUser.getHeaderObject()).then(function(response) {
+                    if(response.data[0]) {
+                        $scope.sub_contractor_details = response.data[0];
+                        cachedData.sub_contractor_details = response.data[0];
+                        workOrderCache.updateSubContractorDetails(response.data[0]);
+                        $scope.isSubContractorInEditMode = true;
+                        isSubContractorModified = true;
+                        $scope.searchSubContractorName = "";
+                        $scope.markerSubContractorPosition = [$scope.sub_contractor_details.address_latitude, $scope.sub_contractor_details.address_longitude];
+                    } else {
+                        alert("No Such Sub Contractor Exists");
+                    }
+                })
             }
-            
         };
 
         $scope.editSubContractorButton = function() {
@@ -281,11 +291,19 @@ define([], function() {
         $scope.allSubContractorName = [];
         $scope.allSubContractor = [];
 
-        $scope.searchSubContractorNameFromListIndex = function(id) {
+        $scope.searchSubContractorNameFromListIndex = function(id, searchByName = false) {
             for(let i=0; i < $scope.allSubContractor.length; i++) {
-                if($scope.allSubContractor[i].id == id){
-                    return i;
+                if(searchByName) {
+                    if($scope.allSubContractor[i].sub_contractor_name == id){
+                        return i;
+                    }
+                } else {
+                    
+                    if($scope.allSubContractor[i].id == id){
+                        return i;
+                    }
                 }
+                
             }
             return -1;
         }

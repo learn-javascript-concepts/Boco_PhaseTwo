@@ -188,7 +188,7 @@
                     <div class="searchCustomer-form custom-btn padlr-50">
                         <div class="searchCustomer-indent">
                             <div class="max-width450">
-                                <input type="text" ng-change="searchSubContractor()" class="form-control" placeholder="Search Sub Contractor" list="subcontractordataList" ng-model="searchSubContractorName">
+                                <input type="text" ng-change="searchSubContractor()" ng-model-options="{ debounce: 500 }"  class="form-control" placeholder="Search Sub Contractor" list="subcontractordataList" ng-model="searchSubContractorName">
                                 <datalist id="subcontractordataList">
                                     <option ng-repeat="subContractor in allSubContractor">{{subContractor.sub_contractor_name}}</option>
                                 </datalist>
