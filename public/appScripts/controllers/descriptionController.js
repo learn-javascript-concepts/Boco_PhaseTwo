@@ -97,6 +97,7 @@ define([], function() {
                     if(response.data.id) {
                         workOrderCache.updateCustomerDetails(response.data);
                         $scope.customer_details = response.data;
+                        $scope.formatTelephoneNumber();
                         $scope.allCustomers[$scope.searchCustomerNameFromListIndex(response.data.id)] = response.data;
                         $scope.updateGoogleMaps();
 
@@ -129,6 +130,7 @@ define([], function() {
                     if(response.data.id) {
                         $scope.allCustomers.push(response.data);
                         $scope.customer_details = response.data;
+                        $scope.formatTelephoneNumber();
                         workOrderCache.updateCustomerDetails(response.data);
                         $scope.updateGoogleMaps();
 
@@ -189,6 +191,7 @@ define([], function() {
             if($scope.allCustomerName.indexOf($scope.searchCustomerName) > -1) {
                 $http.get(appConstants.getSelectedCustomer + "company_name=" + $scope.searchCustomerName, authenticateUser.getHeaderObject()).then(function(response) {
                     $scope.customer_details = response.data[0];
+                    cachedData.customer_details = response.data[0];
                     workOrderCache.updateCustomerDetails(response.data[0]);
                     $scope.isInEditCustomerMode = true;
                     isCustomerIdModified = true;
@@ -225,6 +228,7 @@ define([], function() {
             if($scope.allSubContractorName.indexOf($scope.searchSubContractorName) > -1) {
                 $http.get(appConstants.getSelectedSubContractor + "sub_contractor_name=" + $scope.searchSubContractorName, authenticateUser.getHeaderObject()).then(function(response) {
                     $scope.sub_contractor_details = response.data[0];
+                    cachedData.sub_contractor_details = response.data[0];
                     workOrderCache.updateSubContractorDetails(response.data[0]);
                     $scope.isSubContractorInEditMode = true;
                     isSubContractorModified = true;
@@ -278,6 +282,7 @@ define([], function() {
                         workOrderCache.updateSubContractorDetails(response.data);
                         $scope.allSubContractor[$scope.searchSubContractorNameFromListIndex(response.data.id)] = response.data;
                         $scope.sub_contractor_details = response.data;
+                        $scope.formatTelephoneNumberForContractor()
                         $scope.updateGoogleMapsForContractor();
 
                         if(isSubContractorModified) {
@@ -309,6 +314,7 @@ define([], function() {
                     if(response.data.id) {
                         $scope.allSubContractor.push(response.data);
                         $scope.sub_contractor_details = response.data;
+                        $scope.formatTelephoneNumberForContractor();
                         workOrderCache.updateSubContractorDetails(response.data);
                         $scope.updateGoogleMapsForContractor();
                         var addSubContractorToWorkOrder = {
