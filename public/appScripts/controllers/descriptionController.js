@@ -65,7 +65,7 @@ define([], function() {
 
         $scope.formatTelephoneNumber = function() {
 
-            if ($scope.customer_details && $scope.customer_details.contact_number && $scope.customer_details.contact_number.toString().length > 9) {
+            if ($scope.customer_details && $scope.customer_details.contact_number) {
                 var telData = $scope.customer_details.contact_number.toString().replace(/-|x/g, '');
                 var formattedTel = telData.substring(0, 3) + "-" + telData.substring(3, 6) + "-" + telData.substring(6, 10);
                 $scope.customer_details.contact_number = formattedTel;
@@ -232,7 +232,7 @@ define([], function() {
         }
 
         $scope.formatTelephoneNumberForContractor = function() {
-            if ($scope.sub_contractor_details && $scope.sub_contractor_details.contact_number && $scope.sub_contractor_details.contact_number.toString().length > 9) {
+            if ($scope.sub_contractor_details && $scope.sub_contractor_details.contact_number) {
                 var telData = $scope.sub_contractor_details.contact_number.toString().replace(/-|x/g, '');
                 var formattedTel = telData.substring(0, 3) + "-" + telData.substring(3, 6) + "-" + telData.substring(6, 10);
                 $scope.sub_contractor_details.contact_number = formattedTel;
