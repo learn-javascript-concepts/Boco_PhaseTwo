@@ -172,16 +172,13 @@ define([], function() {
 
         $scope.getAllCustomers = function() {
             $scope.allCustomerName = [];
+            $scope.allCustomers = [];
             $http.get(appConstants.getAllCustomers, authenticateUser.getHeaderObject()).then(function(response) {
                 $scope.allCustomers = response.data;
                 for(let i=0; i < response.data.length; i++) {
                     $scope.allCustomerName.push(response.data[i].company_name);
                 }
             })
-        }
-
-        $scope.updateCustomerList = function() {
-
         }
 
         $scope.getAllCustomers();
@@ -256,6 +253,7 @@ define([], function() {
 
         $scope.getAllSubContractors = function() {
             $scope.allSubContractorName = [];
+            $scope.allSubContractor = [];
             $http.get(appConstants.getAllSubContractors, authenticateUser.getHeaderObject()).then(function(response) {
                 $scope.allSubContractor = response.data;
                 for(let i=0; i < response.data.length; i++) {
