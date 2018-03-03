@@ -18,7 +18,7 @@ define([], function() {
         $scope.date_of_order = new Date(cachedData.date_of_order).toLocaleDateString("en-US");
         $scope.description = cachedData.description;
         $scope.other_requirements = cachedData.other_requirements;
-        $scope.isInNonEditModeOfDescription = true;
+        $scope.isInNonEditModeOfDescription = false;
 
         $scope.logoutUser = function() {
             authenticateUser.clearAuthenticationToken();
@@ -125,14 +125,14 @@ define([], function() {
                             $http.put(appConstants.saveDescription + cachedData.id + "/", addCustomerToWorkOrder, authenticateUser.getHeaderObject()).then(function(response) {
                                 if(response.status == 200) {
                                     workOrderCache.saveWorkOrderDetails(response.data);
-                                    alert("Customer Added Successfully")
+                                    alert("Customer Details Added/Updated Successfully")
                                 }
                             });
                         } else {
-                            alert("Customer Updated Successfully");
+                            alert("Customer Details Added/Updated Successfully");
                         }
                     } else {
-                        alert("Error Updating Customer Details")
+                        alert("Error Updating/Adding Customer Details")
                     }
 
                     isCustomerIdModified = false;
@@ -156,11 +156,11 @@ define([], function() {
                             if(response.status == 200) {
                                 workOrderCache.saveWorkOrderDetails(response.data);
                                 
-                                alert("Customer Added Successfully")
+                                alert("Customer Details Added/Updated Successfully")
                             }
                         });
                     } else {
-                        alert("Error Adding New Customer")
+                        alert("Error Updating/Adding Customer Details")
                     }
                     isCustomerIdModified = false;
                 }, function() {
@@ -366,14 +366,14 @@ define([], function() {
                             $http.put(appConstants.saveDescription + cachedData.id + "/", addSubContractorToWorkOrder, authenticateUser.getHeaderObject()).then(function(response) {
                                 if(response.status == 200) {
                                     workOrderCache.saveWorkOrderDetails(response.data);
-                                    alert("Customer Added Successfully")
+                                    alert("Sub Contractor Details Added/Updated Successfully")
                                 }
                             });
                         } else {
-                            alert("Sub Contractor Updated Successfully");
+                            alert("Sub Contractor Details Added/Updated Successfully");
                         }
                     } else {
-                        alert("Error Updating Sub Contractor Details")
+                        alert("Error Adding/Updating Sub Contractor Details")
                     }
 
                     isSubContractorModified = false;
@@ -395,11 +395,11 @@ define([], function() {
                         $http.put(appConstants.saveDescription + cachedData.id + "/", addSubContractorToWorkOrder, authenticateUser.getHeaderObject()).then(function(response) {
                             if(response.status == 200) {
                                 workOrderCache.saveWorkOrderDetails(response.data);
-                                alert("Sub Contractor Added Successfully")
+                                alert("Sub Contractor Details Added/Updated Successfully")
                             }
                         });
                     } else {
-                        alert("Error Adding New Sub Contractor")
+                        alert("Error Adding/Updating Sub Contractor Details")
                     }
                     isSubContractorModified = false;
                 }, function() {
