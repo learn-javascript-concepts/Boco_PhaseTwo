@@ -111,7 +111,7 @@
                 <form ng-submit="saveCustomerButton()">
                     <div class="company-info">
                         <div class="company-title">
-                            <span ng-bind="customer_details.company_name" ng-if="isInEditCustomerMode == false"></span>
+                            <span ng-bind="customer_details.company_name" ng-if="isInEditCustomerMode == true"></span>
                             <input ng-if="isInEditCustomerMode == true" type="text" placeholder="Name" ng-model="customer_details.company_name" class="form-control" required></span>
                         </div>
                     </div>

@@ -54,6 +54,17 @@ define([], function() {
 
         $scope.customer_details = cachedData.customer_details;
 
+        if(!cachedData.customer_details) {
+            cachedData.customer_details = {
+                company_name: "",
+                address: "",
+                email: "",
+                contact_number: "",
+                poc: ""
+            };
+            $scope.customer_details = cachedData.customer_details;
+        }
+
         $scope.updateGoogleMaps = function() {
             if($scope.customer_details) {
                 $scope.markerPosition = [$scope.customer_details.address_latitude, $scope.customer_details.address_longitude];
