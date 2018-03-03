@@ -9,6 +9,7 @@ define([], function() {
         $scope.workOrderList = [];
 
         $scope.getWorkOrderList = function(){
+            $scope.workOrderList = [];
             $http.get(appConstants.getWorkOrderList, authenticateUser.getHeaderObject()).then(function(response) {
                 $scope.workOrderList = response.data;
             });
