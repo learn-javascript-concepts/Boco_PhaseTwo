@@ -55,7 +55,7 @@ define([], function() {
 
         $scope.updateGoogleMaps = function() {
             if($scope.customer_details) {
-                $scope.markerPosition = [cachedData.customer_details.address_latitude, cachedData.customer_details.address_longitude];
+                $scope.markerPosition = [$scope.customer_details.address_latitude, $scope.customer_details.address_longitude];
             }
         }
 
@@ -197,7 +197,7 @@ define([], function() {
 
         $scope.updateGoogleMapsForContractor = function() {
             if($scope.sub_contractor_details) {
-                $scope.markerSubContractorPosition = [cachedData.sub_contractor_details.address_latitude, cachedData.sub_contractor_details.address_longitude];
+                $scope.markerSubContractorPosition = [$scope.sub_contractor_details.address_latitude, $scope.sub_contractor_details.address_longitude];
             }
         }
 
@@ -251,9 +251,10 @@ define([], function() {
                 $http.put(appConstants.updateSubContractorDetails + cachedData.sub_contractor_details.id + "/", subContractorDetails, authenticateUser.getHeaderObject()).then(function(response) {
                     $scope.isSubContractorInEditMode = false;
                     if(response.data.id) {
-                        $scope.updateGoogleMaps();
                         workOrderCache.updateSubContractorDetails(response.data);
                         $scope.getAllSubContractors();
+                        $scope.sub_contractor_details = response.data;
+                        $scope.updateGoogleMapsForContractor();
 
                         if(isSubContractorModified) {
 
@@ -282,10 +283,10 @@ define([], function() {
                 $http.post(appConstants.addNewSubContractor, subContractorDetails, authenticateUser.getHeaderObject()).then(function(response) {
                     $scope.isSubContractorInEditMode = false;
                     if(response.data.id) {
-                        $scope.updateGoogleMaps();
+                        $scope.sub_contractor_details = response.data;
                         workOrderCache.updateSubContractorDetails(response.data);
                         $scope.getAllSubContractors();
-
+                        $scope.updateGoogleMapsForContractor();
                         var addSubContractorToWorkOrder = {
                             sub_contractor: response.data.id
                         }
