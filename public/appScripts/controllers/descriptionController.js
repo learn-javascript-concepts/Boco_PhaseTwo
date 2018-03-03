@@ -75,7 +75,7 @@ define([], function() {
 
         $scope.formatTelephoneNumber();
 
-        $scope.isInEditCustomerMode = false;
+        $scope.isInEditCustomerMode = true;
 
         $scope.editCustomerButton = function() {
             $scope.isInEditCustomerMode = true;
@@ -135,7 +135,6 @@ define([], function() {
 
                     isCustomerIdModified = false;
                 }, function() {
-                    alert("Error Saving Data");
                 })
             } else {
                 $http.post(appConstants.addNewCustomer, customerDetails, authenticateUser.getHeaderObject()).then(function(response) {
@@ -163,7 +162,6 @@ define([], function() {
                     }
                     isCustomerIdModified = false;
                 }, function() {
-                    alert("Error Saving Data");
                 })
             }
         };
@@ -370,7 +368,6 @@ define([], function() {
 
                     isSubContractorModified = false;
                 }, function() {
-                    alert("Error Saving Data");
                 })
             } else {
                 $http.post(appConstants.addNewSubContractor, subContractorDetails, authenticateUser.getHeaderObject()).then(function(response) {
@@ -396,7 +393,6 @@ define([], function() {
                     }
                     isSubContractorModified = false;
                 }, function() {
-                    alert("Error Saving Data");
                 })
             }
         };
@@ -413,7 +409,7 @@ define([], function() {
                 $scope.updateGoogleMapsForContractor();
                 $scope.formatTelephoneNumberForContractor();
             }
-            $scope.isSubContractorInEditMode = false;
+            $scope.isSubContractorInEditMode = true;
             $scope.getAllSubContractors();
             $scope.searchSubContractorName = "";
         }
