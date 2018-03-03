@@ -54,7 +54,13 @@ define([], function() {
 
         $scope.customer_details = cachedData.customer_details;
 
+        $scope.isInEditCustomerMode = true;
 
+        if($scope.customer_details) {
+            if($scope.customer_details.company_name) {
+                $scope.isInEditCustomerMode = false;
+            }
+        }
 
         $scope.updateGoogleMaps = function() {
             if($scope.customer_details) {
@@ -77,7 +83,7 @@ define([], function() {
 
         $scope.formatTelephoneNumber();
 
-        $scope.isInEditCustomerMode = true;
+        
 
         $scope.editCustomerButton = function() {
             $scope.isInEditCustomerMode = true;
@@ -419,9 +425,16 @@ define([], function() {
                 $scope.updateGoogleMapsForContractor();
                 $scope.formatTelephoneNumberForContractor();
             }
-            $scope.isSubContractorInEditMode = true;
             $scope.getAllSubContractors();
             $scope.searchSubContractorName = "";
+        }
+
+        $scope.isSubContractorInEditMode = true;
+
+        if($scope.sub_contractor_details) {
+            if($scope.sub_contractor_details.sub_contractor_name) {
+                $scope.isSubContractorInEditMode = false;
+            }
         }
 
         $scope.initializePage();
