@@ -6,6 +6,7 @@ define(["appModuleRouting",
         "appConstants",
         "workOrderCache",
         "descriptionController",
+        "CustomerScreenDescriptionController",
         "logoutController"
     ], function(
             appModuleRouting, 
@@ -16,6 +17,7 @@ define(["appModuleRouting",
             appConstants,
             workOrderCache,
             descriptionController,
+            CustomerScreenDescriptionController,
             logoutController) {
 
     var appModule = {
@@ -29,6 +31,8 @@ define(["appModuleRouting",
             appModule.controller("createWorkOrderController", createWorkOrderController);
             
             appModule.controller("descriptionController", descriptionController);
+
+            appModule.controller("CustomerScreenDescriptionController", CustomerScreenDescriptionController);
 
             appModule.controller("logoutController", logoutController);
 
