@@ -11,6 +11,7 @@ $(document).ready(function(){
 		//DatePicker init after tab shown
 		setTimeout(function(){
 			$('.date-picker').datepicker();
+			$(".autoComplete").easyAutocomplete(options);
 		},800);
 
 	});
@@ -22,7 +23,19 @@ $(document).ready(function(){
 	});
 
 	// Date Picker
-	$('.date-picker').datepicker();	
+	$('.date-picker').datepicker();
+
+	//EasyAutoComplete init
+	$(".autoComplete").easyAutocomplete(options);
+
+	//Toast Notifications
+	$.toast({
+		heading: 'Information',
+		text: 'Now you can add icons to the toasts as well.',
+		icon: 'success',
+		position: 'top-right',
+		showHideTransition: 'slide'
+	});
 });
 
 // google map
@@ -35,3 +48,13 @@ function mapRender() {
 	var map2=new google.maps.Map(document.getElementById("googleMap2"),mapProp);
 
 }
+
+var options = {
+	data: [
+		"Customer #001", 
+		"Customer #002",
+		"Customer #003",
+		"Customer #004",
+		"Customer #005"
+	]
+};

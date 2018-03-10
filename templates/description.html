@@ -14,6 +14,8 @@
 
     <!-- plugin css  -->
     <link rel="stylesheet" type="text/css" media="screen" href="assets/plugins/date-picker/bootstrap-datepicker3.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/plugins/easyautocomplete/easy-autocomplete.min.css">
+    <link repl="stylesheet" type="text/css" href="assets/plugins/toast-notifications/css/jquery.toast.css">
 
     <!-- layout css -->
     <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css">
@@ -21,6 +23,33 @@
     
 </head>
 <body class="inner-pages">
+
+    <!-- Toast Notification -->
+     
+
+        <div class="alert alert-warning alert-dismissible fade show" role="alert1">
+            <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+            <button type="button" class="close" data-dismiss="alert1" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
+        <div class="alert alert-danger alert-dismissible fade show" role="alert2">
+            <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+            <button type="button" class="close" data-dismiss="alert2" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
+        <div class="alert alert-success alert-dismissible fade show" role="alert3">
+            <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+            <button type="button" class="close" data-dismiss="alert3" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+          
+    <!-- /Toast Notification -->
+
     
     <!-- Header -->
     <div class="inner-header">
@@ -128,7 +157,7 @@
                     <div class="searchCustomer-form custom-btn padlr-50">
                         <div class="searchCustomer-indent">
                             <div class="max-width450">
-                                <input type="text" class="form-control" placeholder="Search Customer">
+                                <input type="text" class="form-control autoComplete" placeholder="Search Customer">
                                 <button class="btn btn-gray">SEARCH</button>
                             </div>
                         </div>
@@ -220,7 +249,7 @@
                     <div class="searchCustomer-form custom-btn padlr-50">
                         <div class="searchCustomer-indent">
                             <div class="max-width450">
-                                <input type="text" class="form-control" placeholder="Search Customer">
+                                <input type="text" class="form-control autoComplete" placeholder="Search Customer">
                                 <button class="btn btn-gray">SEARCH</button>
                             </div>
                         </div>
@@ -1217,19 +1246,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
         </div>
     </div>
     <!-- /content -->
@@ -1271,6 +1287,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="assets/bootstrap/js/bootstrap.bundle.js"></script>
 <script src="assets/plugins/date-picker/bootstrap-datepicker.min.js"></script>
+<script src="assets/plugins/easyautocomplete/jquery.easy-autocomplete.min.js"></script>
+<script src="assets/plugins/toast-notifications/js/jquery.toast.js"></script>
 <!-- layout js -->
 <script src="assets/js/script.js"></script>
 <!-- google map api -->
