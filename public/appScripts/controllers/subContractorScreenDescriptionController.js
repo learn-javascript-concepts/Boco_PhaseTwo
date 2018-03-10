@@ -1,5 +1,9 @@
 define([], function(){
-    var subContractorScreenDescriptionController = function() {
+
+    var subContractorScreenDescriptionController = function($scope, workOrderCache, $http, $location, appConstants, authenticateUser) {
+
+        var cachedData = workOrderCache.getWorkOrderDetail();
+        
         $scope.sub_contractor_details = cachedData.sub_contractor_details;
 
         $scope.updateGoogleMapsForContractor = function() {
@@ -37,12 +41,12 @@ define([], function(){
                             $scope.searchSubContractorName = "";
                             $scope.markerSubContractorPosition = [$scope.sub_contractor_details.address_latitude, $scope.sub_contractor_details.address_longitude];
                         } else {
-                            alert("No Such Sub Contractor Exists");
+                            alert("No Such Sub Contractor Exists", "error");
                         }
                     })
                 }
             } else {
-                alert("Enter Sub Contractor Name to search");
+                alert("Enter Sub Contractor Name to search", "error");
             }
         };
 
@@ -119,14 +123,14 @@ define([], function(){
                             $http.put(appConstants.saveDescription + cachedData.id + "/", addSubContractorToWorkOrder, authenticateUser.getHeaderObject()).then(function(response) {
                                 if(response.status == 200) {
                                     workOrderCache.saveWorkOrderDetails(response.data);
-                                    alert("Sub Contractor Details Added/Updated Successfully")
+                                    alert("Sub Contractor Details Added/Updated Successfully", "info")
                                 }
                             });
                         } else {
-                            alert("Sub Contractor Details Added/Updated Successfully");
+                            alert("Sub Contractor Details Added/Updated Successfully", "info");
                         }
                     } else {
-                        alert("Error Adding/Updating Sub Contractor Details")
+                        alert("Error Adding/Updating Sub Contractor Details", "error")
                     }
 
                     isSubContractorModified = false;
@@ -152,7 +156,7 @@ define([], function(){
                             }
                         });
                     } else {
-                        alert("Error Adding/Updating Sub Contractor Details")
+                        alert("Error Adding/Updating Sub Contractor Details", "error")
                     }
                     isSubContractorModified = false;
                 }, function() {
@@ -176,6 +180,8 @@ define([], function(){
             $scope.searchSubContractorName = "";
         }
 
+        $scope.initializePage();
+
         $scope.isSubContractorInEditMode = true;
 
         if($scope.sub_contractor_details) {
@@ -183,12 +189,9 @@ define([], function(){
                 $scope.isSubContractorInEditMode = false;
             }
         }
-
-        $scope.initializePage();
-
-
     }
-    }
+    
+    return subContractorScreenDescriptionController;
 })
 
 

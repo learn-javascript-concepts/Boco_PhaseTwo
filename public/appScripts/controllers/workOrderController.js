@@ -25,7 +25,7 @@ define([], function() {
                     workOrderCache.saveWorkOrderDetails(workOrderData[0]);
                     $location.path("description");                    
                 } else {
-                    alert("No Data exists for selected Work Order Number")
+                    alert("No Data exists for selected Work Order Number", "error")
                 }
             });
         }

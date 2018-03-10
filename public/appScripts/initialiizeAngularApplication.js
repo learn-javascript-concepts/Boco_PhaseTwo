@@ -22,8 +22,9 @@ require.config({
         "ngStorage": "lib/ngstorage/ngStorage",
         "ngMaps": "appScripts/maps/ng-maps",
         "logoutController": "appScripts/controllers/logoutController",
-        "CustomerScreenDescriptionController": "appScripts/controllers/CustomerScreenDescriptionController"
-
+        "customerScreenDescriptionController": "appScripts/controllers/customerScreenDescriptionController",
+        "subContractorScreenDescriptionController": "appScripts/controllers/subContractorScreenDescriptionController",
+        "sweetalert": "alertScript/sweetalert"
     },
     shim: {
         "angular-screenshot": { 
@@ -38,8 +39,11 @@ require.config({
         "appScript" : {
             deps: ["jquery"]
         },
+        "sweetalert": {
+            deps: ["jquery"]
+        },
         "appModule": {
-            deps: ["angular", "angular-route", "angular-cookies", "angular-screenshot", "jquery", "fontAwesome", "bootstrapBundle", "datePicker", "appScript", "ngStorage"]
+            deps: ["angular", "angular-route", "angular-cookies", "angular-screenshot", "jquery", "fontAwesome", "bootstrapBundle", "datePicker", "appScript", "ngStorage", "sweetalert"]
         }
     }
 });

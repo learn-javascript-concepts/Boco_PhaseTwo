@@ -37,7 +37,7 @@ define([], function(){
                     authenticateUser.setAuthenticationToken(response.data.token);
                     $location.path("workorder");
                 } else {
-                    alert("Enter Correct Credentials");
+                    alert("Enter Correct Credentials", "error");
                 }
             });          
         }

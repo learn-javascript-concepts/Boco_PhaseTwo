@@ -1,6 +1,6 @@
 define([], function() {
 
-    var CustomerScreenDescriptionController = function($scope, workOrderCache, $http, $location, appConstants, authenticateUser) {
+    var customerScreenDescriptionController = function($scope, workOrderCache, $http, $location, appConstants, authenticateUser) {
         
         $scope.markerPosition = [38.46583480, -91.02618380];
 
@@ -84,14 +84,14 @@ define([], function() {
                             $http.put(appConstants.saveDescription + cachedData.id + "/", addCustomerToWorkOrder, authenticateUser.getHeaderObject()).then(function(response) {
                                 if (response.status == 200) {
                                     workOrderCache.saveWorkOrderDetails(response.data);
-                                    alert("Customer Details Added/Updated Successfully")
+                                    alert("Customer Details Added/Updated Successfully", "info")
                                 }
                             });
                         } else {
-                            alert("Customer Details Added/Updated Successfully");
+                            alert("Customer Details Added/Updated Successfully", "info");
                         }
                     } else {
-                        alert("Error Updating/Adding Customer Details")
+                        alert("Error Updating/Adding Customer Details", "error")
                     }
 
                     isCustomerIdModified = false;
@@ -114,11 +114,11 @@ define([], function() {
                             if (response.status == 200) {
                                 workOrderCache.saveWorkOrderDetails(response.data);
 
-                                alert("Customer Details Added/Updated Successfully")
+                                alert("Customer Details Added/Updated Successfully", "info")
                             }
                         });
                     } else {
-                        alert("Error Updating/Adding Customer Details")
+                        alert("Error Updating/Adding Customer Details", "error")
                     }
                     isCustomerIdModified = false;
                 }, function() {})
@@ -189,15 +189,15 @@ define([], function() {
                             $scope.getAllCustomers();
                             $scope.markerPosition = [$scope.customer_details.address_latitude, $scope.customer_details.address_longitude];
                         } else {
-                            alert("No Such Customer Exists");
+                            alert("No Such Customer Exists", "error");
                         }
                     })
                 }
             } else {
-                alert("Enter Company Name to Search")
+                alert("Enter Company Name to Search", "info")
             }
         };
     }
 
-    return CustomerScreenDescriptionController;
+    return customerScreenDescriptionController;
 })

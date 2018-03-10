@@ -32,7 +32,7 @@ define([], function(){
                 if(response.data.status == "CREATED") {
                     $location.path("description");
                 } else {
-                    alert("Error Creating Work Order")
+                    alert("Error Creating Work Order", "error")
                 }
                 
             })
