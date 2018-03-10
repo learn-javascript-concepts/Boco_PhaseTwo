@@ -14,6 +14,3 @@ var controllers = require("./controllers");
 controllers.init(app);
 
 server.listen(80);
-
-
-

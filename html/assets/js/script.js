@@ -7,6 +7,12 @@ $(document).ready(function(){
 
 		$(this).find('a').addClass('active');
 		$("#"+tab_id).addClass('current');
+
+		//DatePicker init after tab shown
+		setTimeout(function(){
+			$('.date-picker').datepicker();
+		},800);
+
 	});
 
 	//page scroll to top

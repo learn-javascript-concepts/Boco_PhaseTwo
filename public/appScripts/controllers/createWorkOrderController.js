@@ -22,8 +22,8 @@ define([], function(){
                 "work_order_num": $scope.workOrderNumber,
                 "customer_po_num": $scope.poNumber,
                 "work_order_by": $scope.workOrderBy,
-                "date_of_order": $scope.dateOfOrder,
-                "date_work_started": $scope.dateWorkStarted
+                "date_of_order": new Date($scope.dateOfOrder),
+                "date_work_started":  new Date($scope.dateWorkStarted)
             };
 
             $http.post(appConstants.createWorkOrder, requestData, authenticateUser.getHeaderObject()).then(function(response) {
