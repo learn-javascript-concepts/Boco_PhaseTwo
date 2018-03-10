@@ -7,6 +7,7 @@ define([], function(){
             downloadText: "Click here to download",
             cancelText: "Click here to cancel download!!!"
         };
+ 
 
         $scope.userName = "";
         $scope.userPassword = "";
@@ -42,6 +43,8 @@ define([], function(){
             });          
         }
     }
+
+    
     
     return loginController;
 })

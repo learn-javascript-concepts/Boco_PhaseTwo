@@ -24,9 +24,14 @@ require.config({
         "logoutController": "appScripts/controllers/logoutController",
         "customerScreenDescriptionController": "appScripts/controllers/customerScreenDescriptionController",
         "subContractorScreenDescriptionController": "appScripts/controllers/subContractorScreenDescriptionController",
-        "sweetalert": "alertScript/sweetalert"
+        "sweetalert": "alertScript/sweetalert",
+        "jquery.loading": "lib/jquery-loading/dist/jquery.loading"
     },
     shim: {
+
+        "angular-loading-overlay": { 
+            deps: ["angular"]
+        },
         "angular-screenshot": { 
             deps: ["angular"]
         },
@@ -36,6 +41,9 @@ require.config({
         "angular-route" : {
             deps: ["angular"]
         },
+        "jquery.loading": {
+            deps: ["jquery"]
+        },
         "appScript" : {
             deps: ["jquery"]
         },
@@ -43,7 +51,7 @@ require.config({
             deps: ["jquery"]
         },
         "appModule": {
-            deps: ["angular", "angular-route", "angular-cookies", "angular-screenshot", "jquery", "fontAwesome", "bootstrapBundle", "datePicker", "appScript", "ngStorage", "sweetalert"]
+            deps: ["angular", "angular-route", "angular-cookies", "angular-screenshot", "jquery", "fontAwesome", "bootstrapBundle", "datePicker", "appScript", "ngStorage", "sweetalert", "jquery.loading"]
         }
     }
 });

@@ -38,6 +38,9 @@ define([], function() {
         };
 
         $scope.saveDescriptionButton = function() {
+
+            window.showLoader();
+
             $scope.isInNonEditModeOfDescription = true;
 
             var descriptionData = {
@@ -47,6 +50,7 @@ define([], function() {
             }
 
             $http.put(appConstants.saveDescription + cachedData.id + "/", descriptionData, authenticateUser.getHeaderObject()).then(function(response) {
+                window.hideLoader();
                 if(response.status == 200) {
                     workOrderCache.saveWorkOrderDetails(response.data);
                     alert("Workorder Description Updated Successfully", "info")

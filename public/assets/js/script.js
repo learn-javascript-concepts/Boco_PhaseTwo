@@ -23,3 +23,11 @@ var options = {
 		"Customer #005"
 	]
 };
+
+window.showLoader = function() {
+	$('#mainDiv').loading();
+}
+
+window.hideLoader = function() {
+	$('#mainDiv').loading('stop');
+}

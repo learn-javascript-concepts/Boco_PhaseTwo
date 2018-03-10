@@ -17,10 +17,12 @@ define([], function() {
 
         $scope.getWorkOrderList();
 
-        $scope.searchWorkOrder = function() {      
+        $scope.searchWorkOrder = function() {   
+            window.showLoader();   
             $http.get(appConstants.getWorkOrder + "work_order_num=" + $scope.workOrderNumber, authenticateUser.getHeaderObject()).then(function(response) {
                 var workOrderData = response.data;
                 $sessionStorage.cachedWorkOrder = response.data;
+                window.hideLoader();
                 if(workOrderData.length > 0) {
                     workOrderCache.saveWorkOrderDetails(workOrderData[0]);
                     $location.path("description");                    

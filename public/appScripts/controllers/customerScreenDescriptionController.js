@@ -4,7 +4,9 @@ define([], function() {
         
         $scope.markerPosition = [38.46583480, -91.02618380];
 
-        var isCustomerIdModified = false;
+        var self = this;
+
+        self.isCustomerIdModified = false;
 
         $scope.googleMapsUrl = "AIzaSyAog2mjYSr6LJ2nMkQ2mOO7H4mrzizFqmY";
 
@@ -75,7 +77,7 @@ define([], function() {
                         $scope.updateGoogleMaps();
                         $scope.isInEditCustomerMode = false;
 
-                        if (isCustomerIdModified) {
+                        if (self.isCustomerIdModified) {
 
                             var addCustomerToWorkOrder = {
                                 customer: response.data.id
@@ -94,7 +96,7 @@ define([], function() {
                         alert("Error Updating/Adding Customer Details", "error")
                     }
 
-                    isCustomerIdModified = false;
+                    self.isCustomerIdModified = false;
                 }, function() {})
             } else {
                 $http.post(appConstants.addNewCustomer, customerDetails, authenticateUser.getHeaderObject()).then(function(response) {
@@ -120,7 +122,7 @@ define([], function() {
                     } else {
                         alert("Error Updating/Adding Customer Details", "error")
                     }
-                    isCustomerIdModified = false;
+                    self.isCustomerIdModified = false;
                 }, function() {})
             }
         };
@@ -174,9 +176,10 @@ define([], function() {
                     cachedData.customer_details = $scope.customer_details;
                     workOrderCache.updateCustomerDetails($scope.customer_details)
                     $scope.isInEditCustomerMode = true;
-                    isCustomerIdModified = true;
+                    self.isCustomerIdModified = true;
                     $scope.searchCustomerName = "";
                     $scope.markerPosition = [$scope.customer_details.address_latitude, $scope.customer_details.address_longitude];
+                    $scope.searchCustomerName = "";
                 } else {
                     $http.get(appConstants.getSelectedCustomer + "company_name=" + $scope.searchCustomerName, authenticateUser.getHeaderObject()).then(function(response) {
                         if (response.data[0]) {
@@ -184,16 +187,19 @@ define([], function() {
                             cachedData.customer_details = response.data[0];
                             workOrderCache.updateCustomerDetails(response.data[0]);
                             $scope.isInEditCustomerMode = true;
-                            isCustomerIdModified = true;
+                            self.isCustomerIdModified = true;
                             $scope.searchCustomerName = "";
                             $scope.getAllCustomers();
                             $scope.markerPosition = [$scope.customer_details.address_latitude, $scope.customer_details.address_longitude];
+                            $scope.searchCustomerName = "";
                         } else {
+                            $scope.searchCustomerName = "";
                             alert("No Such Customer Exists", "error");
                         }
                     })
                 }
             } else {
+                $scope.searchCustomerName = "";
                 alert("Enter Company Name to Search", "info")
             }
         };
