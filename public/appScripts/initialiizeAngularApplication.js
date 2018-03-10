@@ -21,7 +21,8 @@ require.config({
         "appScript": "assets/js/script",
         "ngStorage": "lib/ngstorage/ngStorage",
         "ngMaps": "appScripts/maps/ng-maps",
-        "logoutController": "appScripts/controllers/logoutController"
+        "logoutController": "appScripts/controllers/logoutController",
+        "CustomerScreenDescriptionController": "appScripts/controllers/CustomerScreenDescriptionController"
 
     },
     shim: {
