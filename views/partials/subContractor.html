@@ -1,0 +1,92 @@
+<div>
+    <div class="searchCustomer-form custom-btn padlr-50">
+        <div class="searchCustomer-indent">
+            <form class="max-width450" ng-submit="searchSubContractor(1)">
+                <input required type="text" class="form-control" placeholder="Search Sub Contractor" list="subcontractordataList" ng-model="searchSubContractorName">
+                <datalist id="subcontractordataList">
+                    <option ng-repeat="subContractor in allSubContractor">{{subContractor.sub_contractor_name}}</option>
+                </datalist>
+                
+                <input type="submit" class="btn btn-gray" value="Search" />
+            </form>
+        </div>
+        <div class="add-customer">
+            <button class="btn btn-gray" ng-click="addNewSubContractor()">
+            Add New Sub Contractor
+            </button>
+        </div>
+    </div>
+    <form ng-submit="saveSubContractorButton()">
+            <div class="company-info">
+                <div class="company-title">
+                    <span ng-bind="sub_contractor_details.sub_contractor_name" ng-show="!isSubContractorInEditMode"></span>
+                    <input type="text" ng-model="sub_contractor_details.sub_contractor_name" class="form-control" ng-show="isSubContractorInEditMode" required placeholder="Name">
+                </div>
+            </div>
+        <div class="address-container">
+            <div class="address-col">
+                <h3>ADDRESS</h3>
+                <ul>
+                    <li>
+                        <div class="col-content">
+                            <div class="col-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="colContent-indent">
+                                <input type="text" ng-model="sub_contractor_details.address" class="form-control" ng-disabled="isSubContractorInEditMode == false" placeholder="Address" required>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="col-content">
+                            <div class="col-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="colContent-indent">
+                                <input type="text" pattern="[a-zA-Z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*" title="Contact's email (format: xxx@xxx.xxx)" ng-model="sub_contractor_details.email" class="form-control" ng-disabled="isSubContractorInEditMode == false" placeholder="Email Id" required>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="col-content">
+                            <div class="col-icon">
+                                <i class="fas fa-phone-square"></i>
+                            </div>
+                            <div class="colContent-indent">
+                                <input type="tel" ng-model="sub_contractor_details.contact_number" 
+                                       class="form-control" 
+                                       ng-disabled="isSubContractorInEditMode == false" 
+                                       placeholder="Contact Number" required
+                                       ng-keyup="formatTelephoneNumberForContractor()"
+                                       oninvalid="InvalidMsg(this);"
+                                       oninput="InvalidMsg(this);"
+                                       maxlength="12">
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="col-content">
+                            <div class="col-icon">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="colContent-indent">
+                                <input type="text" ng-model="sub_contractor_details.poc" class="form-control" ng-disabled="isSubContractorInEditMode == false" placeholder="Point Of Contact" required>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="custom-btn padt-25">
+                        <input type="button" class="btn btn-lightgray" ng-click="editSubContractorButton()" ng-if="isSubContractorInEditMode == false" value="Edit" />
+                        <input type="submit" class="btn btn-gray" ng-if="isSubContractorInEditMode == true" value="Save" />
+                    </li>
+                </ul>
+            </div>
+            <div class="map-container" id="googleMap2">
+                    <div map-lazy-load="https://maps.google.com/maps/api/js" ng-if="markerSubContractorPosition">
+                        <ng-map id="map" zoom="11" center="{{markerSubContractorPosition}}">
+                            <marker position="{{markerSubContractorPosition}}"></marker>
+                        </ng-map>
+                    </div>
+            </div>
+        </div>
+    </form>
+</div>
