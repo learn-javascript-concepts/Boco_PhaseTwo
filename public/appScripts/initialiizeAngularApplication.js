@@ -37,6 +37,7 @@ require.config({
         },
         "appModule": {
             deps: [
+                "angular",
                 "angular-route", 
                 "angular-cookies", 
                 "ngStorage", 
