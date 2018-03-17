@@ -1,6 +1,6 @@
 define([], function() {
 
-    var serverUrl = "http://ec2-13-58-74-246.us-east-2.compute.amazonaws.com:5000/"
+    var serverUrl = "http://ec2-18-217-39-52.us-east-2.compute.amazonaws.com:5000/"
     //var serverUrl = "http://localhost/api/"
 
     var appConstants = {

@@ -51,7 +51,7 @@ require.config({
             deps: ["jquery"]
         },
         "appModule": {
-            deps: ["angular", "angular-route", "angular-cookies", "angular-screenshot", "jquery", "fontAwesome", "bootstrapBundle", "datePicker", "appScript", "ngStorage", "sweetalert", "jquery.loading"]
+            deps: ["angular", "angular-route", "angular-cookies", "angular-screenshot", "jquery", "bootstrapBundle", "datePicker", "appScript", "ngStorage", "sweetalert", "jquery.loading"]
         }
     }
 });
