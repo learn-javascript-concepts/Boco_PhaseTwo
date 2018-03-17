@@ -26,10 +26,6 @@ require.config({
         "jquery.loading": "lib/jquery-loading/dist/jquery.loading"
     },
     shim: {
-
-        "angular-loading-overlay": { 
-            deps: ["angular"]
-        },
         "angular-cookies": {
             deps: ["angular"]
         },
@@ -40,14 +36,29 @@ require.config({
             deps: ["jquery"]
         },
         "appModule": {
-            deps: ["angular", "angular-route", "angular-cookies", "ngStorage", "jquery.loading"]
+            deps: [
+                "angular-route", 
+                "angular-cookies", 
+                "ngStorage", 
+                "jquery.loading", 
+                "ngMaps","appModuleRouting", 
+                "loginController", 
+                "authenticateUser", 
+                "workOrderController", 
+                "createWorkOrderController", 
+                "appConstants",
+                "workOrderCache",
+                "descriptionController",
+                "customerScreenDescriptionController",
+                "subContractorScreenDescriptionController",
+                "logoutController"
+            ]
         }
     }
 });
 
 require(["appModule"], function(appModule) {
-    require(["ngMaps"], function() {
+    
         appModule.init();
-    })
     
 });
