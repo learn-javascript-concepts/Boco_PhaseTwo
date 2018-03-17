@@ -17,22 +17,17 @@ require.config({
         "descriptionController": "appScripts/controllers/descriptionController",
         "fontAwesome": "https://use.fontawesome.com/releases/v5.0.6/js/all",
         "bootstrapBundle": "assets/bootstrap/js/bootstrap.bundle",
-        "datePicker": "assets/plugins/date-picker/bootstrap-datepicker.min",
         "appScript": "assets/js/script",
         "ngStorage": "lib/ngstorage/ngStorage",
         "ngMaps": "appScripts/maps/ng-maps",
         "logoutController": "appScripts/controllers/logoutController",
         "customerScreenDescriptionController": "appScripts/controllers/customerScreenDescriptionController",
         "subContractorScreenDescriptionController": "appScripts/controllers/subContractorScreenDescriptionController",
-        "sweetalert": "alertScript/sweetalert",
         "jquery.loading": "lib/jquery-loading/dist/jquery.loading"
     },
     shim: {
 
         "angular-loading-overlay": { 
-            deps: ["angular"]
-        },
-        "angular-screenshot": { 
             deps: ["angular"]
         },
         "angular-cookies": {
@@ -44,14 +39,8 @@ require.config({
         "jquery.loading": {
             deps: ["jquery"]
         },
-        "appScript" : {
-            deps: ["jquery"]
-        },
-        "sweetalert": {
-            deps: ["jquery"]
-        },
         "appModule": {
-            deps: ["angular", "angular-route", "angular-cookies", "angular-screenshot", "jquery", "bootstrapBundle", "datePicker", "appScript", "ngStorage", "sweetalert", "jquery.loading"]
+            deps: ["angular", "angular-route", "angular-cookies", "ngStorage", "jquery.loading"]
         }
     }
 });
