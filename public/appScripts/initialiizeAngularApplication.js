@@ -26,19 +26,14 @@ require.config({
         "jquery.loading": "lib/jquery-loading/dist/jquery.loading"
     },
     shim: {
-        "angular-cookies": {
-            deps: ["angular"]
-        },
-        "angular-route" : {
-            deps: ["angular"]
-        },
         "appModule": {
             deps: [
                 "angular",
                 "angular-route", 
                 "angular-cookies", 
                 "ngStorage", 
-                "ngMaps","appModuleRouting", 
+                "ngMaps",
+                "appModuleRouting", 
                 "loginController", 
                 "authenticateUser", 
                 "workOrderController", 
