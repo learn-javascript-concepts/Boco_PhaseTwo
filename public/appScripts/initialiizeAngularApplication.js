@@ -32,16 +32,12 @@ require.config({
         "angular-route" : {
             deps: ["angular"]
         },
-        "jquery.loading": {
-            deps: ["jquery"]
-        },
         "appModule": {
             deps: [
                 "angular",
                 "angular-route", 
                 "angular-cookies", 
                 "ngStorage", 
-                "jquery.loading", 
                 "ngMaps","appModuleRouting", 
                 "loginController", 
                 "authenticateUser", 
