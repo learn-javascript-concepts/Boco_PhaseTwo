@@ -17,14 +17,14 @@ define([], function(){
             $http.get(appConstants.getAllSupplier + cachedData.id + "/suppliers/", authenticateUser.getHeaderObject()).then(function(response) {
                 if(response.data.length) {
                     $scope.supplierList = response.data;
-                    window.hideLoader();
                 }
+                window.hideLoader();
             })
         }
 
         $scope.getSupplierList();
         
-        this.addSupplierData = function() {
+        $scope.addSupplierData = function() {
             window.showLoader();
 
             var data = {
@@ -33,7 +33,7 @@ define([], function(){
                 ticket_number: $scope.ticket_number,
                 cost: $scope.cost
             }
-            
+
             $http.post(appConstants.supplierApi + cachedData.id + "/suppliers/", data, authenticateUser.getHeaderObject()).then(function(response) {
                 if(response.status == 200) {
                     alert("Supplier Details Added/Updated Successfully")

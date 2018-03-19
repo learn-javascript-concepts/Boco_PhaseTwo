@@ -4,10 +4,10 @@
             Supplier Materials
         </div>
 
-        <div class="supplier-form-indent">
+        <form ng-submit="addSupplierData()" class="supplier-form-indent">
             <ul>
                 <li>
-                    <input type="text" class="form-control" ng-click="getCustomerList()" placeholder="Search Customer" list="dataList" ng-model="customerName" required>
+                    <input type="text" class="form-control" ng-click="getCustomerList()" placeholder="Search Customer" list="dataList" ng-model="company_name" required>
                     <datalist id="dataList">
                         <option ng-repeat="customer in customerList">{{customer.company_name}}</option>
                     </datalist>
@@ -19,13 +19,11 @@
                     <input type="text" class="form-control" ng-model="cost" placeholder="Cost">
                 </li>
                 <li class="custom-btn padlr-50">
-                    <button class="btn btn-gray" type="submit">
-                        ADD TO SUPPLIER
-                    </button>
+                    <input class="btn btn-gray" type="submit" value="Add Supplier" />
                 </li>
 
             </ul>
-        </div>
+        </form>
     </div>
 
     <div class="data-table-wrapper">

@@ -161,7 +161,6 @@ define([], function() {
                 for (let i = 0; i < response.data.length; i++) {
                     $scope.allCustomerName.push(response.data[i].company_name);
                 }
-                customerCache.setCustomerListDataCache($scope.allCustomers);
             })
         }
 
