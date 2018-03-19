@@ -1,14 +1,13 @@
 require.config({
     baseUrl: "/",
     paths: {
-        "angular": "lib/angular/angular",
-        "angular-route": "lib/angular-route/angular-route",
-        "jquery": "lib/jquery/dist/jquery",
-        "angular-screenshot": "lib/angular-screenshot/build/angular-screenshot",
+        "angular": "lib/angular/angular.min",
+        "angular-route": "lib/angular-route/angular-route.min",
+        "jquery": "lib/jquery/dist/jquery.min",
         "appModule": "appScripts/appModule",
         "appModuleRouting": "appScripts/appModuleRouting",
         "loginController": "appScripts/controllers/loginController",
-        "angular-cookies": "lib/angular-cookies/angular-cookies",
+        "angular-cookies": "lib/angular-cookies/angular-cookies.min",
         "authenticateUser": "appScripts/services/authenticateUser",
         "workOrderController": "appScripts/controllers/workOrderController",
         "createWorkOrderController": "appScripts/controllers/createWorkOrderController",
@@ -23,7 +22,7 @@ require.config({
         "logoutController": "appScripts/controllers/logoutController",
         "customerScreenDescriptionController": "appScripts/controllers/customerScreenDescriptionController",
         "subContractorScreenDescriptionController": "appScripts/controllers/subContractorScreenDescriptionController",
-        "jquery.loading": "lib/jquery-loading/dist/jquery.loading"
+        "jquery.loading": "lib/jquery-loading/dist/jquery.loading.min"
     },
     shim: {
         "appModule": {
