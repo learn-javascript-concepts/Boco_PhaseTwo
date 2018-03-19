@@ -22,6 +22,9 @@ require.config({
         "logoutController": "appScripts/controllers/logoutController",
         "customerScreenDescriptionController": "appScripts/controllers/customerScreenDescriptionController",
         "subContractorScreenDescriptionController": "appScripts/controllers/subContractorScreenDescriptionController",
+        "supplierController": "appScripts/controllers/supplierController",
+        "supplierCache": "appScripts/services/supplierCache",
+        "customerCache": "appScripts/services/customerCache",
         "jquery.loading": "lib/jquery-loading/dist/jquery.loading.min"
     },
     shim: {
@@ -42,7 +45,10 @@ require.config({
                 "descriptionController",
                 "customerScreenDescriptionController",
                 "subContractorScreenDescriptionController",
-                "logoutController"
+                "logoutController",
+                "supplierController",
+                "supplierCache",
+                "customerCache"
             ]
         }
     }

@@ -1,6 +1,6 @@
 define([], function() {
 
-    var customerScreenDescriptionController = function($scope, workOrderCache, $http, $location, appConstants, authenticateUser) {
+    var customerScreenDescriptionController = function($scope, workOrderCache, $http, $location, appConstants, authenticateUser, customerCache) {
         
         $scope.markerPosition = [38.46583480, -91.02618380];
 
@@ -161,6 +161,7 @@ define([], function() {
                 for (let i = 0; i < response.data.length; i++) {
                     $scope.allCustomerName.push(response.data[i].company_name);
                 }
+                customerCache.setCustomerListDataCache($scope.allCustomers);
             })
         }
 

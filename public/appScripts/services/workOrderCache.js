@@ -34,7 +34,6 @@ define([], function() {
                 cachedWorkOrder = $sessionStorage.cachedWorkOrder;
                 return cachedWorkOrder;
             }
-            
         }
     }
         

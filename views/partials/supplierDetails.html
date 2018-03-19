@@ -1,4 +1,4 @@
-<div>
+<div ng-controller="supplierController">
     <div class="supplier-materials-form">
         <div class="section-title">
             Supplier Materials
@@ -7,13 +7,16 @@
         <div class="supplier-form-indent">
             <ul>
                 <li>
-                    <input type="text" class="form-control" placeholder="Search Supplier">
+                    <input type="text" class="form-control" ng-click="getCustomerList()" placeholder="Search Customer" list="dataList" ng-model="customerName" required>
+                    <datalist id="dataList">
+                        <option ng-repeat="customer in customerList">{{customer.company_name}}</option>
+                    </datalist>
                 </li>
                 <li>
-                    <input type="text" class="form-control" placeholder="Ticket Number">
+                    <input type="text" class="form-control" ng-model="ticket_number" placeholder="Ticket Number">
                 </li>
                 <li>
-                    <input type="text" class="form-control" placeholder="Cost">
+                    <input type="text" class="form-control" ng-model="cost" placeholder="Cost">
                 </li>
                 <li class="custom-btn padlr-50">
                     <button class="btn btn-gray" type="submit">
