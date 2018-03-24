@@ -23,6 +23,7 @@ require.config({
         "customerScreenDescriptionController": "appScripts/controllers/customerScreenDescriptionController",
         "subContractorScreenDescriptionController": "appScripts/controllers/subContractorScreenDescriptionController",
         "supplierController": "appScripts/controllers/supplierController",
+        "equipmentController": "appScripts/controllers/equipmentController",
         "supplierCache": "appScripts/services/supplierCache",
         "customerCache": "appScripts/services/customerCache",
         "jquery.loading": "lib/jquery-loading/dist/jquery.loading.min"

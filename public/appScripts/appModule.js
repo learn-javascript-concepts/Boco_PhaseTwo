@@ -10,6 +10,7 @@ define(["appModuleRouting",
         "subContractorScreenDescriptionController",
         "logoutController",
         "supplierController",
+        "equipmentController",
         "supplierCache"
     ], function(
             appModuleRouting, 
@@ -24,6 +25,7 @@ define(["appModuleRouting",
             subContractorScreenDescriptionController,
             logoutController,
             supplierController,
+            equipmentController,
             supplierCache) {
 
     var appModule = {
@@ -45,6 +47,8 @@ define(["appModuleRouting",
             appModule.controller("logoutController", logoutController);
 
             appModule.controller("supplierController", supplierController);
+
+            appModule.controller("equipmentController", equipmentController);
 
             appModule.service("authenticateUser", authenticateUser);
 

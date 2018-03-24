@@ -5,73 +5,70 @@ define([], function(){
         var cachedData = workOrderCache.getWorkOrderDetail();
 
         $scope.cost = "";
-        $scope.ticket_number = "";
-        $scope.company_name = "";
-        $sccope.date = "";
+        $scope.item_name = "";
 
-        $scope.supplierList = null;
-        $scope.workOrderSupplierInfo = null;
+        $scope.itemList = null;
+        $scope.workOrderItemListInfo = null;
 
-        $scope.getWorkOrderSuppliers = function() {
-            $http.get(appConstants.supplierApi + cachedData.id + "/suppliers/", authenticateUser.getHeaderObject()).then(function(response) {
+        $scope.getAllEquipment = function() {
+            $http.get(appConstants.getEquipmentList, authenticateUser.getHeaderObject()).then(function(response) {
                 if(response.data.length) {
-                    $scope.workOrderSupplierInfo = response.data;
+                    $scope.itemList = response.data;
+                    $scope.getEquipmentList();
+                }
+            })
+        };
 
-                    for(i=0; i< $scope.workOrderSupplierInfo.length; i++) {
-                        $scope.workOrderSupplierInfo[i].supplier = $scope.supplierList.filter((data) => data.id == $scope.workOrderSupplierInfo[i].supplier)[0];
+        $scope.getEquipmentList = function() {
+            $http.get(appConstants.equipmentApi + cachedData.id + "/equipments/", authenticateUser.getHeaderObject()).then(function(response) {
+                if(response.data.length) {
+                    $scope.workOrderItemListInfo = response.data;
+
+                    for(i=0; i< $scope.workOrderItemListInfo.length; i++) {
+                        $scope.workOrderItemListInfo[i].equipment = $scope.itemList.filter((data) => data.id == $scope.workOrderItemListInfo[i].equipment)[0];
                     }
                 }
             })
         }
 
-        $scope.getAllSuppliers = function() {
-            $http.get(appConstants.getSupplierList, authenticateUser.getHeaderObject()).then(function(response) {
-                if(response.data.length) {
-                    $scope.supplierList = response.data;
-                    $scope.getWorkOrderSuppliers();
-                }
-            })
-        };
-
-        $scope.getAllSuppliers();
+        $scope.getAllEquipment();
         
-        $scope.addSupplierData = function() {
+        $scope.addEquipmentData = function() {
 
             var data = {
-                company_name: $scope.company_name,
+                cost: $scope.cost,
                 workorder: workOrderCache.getWorkOrderDetail().id,
-                ticket_number: $scope.ticket_number,
-                cost: $scope.cost
+                item_name: $scope.item_name
             }
 
-            $http.post(appConstants.addSupplier, data, authenticateUser.getHeaderObject()).then(function(response) {
+            $http.post(appConstants.addEquipment, data, authenticateUser.getHeaderObject()).then(function(response) {
                 if(response.status == 200 || response.status == 201) {
-                    var supplierId = response.data.id;
+                    var equipmentId = response.data.id;
 
-                    let addSupplierToWorkOrderData = {
-                        "supplier": supplierId,
+                    let addEquipmentToWorkOrderData = {
+                        "supplier": equipmentId,
                         "workorder": workOrderCache.getWorkOrderDetail().id
                     };
 
-                    $http.post(appConstants.supplierApi + cachedData.id + "/suppliers/", addSupplierToWorkOrderData, authenticateUser.getHeaderObject()).then(function(response){
-                        alert("Supplier Details Added/Updated Successfully")
-                        $scope.getAllSuppliers();
+                    $http.post(appConstants.equipmentApi + cachedData.id + "/equipments/", addEquipmentToWorkOrderData, authenticateUser.getHeaderObject()).then(function(response){
+                        alert("Equipment Added Successfully")
+                        $scope.getAllEquipment();
                     });
                 }
             })
         }
 
-        $scope.removeSupplier = function(selectedSupplierId) {
-            $http.delete(appConstants.supplierApi + cachedData.id + "/suppliers/" + selectedSupplierId, authenticateUser.getHeaderObject()).then(function(response) {
+        $scope.removeEquipment = function(selectedEquipment) {
+            $http.delete(appConstants.equipmentApi + cachedData.id + "/equipments/" + selectedEquipment, authenticateUser.getHeaderObject()).then(function(response) {
                 if(response.status == 200) {
-                    alert("Supplier Details Successfully Deleted.")
-                    $scope.getSupplierList();
+                    alert("Equipment Successfully Deleted.")
+                    $scope.getAllEquipment();
                 }
             })
         }
 
     }
 
-    return supplierController;
+    return equipmentController;
 
 });

@@ -13,10 +13,10 @@
                     </datalist>
                 </li>
                 <li>
-                    <input type="text" class="form-control" ng-model="ticket_number" placeholder="Ticket Number">
+                    <input type="number" class="form-control" ng-model="ticket_number" placeholder="Ticket Number" required>
                 </li>
                 <li>
-                    <input type="text" class="form-control" ng-model="cost" placeholder="Cost">
+                    <input type="number" class="form-control" ng-model="cost" placeholder="Cost" required>
                 </li>
                 <li class="custom-btn padlr-50">
                     <input class="btn btn-gray" type="submit" value="Add Supplier" />
@@ -31,30 +31,33 @@
             <table class="table">
                 <thead class="thead-dark">
                 <tr>
-                    <th scope="col"> 
+                    <th scope="col" ng-click="sortByField('company_name')"> 
                     <div class="label-wrapper">
                             <div class="data-label"> Selected Suppliers</div>
                             <div class="sorting-controls">
-                                <img src="assets/img/arrow-top.jpg">
-                                <img src="assets/img/arrow-bottom.jpg">
+                                <img src="assets/img/arrow-top.jpg" ng-click="sortByField()" ng-show="supplierSortOrder == -1">
+                                <img src="assets/img/arrow-bottom.jpg" ng-click="sortByField()"  ng-show="supplierSortOrder == 1">
+                                <img src="" ng-click="sortByField()"  ng-show="supplierSortOrder == 0">
                             </div>
                     </div>
                     </th>
-                    <th scope="col">
+                    <th scope="col" ng-click="sortByField('ticket_number')">
                             <div class="label-wrapper">
                                     <div class="data-label"> Ticket Number</div>
                                     <div class="sorting-controls">
-                                        <img src="assets/img/arrow-top.jpg">
-                                        <img src="assets/img/arrow-bottom.jpg">
+                                        <img src="assets/img/arrow-top.jpg" ng-show="supplierTicketSortOrder == -1">
+                                        <img src="assets/img/arrow-bottom.jpg" ng-show="supplierTicketSortOrder == 1">
+                                        <img src="" ng-show="supplierTicketSortOrder == 0">
                                     </div>
                             </div>
                     </th>
-                    <th scope="col" colspan="2">
+                    <th scope="col" colspan="2" ng-click="sortByField('cost')">
                         <div class="label-wrapper">
                                 <div class="data-label"> Cost</div>
                                 <div class="sorting-controls">
-                                    <img src="assets/img/arrow-top.jpg">
-                                    <img src="assets/img/arrow-bottom.jpg">
+                                    <img src="assets/img/arrow-top.jpg" ng-show="supplierCostSortOrder == -1">
+                                    <img src="assets/img/arrow-bottom.jpg" ng-show="supplierCostSortOrder == 1">
+                                    <img src="" ng-show="supplierCostSortOrder == 0">
                                 </div>
                         </div>
                     </th>

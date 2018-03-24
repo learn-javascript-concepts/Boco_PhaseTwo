@@ -25,7 +25,11 @@ define([], function() {
 
         supplierApi: serverUrl + "workorders/",
         getSupplierList: serverUrl + "suppliers/",
-        addSupplier: serverUrl + "suppliers/"
+        addSupplier: serverUrl + "suppliers/",
+
+        getEquipmentList: serverUrl + "equipments/",
+        equipmentApi: serverUrl + "equipments/",
+        addEquipment: serverUrl + "equipments/",
 
     }
 
