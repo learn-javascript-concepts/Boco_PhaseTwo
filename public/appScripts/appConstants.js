@@ -31,6 +31,10 @@ define([], function() {
         equipmentApi: serverUrl + "equipments/",
         addEquipment: serverUrl + "equipments/",
 
+        stockApi: serverUrl + "workorders/",
+        addStock: serverUrl + "stocks/",
+        getStockList: serverUrl + "stocks/",
+
     }
 
     return appConstants;

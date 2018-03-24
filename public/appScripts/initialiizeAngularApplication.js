@@ -23,6 +23,7 @@ require.config({
         "customerScreenDescriptionController": "appScripts/controllers/customerScreenDescriptionController",
         "subContractorScreenDescriptionController": "appScripts/controllers/subContractorScreenDescriptionController",
         "supplierController": "appScripts/controllers/supplierController",
+        "stockController": "appScripts/controllers/stockController",
         "equipmentController": "appScripts/controllers/equipmentController",
         "supplierCache": "appScripts/services/supplierCache",
         "customerCache": "appScripts/services/customerCache",

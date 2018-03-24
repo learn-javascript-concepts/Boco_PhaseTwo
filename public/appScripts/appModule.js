@@ -11,7 +11,8 @@ define(["appModuleRouting",
         "logoutController",
         "supplierController",
         "equipmentController",
-        "supplierCache"
+        "supplierCache",
+        "stockController"
     ], function(
             appModuleRouting, 
             loginController, 
@@ -26,7 +27,8 @@ define(["appModuleRouting",
             logoutController,
             supplierController,
             equipmentController,
-            supplierCache) {
+            supplierCache,
+            stockController) {
 
     var appModule = {
         init : function() {
@@ -49,6 +51,8 @@ define(["appModuleRouting",
             appModule.controller("supplierController", supplierController);
 
             appModule.controller("equipmentController", equipmentController);
+
+            appModule.controller("stockController", stockController);
 
             appModule.service("authenticateUser", authenticateUser);
 

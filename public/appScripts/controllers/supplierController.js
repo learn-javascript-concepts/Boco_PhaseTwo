@@ -8,8 +8,8 @@ define([], function(){
         $scope.ticket_number = "";
         $scope.company_name = "";
 
-        $scope.supplierList = null;
-        $scope.workOrderSupplierInfo = null;
+        $scope.supplierList = [];
+        $scope.workOrderSupplierInfo = [];
 
         $scope.getWorkOrderSuppliers = function() {
             $http.get(appConstants.supplierApi + cachedData.id + "/suppliers/", authenticateUser.getHeaderObject()).then(function(response) {
@@ -99,9 +99,13 @@ define([], function(){
         
         $scope.addSupplierData = function() {
 
-            if($scope.supplierList.filter((supplierObj) => $scope.compareAllObjects(supplierObj)).length > 0){
-                alert("Value Already Exists", "error");
-                return;
+            // If Same data already Exists in the Grid, do Nothing
+
+            if($scope.workOrderSupplierInfo.length > 0) {
+                if($scope.workOrderSupplierInfo.filter((supplierObj) => $scope.compareAllObjects(supplierObj.supplier)).length > 0){
+                    alert("Value Already Exists", "error");
+                    return;
+                }
             }
 
             var data = {
@@ -111,13 +115,39 @@ define([], function(){
                 cost: $scope.cost
             }
 
+            var existingSupplierObject = [];
+
+            if($scope.supplierList.length > 0) {
+                existingSupplierObject =  $scope.supplierList.filter((supplierObj) => $scope.compareAllObjects(supplierObj));
+            }
+
+            if(existingSupplierObject.length > 0) {
+
+                let addSupplierToWorkOrderData = {
+                    "supplier": existingSupplierObject[0].id,
+                    "workorder": workOrderCache.getWorkOrderDetail().id
+                };
+
+                $http.post(appConstants.supplierApi + cachedData.id + "/suppliers/", addSupplierToWorkOrderData, authenticateUser.getHeaderObject()).then(function(response){
+                    $scope.getAllSuppliers();
+                    $scope.clearData();
+                    window.hideLoader();
+                    alert("Supplier Details Added/Updated Successfully")
+                }, function(response) {
+                    $scope.clearData();
+                    window.hideLoader();
+                    alert(response.data, "error");
+                });
+
+                return;
+            }
+
             $http.post(appConstants.addSupplier, data, authenticateUser.getHeaderObject()).then(function(response) {
                 window.showLoader();
+                var existingSupplierObject = [];
                 if(response.status == 200 || response.status == 201) {
                     var supplierId = response.data.id;
-
-                    var existingSupplierObject =  $scope.supplierList.filter((supplierObj) => $scope.compareObjects(supplierObj));
-
+                    
                     if(existingSupplierObject.length == 0) {
                         
                         let addSupplierToWorkOrderData = {
@@ -156,7 +186,7 @@ define([], function(){
                     $scope.getSupplierList();
                     alert("Supplier Details Successfully Deleted.");
                 }
-            }, function(rtesponse) {
+            }, function(response) {
                 $scope.clearData();
                 window.hideLoader();
                 alert(response.data, "error");

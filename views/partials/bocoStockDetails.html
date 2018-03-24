@@ -1,4 +1,4 @@
-<div>
+<div ng-controller="stockController">
     <div class="supplier-materials-form">
         <div class="section-title">
             BOCO Stock
@@ -13,16 +13,16 @@
             Mechanicals
             </label>
         </div>
-        <div class="supplier-form-indent">
+        <form class="supplier-form-indent" ng-submit="addStockData()">
             <ul>
                 <li>
-                    <input type="text" class="form-control" placeholder="Search Items">
+                    <input type="text" class="form-control" placeholder="Search Items" ng-model="item_name">
                 </li>
                 <li>
-                    <input type="text" class="form-control" placeholder="Number of Items">
+                    <input type="text" class="form-control" placeholder="Number of Items" ng-model="number_of_items">
                 </li>
                 <li>
-                    <input type="text" class="form-control" placeholder="Cost per Unit">
+                    <input type="text" class="form-control" placeholder="Cost per Unit" ng-model="cost">
                 </li>
                 <li class="custom-btn padlr-50">
                     <button class="btn btn-gray" type="submit">
@@ -30,7 +30,7 @@
                     </button>
                 </li>
             </ul>
-        </div>
+        </form>
     </div>
     <div class="data-table-wrapper">
         <table class="table">
