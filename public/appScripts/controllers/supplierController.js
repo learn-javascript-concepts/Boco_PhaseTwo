@@ -147,29 +147,23 @@ define([], function(){
                 var existingSupplierObject = [];
                 if(response.status == 200 || response.status == 201) {
                     var supplierId = response.data.id;
-                    
-                    if(existingSupplierObject.length == 0) {
-                        
-                        let addSupplierToWorkOrderData = {
-                            "supplier": supplierId,
-                            "workorder": workOrderCache.getWorkOrderDetail().id
-                        };
-    
-                        $http.post(appConstants.supplierApi + cachedData.id + "/suppliers/", addSupplierToWorkOrderData, authenticateUser.getHeaderObject()).then(function(response){
-                            $scope.getAllSuppliers();
-                            $scope.clearData();
-                            window.hideLoader();
-                            alert("Supplier Details Added/Updated Successfully")
-                        }, function(response) {
-                            $scope.clearData();
-                            window.hideLoader();
-                            alert(response.data, "error");
-                        });
-                    } else {
+                      
+                    let addSupplierToWorkOrderData = {
+                        "supplier": supplierId,
+                        "workorder": workOrderCache.getWorkOrderDetail().id
+                    };
+
+                    $http.post(appConstants.supplierApi + cachedData.id + "/suppliers/", addSupplierToWorkOrderData, authenticateUser.getHeaderObject()).then(function(response){
+                        $scope.getAllSuppliers();
                         $scope.clearData();
                         window.hideLoader();
                         alert("Supplier Details Added/Updated Successfully")
-                    }
+                    }, function(response) {
+                        $scope.clearData();
+                        window.hideLoader();
+                        alert(response.data, "error");
+                    });
+                    
                 }
             }, function(response) {
                 $scope.clearData();
