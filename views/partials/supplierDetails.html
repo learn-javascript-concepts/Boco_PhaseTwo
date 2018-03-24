@@ -7,9 +7,9 @@
         <form ng-submit="addSupplierData()" class="supplier-form-indent">
             <ul>
                 <li>
-                    <input type="text" class="form-control" ng-click="getCustomerList()" placeholder="Search Customer" list="dataList" ng-model="company_name" required>
-                    <datalist id="dataList">
-                        <option ng-repeat="customer in customerList">{{customer.company_name}}</option>
+                    <input type="text" class="form-control" placeholder="Search Supplier" list="supplierList" ng-model="company_name" required>
+                    <datalist id="supplierList">
+                        <option ng-repeat="supplier in supplierList">{{supplier.company_name}}</option>
                     </datalist>
                 </li>
                 <li>
@@ -28,83 +28,50 @@
 
     <div class="data-table-wrapper">
         <div class="table-responsive">
-        <table class="table">
-            <thead class="thead-dark">
-            <tr>
-                <th scope="col"> 
-                <div class="label-wrapper">
-                        <div class="data-label"> Selected Suppliers</div>
-                        <div class="sorting-controls">
-                            <img src="assets/img/arrow-top.jpg">
-                            <img src="assets/img/arrow-bottom.jpg">
-                        </div>
-                </div>
-                </th>
-                <th scope="col">
-                        <div class="label-wrapper">
-                                <div class="data-label"> Ticket Number</div>
-                                <div class="sorting-controls">
-                                    <img src="assets/img/arrow-top.jpg">
-                                    <img src="assets/img/arrow-bottom.jpg">
-                                </div>
-                        </div>
-                </th>
-                <th scope="col" colspan="2">
+            <table class="table">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col"> 
                     <div class="label-wrapper">
-                            <div class="data-label"> Cost</div>
+                            <div class="data-label"> Selected Suppliers</div>
                             <div class="sorting-controls">
                                 <img src="assets/img/arrow-top.jpg">
                                 <img src="assets/img/arrow-bottom.jpg">
                             </div>
                     </div>
-                </th>
-                
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>ABC Company</td>
-                <td>45789</td>
-                <td>$500.00</td>
-                <td>
-                    <span class="delete-item">
-                        <i class="fas fa-trash-alt"></i>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td>DEF Company</td>
-                <td>65780</td>
-                <td>$709.00</td>
-                <td>
-                    <span class="delete-item">
-                        <i class="fas fa-trash-alt"></i>
-                    </span>
-                </td>
-            </tr>
-
-            <tr>
-                <td>GHR Company</td>
-                <td>84647</td>
-                <td>$234.00</td>
-                <td>
-                    <span class="delete-item">
-                        <i class="fas fa-trash-alt"></i>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td> IST Company</td>
-                <td>84524</td>
-                <td>$347.00</td>
-                <td>
-                    <span class="delete-item">
-                        <i class="fas fa-trash-alt"></i>
-                    </span>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+                    </th>
+                    <th scope="col">
+                            <div class="label-wrapper">
+                                    <div class="data-label"> Ticket Number</div>
+                                    <div class="sorting-controls">
+                                        <img src="assets/img/arrow-top.jpg">
+                                        <img src="assets/img/arrow-bottom.jpg">
+                                    </div>
+                            </div>
+                    </th>
+                    <th scope="col" colspan="2">
+                        <div class="label-wrapper">
+                                <div class="data-label"> Cost</div>
+                                <div class="sorting-controls">
+                                    <img src="assets/img/arrow-top.jpg">
+                                    <img src="assets/img/arrow-bottom.jpg">
+                                </div>
+                        </div>
+                    </th>
+                    
+                </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="supplierData in workOrderSupplierInfo">
+                        <td ng-bind="supplierData.supplier.company_name">{{supplier.company_name}}</td>
+                        <td ng-bind="supplierData.supplier.ticket_number"></td>
+                        <td ng-bind="supplierData.supplier.cost"></td>
+                        <td>
+                            <input type="button" ng-click="removeSupplier(supplierData.supplier.id)" value="Delete" />
+                            <span class="delete-item" ng-click="removeSupplier(supplierData.supplier.id)"><i class="fas fa-trash-alt"></i></td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>

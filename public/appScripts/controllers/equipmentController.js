@@ -1,12 +1,13 @@
 define([], function(){
 
-    function supplierController($scope, $http, appConstants, workOrderCache, authenticateUser, customerCache) {
+    function equipmentController($scope, $http, appConstants, workOrderCache, authenticateUser, customerCache) {
 
         var cachedData = workOrderCache.getWorkOrderDetail();
 
         $scope.cost = "";
         $scope.ticket_number = "";
         $scope.company_name = "";
+        $sccope.date = "";
 
         $scope.supplierList = null;
         $scope.workOrderSupplierInfo = null;

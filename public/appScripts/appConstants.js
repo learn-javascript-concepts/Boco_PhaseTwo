@@ -23,7 +23,9 @@ define([], function() {
         addNewSubContractor: serverUrl + "subcontractors/",
         getSelectedSubContractor: serverUrl + "subcontractors/?",
 
-        getAllSupplier: serverUrl + "workorders/"
+        supplierApi: serverUrl + "workorders/",
+        getSupplierList: serverUrl + "suppliers/",
+        addSupplier: serverUrl + "suppliers/"
 
     }
 
