@@ -13,7 +13,10 @@
                     </datalist>
                 </li>
                 <li>
-                    <input type="number" class="form-control" ng-model="ticket_number" placeholder="Ticket Number" required>
+                    <input type="number" oninvalid="InvalidNonNumeric(this);" ng-change="fillSupplierData()" oninput="InvalidNonNumeric(this);" class="form-control" ng-model="ticket_number" placeholder="Ticket Number" required list="supplierTicketList">
+                    <datalist id="supplierTicketList">
+                        <option ng-repeat="supplier in supplierList" >{{supplier.company_name}} - {{supplier.ticket_number}}</option>
+                    </datalist>
                 </li>
                 <li>
                     <input type="number" class="form-control" ng-model="cost" placeholder="Cost" required>
@@ -75,4 +78,17 @@
             </table>
         </div>
     </div>
+
+    <script>
+    
+        window.InvalidNonNumeric = function(textbox) {
+            if(!Number.isNaN(textbox.value)) {
+                textbox.setCustomValidity(''); 
+                return true;
+            } 
+                
+            textbox.setCustomValidity('Please Enter Numeric Number'); 
+        }
+        
+    </script>
 </div>

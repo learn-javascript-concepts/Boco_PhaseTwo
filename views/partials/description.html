@@ -139,6 +139,15 @@
 
             textbox.setCustomValidity('Incorect Contact Number Format'); 
         }
+
+         window.InvalidNonNumeric = function(textbox) {
+            if(!Number.isNaN(textbox.value)) {
+                textbox.setCustomValidity(''); 
+                return true;
+            } 
+                
+            textbox.setCustomValidity('Please Enter Numeric Number'); 
+        }
     </script>
 
 </div>

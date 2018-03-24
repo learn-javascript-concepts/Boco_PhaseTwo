@@ -24,6 +24,19 @@
         
         <script src="lib/requirejs/require.js" data-main="appScripts/initialiizeAngularApplication.js"></script>
 
+        <script>
+    
+            window.InvalidNonNumeric = function(textbox) {
+                if(!Number.isNaN(textbox.value)) {
+                    textbox.setCustomValidity(''); 
+                    return true;
+                } 
+                    
+                textbox.setCustomValidity('Please Enter Numeric Number'); 
+            }
+                
+        </script>
+
     </head>
         <body>
 
