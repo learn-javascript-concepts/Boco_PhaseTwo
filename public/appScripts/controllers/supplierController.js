@@ -99,7 +99,10 @@ define([], function(){
         
         $scope.addSupplierData = function() {
 
-            window.showLoader();
+            if($scope.supplierList.filter((supplierObj) => $scope.compareAllObjects(supplierObj)).length > 0){
+                alert("Value Already Exists", "error");
+                return;
+            }
 
             var data = {
                 company_name: $scope.company_name,
@@ -109,27 +112,36 @@ define([], function(){
             }
 
             $http.post(appConstants.addSupplier, data, authenticateUser.getHeaderObject()).then(function(response) {
+                window.showLoader();
                 if(response.status == 200 || response.status == 201) {
                     var supplierId = response.data.id;
 
-                    let addSupplierToWorkOrderData = {
-                        "supplier": supplierId,
-                        "workorder": workOrderCache.getWorkOrderDetail().id
-                    };
+                    var existingSupplierObject =  $scope.supplierList.filter((supplierObj) => $scope.compareObjects(supplierObj));
 
-                    $http.post(appConstants.supplierApi + cachedData.id + "/suppliers/", addSupplierToWorkOrderData, authenticateUser.getHeaderObject()).then(function(response){
+                    if(existingSupplierObject.length == 0) {
                         
-                        $scope.getAllSuppliers();
+                        let addSupplierToWorkOrderData = {
+                            "supplier": supplierId,
+                            "workorder": workOrderCache.getWorkOrderDetail().id
+                        };
+    
+                        $http.post(appConstants.supplierApi + cachedData.id + "/suppliers/", addSupplierToWorkOrderData, authenticateUser.getHeaderObject()).then(function(response){
+                            $scope.getAllSuppliers();
+                            $scope.clearData();
+                            window.hideLoader();
+                            alert("Supplier Details Added/Updated Successfully")
+                        }, function(response) {
+                            $scope.clearData();
+                            window.hideLoader();
+                            alert(response.data, "error");
+                        });
+                    } else {
                         $scope.clearData();
                         window.hideLoader();
                         alert("Supplier Details Added/Updated Successfully")
-                    }, function() {
-                        $scope.clearData();
-                        window.hideLoader();
-                        alert(response.data, "error");
-                    });
+                    }
                 }
-            }, function() {
+            }, function(response) {
                 $scope.clearData();
                 window.hideLoader();
                 alert(response.data, "error");
@@ -140,9 +152,9 @@ define([], function(){
             window.showLoader();
             $http.delete(appConstants.supplierApi + cachedData.id + "/suppliers/" + selectedSupplierId, authenticateUser.getHeaderObject()).then(function(response) {
                 if(response.status == 200) {
-                    alert("Supplier Details Successfully Deleted.");
                     window.hideLoader();
                     $scope.getSupplierList();
+                    alert("Supplier Details Successfully Deleted.");
                 }
             }, function(rtesponse) {
                 $scope.clearData();
@@ -156,6 +168,28 @@ define([], function(){
             $scope.cost = "";
             $scope.ticket_number = "";
             $scope.company_name = "";
+        }
+
+        $scope.fillSupplierData = function(supplier) {
+            if($scope.company_name.indexOf("-") > -1) {
+                var data = $scope.company_name.split(" - ");
+                var object = $scope.supplierList.filter((supplierInfo) => supplierInfo.company_name == data[0] && supplierInfo.ticket_number == data[1])[0]
+                $scope.cost = parseInt(object.cost);
+                $scope.ticket_number = parseInt(object.ticket_number);
+                $scope.company_name = object.company_name;
+            }
+        }
+
+        $scope.compareObjects = function(obj) {
+            if(obj.company_name == $scope.company_name && $scope.ticket_number == obj.ticket_number) {
+                return true;
+            } else return false;
+        }
+
+        $scope.compareAllObjects = function(obj) {
+            if(obj.company_name == $scope.company_name && $scope.ticket_number == obj.ticket_number && $scope.cost == obj.cost) {
+                return true;
+            } else return false;
         }
 
     }

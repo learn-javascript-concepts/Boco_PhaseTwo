@@ -7,9 +7,9 @@
         <form ng-submit="addSupplierData()" class="supplier-form-indent">
             <ul>
                 <li>
-                    <input type="text" class="form-control" placeholder="Search Supplier" list="supplierList" ng-model="company_name" required>
+                    <input type="text" class="form-control" placeholder="Search Supplier" ng-change="fillSupplierData()" list="supplierList" ng-model="company_name" required>
                     <datalist id="supplierList">
-                        <option ng-repeat="supplier in supplierList">{{supplier.company_name}}</option>
+                        <option ng-repeat="supplier in supplierList" >{{supplier.company_name}} - {{supplier.ticket_number}}</option>
                     </datalist>
                 </li>
                 <li>
@@ -69,9 +69,7 @@
                         <td ng-bind="supplierData.supplier.company_name">{{supplier.company_name}}</td>
                         <td ng-bind="supplierData.supplier.ticket_number"></td>
                         <td ng-bind="supplierData.supplier.cost"></td>
-                        <td>
-                            <input type="button" ng-click="removeSupplier(supplierData.supplier.id)" value="Delete" />
-                            <span class="delete-item" ng-click="removeSupplier(supplierData.supplier.id)"><i class="fas fa-trash-alt"></i></td>
+                        <td><span class="delete-item" ng-click="removeSupplier(supplierData.supplier.id)"><i class="fas fa-trash-alt"></i></td>
                     </tr>
                 </tbody>
             </table>

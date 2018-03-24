@@ -31,7 +31,7 @@ define([], function(){
             })
         }
 
-        $scope.getAllEquipment();
+        //$scope.getAllEquipment();
         
         $scope.addEquipmentData = function() {
 
