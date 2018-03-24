@@ -178,28 +178,22 @@ define([], function(){
                         existingStockObject =  $scope.stockList.filter((stockObj) => $scope.compareObjects(stockObj));
                     }
 
-                    if(existingStockObject.length == 0) {
-                        
-                        let addStockToWorkOrderData = {
-                            "stocks": stockId,
-                            "workorder": workOrderCache.getWorkOrderDetail().id
-                        };
-    
-                        $http.post(appConstants.stockApi + cachedData.id + "/stocks/", addStockToWorkOrderData, authenticateUser.getHeaderObject()).then(function(response){
-                            $scope.getAllStocks();
-                            $scope.clearData();
-                            window.hideLoader();
-                            alert("Stock Details Added/Updated Successfully")
-                        }, function(response) {
-                            $scope.clearData();
-                            window.hideLoader();
-                            alert(response.data, "error");
-                        });
-                    } else {
+                    let addStockToWorkOrderData = {
+                        "stocks": stockId,
+                        "workorder": workOrderCache.getWorkOrderDetail().id
+                    };
+
+                    $http.post(appConstants.stockApi + cachedData.id + "/stocks/", addStockToWorkOrderData, authenticateUser.getHeaderObject()).then(function(response){
+                        $scope.getAllStocks();
                         $scope.clearData();
                         window.hideLoader();
                         alert("Stock Details Added/Updated Successfully")
-                    }
+                    }, function(response) {
+                        $scope.clearData();
+                        window.hideLoader();
+                        alert(response.data, "error");
+                    });
+
                 }
             }, function(response) {
                 $scope.clearData();
